@@ -758,7 +758,7 @@ body[data-page="ok"] .garden,body[data-page="ok"] #petals{display:none}
 .okdots circle{fill:#3a4069}
 .okbody{fill:none;stroke-width:19;stroke-linecap:round;stroke-linejoin:round}
 .okhead{stroke-width:6;stroke-linejoin:round}
-.okbody{stroke:#dfe1ee}.okhead{fill:#dfe1ee;stroke:#dfe1ee}
+.okbody{stroke:var(--o-ok,#dfe1ee)}.okhead{fill:var(--o-ok,#dfe1ee);stroke:var(--o-ok,#dfe1ee)}
 .oka.go .okbody{stroke:#ffd27a}.oka.go .okhead{fill:#ffd27a;stroke:#ffd27a}
 .okhead.okheadgo{fill:#fff;stroke:#fff}
 .oka.bad .okbody,.oka.hit .okbody{stroke:var(--o-bad)}.oka.bad .okhead,.oka.hit .okhead{fill:var(--o-bad);stroke:var(--o-bad)}
@@ -2935,3 +2935,11 @@ body[data-page="takvim"] .hdtitle span{color:var(--t-acc)}
 /* ===== YEC: menünün üstü — takvim + skor tablosu ===== */
 .qmust{display:flex;flex-direction:column;gap:12px;margin:4px 0 18px}
 .qmust .qmtablo{min-height:72px}
+
+/* ===== Eros'un Oku: 101'den sonra her 5 bölümde renk teması ===== */
+body[data-page="ok"][data-okt]{-webkit-transition:background-color .6s;transition:background-color .6s}
+body[data-page="ok"][data-okt="1"]{--o-bg:#1f1636;--o-sf:#2d2150;--o-line:#4b3a7c;--o-ok:#efe4ff;background:radial-gradient(110% 55% at 50% -5%,#3a2a66 0%,#1f1636 62%);background-color:#1f1636}
+body[data-page="ok"][data-okt="2"]{--o-bg:#12251f;--o-sf:#1c3830;--o-line:#2d5a4c;--o-ok:#e1f7ec;background:radial-gradient(110% 55% at 50% -5%,#24493d 0%,#12251f 62%);background-color:#12251f}
+body[data-page="ok"][data-okt="3"]{--o-bg:#25111b;--o-sf:#3a1d2c;--o-line:#5f3049;--o-ok:#ffe4ee;background:radial-gradient(110% 55% at 50% -5%,#4a2438 0%,#25111b 62%);background-color:#25111b}
+body[data-page="ok"][data-okt="4"]{--o-bg:#0d222e;--o-sf:#153646;--o-line:#245a71;--o-ok:#dcf2ff;background:radial-gradient(110% 55% at 50% -5%,#1d465b 0%,#0d222e 62%);background-color:#0d222e}
+body[data-page="ok"][data-okt="5"]{--o-bg:#231810;--o-sf:#38281c;--o-line:#5b4230;--o-ok:#fbeedc;background:radial-gradient(110% 55% at 50% -5%,#4a3423 0%,#231810 62%);background-color:#231810}

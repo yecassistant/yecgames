@@ -29,7 +29,7 @@
 
   function mesaj(e) {
     var m = (e && e.message) || "";
-    return { ad: "Takma adını yaz (en fazla 16 harf).", kod: "Kod 8 karakter olmalı.", yok: "Bu kod geçersiz: yanlış yazılmış, süresi dolmuş ya da oda çoktan dolmuş olabilir.", eski: "Bu kodun süresi dolmuş; arkadaşın Oda Ayarları'ndan yeni kod üretsin.", dolu: "Bu odaya katılınamadı: oda dolmuş ya da kodun süresi geçmiş olabilir. Arkadaşın Oda Ayarları'ndan yeni kod üretebilir.", kendin: "Bu senin kendi odan :)", bicim: "Anahtar biçimi: ODA-A-ANAHTAR (üç parça, tire ile).", yanlis: "Anahtar yanlış ya da bu oda artık yok." }[m] || "Bağlantı kurulamadı. İnternetini kontrol edip tekrar dene.";
+    return { ad: "Takma adını yaz (en fazla 16 harf).", kod: "Kod 8 karakter olmalı.", yok: "Bu kod geçersiz: yanlış yazılmış, süresi dolmuş ya da oda çoktan dolmuş olabilir.", eski: "Bu kodun süresi dolmuş; arkadaşın Oda Ayarları'ndan yeni kod üretsin.", dolu: "Bu odaya katılınamadı: oda dolmuş ya da kodun süresi geçmiş olabilir. Arkadaşın Oda Ayarları'ndan yeni kod üretebilir.", kendin: "Bu senin kendi odan :)", bicim: "Anahtar biçimi: ODA-A-ANAHTAR (üç parça, tire ile).", yanlis: "Anahtar yanlış ya da bu oda artık yok." }[m] || "Bağlantı kurulamadı. İnternetini kontrol edip tekrar dene." + ((e && (e.code || e.message)) ? " (" + String(e.code || e.message).slice(0, 60) + ")" : "");
   }
   function mesgul(btn, evet, yazi) { btn.disabled = evet; if (evet) { btn.dataset.o = btn.textContent; btn.textContent = yazi; } else if (btn.dataset.o) btn.textContent = btn.dataset.o; }
 

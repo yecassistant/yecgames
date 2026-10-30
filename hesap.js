@@ -172,7 +172,7 @@
           auth.signInAnonymously().catch(function (e) { sdkHata = true; bitti(); durum(); rej(e); });
         });
       });
-    }).catch(function (e) { sdkHata = true; bitti(); durum(); throw e; });
+    }).catch(function (e) { sdkHata = true; baglandi = false; bitti(); durum(); throw e; });   /* başarısızsa bir sonraki denemede yeniden bağlanmayı dene */
     return girisSoz;
   }
   /* yerel kayıt yoksa ama cihaz kimliği duruyorsa: kisiler/{fuid} üzerinden odayı geri bul */
