@@ -2943,3 +2943,50 @@ body[data-page="ok"][data-okt="2"]{--o-bg:#12251f;--o-sf:#1c3830;--o-line:#2d5a4
 body[data-page="ok"][data-okt="3"]{--o-bg:#25111b;--o-sf:#3a1d2c;--o-line:#5f3049;--o-ok:#ffe4ee;background:radial-gradient(110% 55% at 50% -5%,#4a2438 0%,#25111b 62%);background-color:#25111b}
 body[data-page="ok"][data-okt="4"]{--o-bg:#0d222e;--o-sf:#153646;--o-line:#245a71;--o-ok:#dcf2ff;background:radial-gradient(110% 55% at 50% -5%,#1d465b 0%,#0d222e 62%);background-color:#0d222e}
 body[data-page="ok"][data-okt="5"]{--o-bg:#231810;--o-sf:#38281c;--o-line:#5b4230;--o-ok:#fbeedc;background:radial-gradient(110% 55% at 50% -5%,#4a3423 0%,#231810 62%);background-color:#231810}
+
+/* ===== YEC: Ortak Takvim — kalpli dokunuşlar ===== */
+.tkkalpler{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none}
+.tkkalpler i{position:absolute;bottom:-40px;width:var(--s,18px);height:var(--s,18px);opacity:0;-webkit-animation:tkSuz var(--d,14s) linear var(--g,0s) infinite;animation:tkSuz var(--d,14s) linear var(--g,0s) infinite}
+.tkkalpler i svg{width:100%;height:100%;fill:var(--r,#ff8fb3)}
+@-webkit-keyframes tkSuz{0%{opacity:0;-webkit-transform:translate(0,0) rotate(-10deg)}12%{opacity:var(--o,.22)}85%{opacity:var(--o,.22)}100%{opacity:0;-webkit-transform:translate(var(--x,20px),-110vh) rotate(14deg)}}
+@keyframes tkSuz{0%{opacity:0;transform:translate(0,0) rotate(-10deg)}12%{opacity:var(--o,.22)}85%{opacity:var(--o,.22)}100%{opacity:0;transform:translate(var(--x,20px),-110vh) rotate(14deg)}}
+.tkd.ben:not(.ikisi)::after,.tkd.o:not(.ikisi)::after{content:"";position:absolute;right:5px;top:5px;width:10px;height:10px;background:var(--t-me,#ff8fb3);-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 21s-7.5-5.2-9.5-10A5.3 5.3 0 0 1 12 6a5.3 5.3 0 0 1 9.5 5c-2 4.8-9.5 10-9.5 10z'/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 21s-7.5-5.2-9.5-10A5.3 5.3 0 0 1 12 6a5.3 5.3 0 0 1 9.5 5c-2 4.8-9.5 10-9.5 10z'/%3E%3C/svg%3E") center/contain no-repeat}
+.tkd.o:not(.ikisi)::after{background:var(--t-o,#9d8cff)}
+.tkd.ikisi svg{width:15px;height:15px;right:3px;top:3px;-webkit-animation:tkbeat 1.6s ease-in-out infinite;animation:tkbeat 1.6s ease-in-out infinite}
+.tklegend span::before{border-radius:0;box-shadow:none!important;width:13px;height:13px;-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 21s-7.5-5.2-9.5-10A5.3 5.3 0 0 1 12 6a5.3 5.3 0 0 1 9.5 5c-2 4.8-9.5 10-9.5 10z'/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 21s-7.5-5.2-9.5-10A5.3 5.3 0 0 1 12 6a5.3 5.3 0 0 1 9.5 5c-2 4.8-9.5 10-9.5 10z'/%3E%3C/svg%3E") center/contain no-repeat;background:var(--t-me,#ff8fb3)!important}
+.tklegend .o::before{background:var(--t-o,#9d8cff)!important}
+.tklegend .ikisi::before{background:#f2c35b!important}
+.tkheart{fill:rgba(255,143,179,.35)}
+.tkpatla{position:fixed;z-index:50;pointer-events:none;width:16px;height:16px;margin:-8px 0 0 -8px;-webkit-animation:tkPat .9s ease-out forwards;animation:tkPat .9s ease-out forwards}
+.tkpatla svg{width:100%;height:100%;fill:var(--r,#ff8fb3)}
+@-webkit-keyframes tkPat{0%{opacity:1;-webkit-transform:translate(0,0) scale(.4)}100%{opacity:0;-webkit-transform:translate(var(--x),var(--y)) scale(1.2)}}
+@keyframes tkPat{0%{opacity:1;transform:translate(0,0) scale(.4)}100%{opacity:0;transform:translate(var(--x),var(--y)) scale(1.2)}}
+@media (prefers-reduced-motion:reduce){.tkkalpler,.tkpatla{display:none}.tkd.ikisi svg{-webkit-animation:none;animation:none}}
+
+/* ===== YEC: menüde Ortak Takvim kartı — akan kenar ve süzülen kalpler ===== */
+.qmherosar{position:relative;border-radius:26px;padding:3px;background:linear-gradient(120deg,#ff8fb3,#f2c35b,#b79cf2,#ff8fb3);background-size:100% 100%;box-shadow:0 18px 40px -18px rgba(255,143,179,.7)}
+@-webkit-keyframes qmHeroAkis{50%{background-position:100% 50%}}@keyframes qmHeroAkis{50%{background-position:100% 50%}}
+.qmhero{border-radius:23px;min-height:104px;background:radial-gradient(120% 140% at 0% 0%,#ff9cbd 0%,#e45d8e 38%,#7b3fb8 100%)!important;box-shadow:inset 0 0 0 1px rgba(255,255,255,.25)}
+.qmhero .qmtx b{font-size:1.28rem!important}
+.qmhero .qmtx small{color:rgba(255,255,255,.92)}
+.qmhero .qmnew{background:#fff;color:#c2356b}
+.qmherokalp{position:absolute;z-index:2;right:22%;top:-10px;width:16px;height:16px;pointer-events:none;-webkit-animation:qmKalp 3.2s ease-in-out infinite;animation:qmKalp 3.2s ease-in-out infinite}
+.qmherokalp:before,.qmherokalp:after{content:"";position:absolute;top:0;width:9px;height:14px;border-radius:9px 9px 0 0;background:#ff5d8f}
+.qmherokalp:before{left:7px;-webkit-transform:rotate(-45deg);transform:rotate(-45deg);-webkit-transform-origin:0 100%;transform-origin:0 100%}
+.qmherokalp:after{left:0;-webkit-transform:rotate(45deg);transform:rotate(45deg);-webkit-transform-origin:100% 100%;transform-origin:100% 100%}
+.qmherokalp.k2{--k:.7;right:12%;top:auto;bottom:-8px;-webkit-animation-delay:1.1s;animation-delay:1.1s}
+.qmherokalp.k3{--k:.55;right:40%;top:auto;bottom:-6px;-webkit-animation-delay:2s;animation-delay:2s}
+@-webkit-keyframes qmKalp{0%,100%{opacity:0;-webkit-transform:translateY(0) scale(var(--k,1))}30%{opacity:1}70%{opacity:1;-webkit-transform:translateY(-8px) scale(var(--k,1))}}@keyframes qmKalp{0%,100%{opacity:0;transform:translateY(0) scale(var(--k,1))}30%{opacity:1}70%{opacity:1;transform:translateY(-8px) scale(var(--k,1))}}
+.qmust .qmherosar{margin:0}
+.qmhero .qmtx{padding-right:0!important}
+@media (prefers-reduced-motion:reduce){.qmherosar,.qmherokalp{-webkit-animation:none!important;animation:none!important}}
+.qmhero .qmtx b{padding-right:74px;font-size:1.18rem!important;white-space:normal}
+
+/* ===== YEC: "uygulama gibi ekle" resimli rehber ===== */
+.qmrehber{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:4px 0 14px}
+.qmrh{margin:0;display:flex;flex-direction:column;align-items:center;gap:6px}
+.qmrh svg{width:100%;max-width:96px;height:auto;display:block;filter:drop-shadow(0 6px 14px rgba(0,0,0,.35))}
+.qmrh figcaption{font-size:.72rem;font-weight:800;line-height:1.25;text-align:center;color:#f3e9ff}
+.qmanahtar{margin:12px 0 0;padding:10px 12px;border-radius:14px;background:rgba(255,255,255,.08);box-shadow:inset 0 0 0 1px rgba(242,195,91,.4);display:flex;flex-direction:column;gap:6px;align-items:center;text-align:center}
+.qmanahtar small{font-size:.78rem;line-height:1.35;color:#eadcff}
+.qmanahtar>b{font-size:1.05rem;letter-spacing:.06em;color:#f2c35b;word-break:break-all}

@@ -21,7 +21,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="YEC Games">
 <link rel="apple-touch-icon" href="ikon/app-180.png">
-<link rel="stylesheet" href="style.css?v=yec7">
+<link rel="stylesheet" href="style.css?v=yec9">
 <script>try { if (!localStorage.getItem("yg_oda") && location.search.indexOf("deneme") < 0) location.replace("baslat.html"); } catch (e) {}</script>
 </head>
 <body data-page="oyunlar">
@@ -60,17 +60,19 @@
 
   <button type="button" class="qmtam" id="qmTam" hidden>
     <span class="qmtamico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></span>
-    <span class="qmtamtx"><b>Tam ekran oyna</b><small id="qmTamSub">Adres çubuğu gitsin, ekranın hepsi oyunun olsun.</small></span>
+    <span class="qmtamtx"><b>Telefona uygulama gibi ekle</b><small id="qmTamSub">Ana ekranda simgesi olsun, tam ekran açılsın. Nasıl yapılır, resimli göster.</small></span>
     <span class="qmtamx" id="qmTamX" role="button" aria-label="Gizle">×</span>
   </button>
 
   <div class="qmust">
-  <a class="qmc qmwide qm-takvim" href="takvim.html" id="toTakvim">
+  <div class="qmherosar"><span class="qmherokalp" aria-hidden="true"></span><span class="qmherokalp k2" aria-hidden="true"></span><span class="qmherokalp k3" aria-hidden="true"></span>
+  <a class="qmc qmwide qm-takvim qmhero" href="takvim.html" id="toTakvim">
     <span class="qmico qmico-takvim"><svg viewBox="0 0 92 56" aria-hidden="true"><rect x="18" y="8" width="56" height="44" rx="8" fill="#fbf7fd"/><rect x="18" y="8" width="56" height="13" rx="7" fill="#f2c35b"/><rect x="18" y="15" width="56" height="6" fill="#f2c35b"/><rect x="28" y="3" width="5" height="11" rx="2.5" fill="#3b2a08"/><rect x="59" y="3" width="5" height="11" rx="2.5" fill="#3b2a08"/><g fill="#d9d1e3"><rect x="24" y="26" width="8" height="6" rx="2"/><rect x="36" y="26" width="8" height="6" rx="2"/><rect x="48" y="26" width="8" height="6" rx="2"/><rect x="60" y="26" width="8" height="6" rx="2"/><rect x="24" y="36" width="8" height="6" rx="2"/><rect x="36" y="36" width="8" height="6" rx="2"/><rect x="60" y="36" width="8" height="6" rx="2"/></g><path d="M52 45s-6-3.8-6-7.4a3.1 3.1 0 0 1 6-1.2 3.1 3.1 0 0 1 6 1.2c0 3.6-6 7.4-6 7.4z" fill="#ec4b5f"/><use href="#qmSpark" x="78" y="6" width="10" height="10" fill="#ffe08a"/><use href="#qmSpark" x="4" y="38" width="8" height="8" fill="#ffe08a"/></svg></span>
     <span class="qmtx"><b>Ortak Takvim</b><small id="takvimSub">Müsait olduğun günleri işaretle; ikinizin de boş olduğu ilk gün öne çıksın.</small></span>
     <i class="qmnew qmturn" id="takvimBadge">işaretle</i>
     <svg class="qmchev" aria-hidden="true"><use href="#qmChev"/></svg>
   </a>
+  </div>
   <a class="qmc qmsoon qmtablo" href="tablo.html" id="toTablo">
     <span class="qmplus" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 19V9M12 19V5M19 19v-7"/></svg></span>
     <span class="qmtx"><b>Skor Tablosu</b><small>Kim kaç taç aldı, son hareketler.</small></span>
@@ -215,10 +217,10 @@
   <p class="qmimza">YEC Games · Nunu &amp; Büş yapımı · <a href="gizlilik.html">Gizlilik</a></p>
 </main>
 
-<script src="app.js?v=yec7"></script>
-<script src="yapilandirma.js?v=yec7"></script>
-<script src="deneme.js?v=yec7"></script>
-<script src="hesap.js?v=yec7"></script>
+<script src="app.js?v=yec9"></script>
+<script src="yapilandirma.js?v=yec9"></script>
+<script src="deneme.js?v=yec9"></script>
+<script src="hesap.js?v=yec9"></script>
 <script>
 /* oda çubuğu: iki koltuk, adlar, durum */
 (function () {
@@ -320,11 +322,31 @@
     s.querySelector(".qmsheetbtn").onclick = kapat; s.addEventListener("click", function (e) { if (e.target === s) kapat(); });
   }
   var paylas = '<svg class="qmpay" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15V3M8 7l4-4 4 4M6 11H5v10h14V11h-1"/></svg>';
+  /* iPhone'da ana ekran uygulaması Safari'den ayrı hafıza kullanır: ilk açışta odaya kurtarma anahtarıyla dönülür */
+  function anahtarNot() {
+    var o = window.Hesap && Hesap.oda(), an = o && o.anahtar;
+    if (!an) return '<p class="qmsoonnote">Simgeden ilk açışta "Kurtarma anahtarım var" deyip odana dönebilirsin.</p>';
+    return '<div class="qmanahtar"><small>' + (ios ? "iPhone'da simgeden ilk açışta odan görünmez; <b>Kurtarma anahtarım var</b> deyip bunu yaz:" : "Simgeden açınca odan görünmezse <b>Kurtarma anahtarım var</b> deyip bunu yaz:") + '</small><b>' + an + '</b><button type="button" class="hsghost kucuk" data-kopya="' + an + '">Kopyala</button></div>';
+  }
+  document.addEventListener("click", function (e) { var b = e.target && e.target.closest ? e.target.closest("[data-kopya]") : null; if (!b) return; var t = b.getAttribute("data-kopya"); (navigator.clipboard && navigator.clipboard.writeText ? navigator.clipboard.writeText(t) : Promise.reject()).then(function () { b.textContent = "Kopyalandı ✓"; }, function () { try { window.prompt("Kopyala:", t); } catch (er) {} }); });
+  /* resimli rehber: 3 küçük telefon ekranı, basılacak yer altın halkayla */
+  function rehber(ios) {
+    var tel = function (ic, alt) { return '<figure class="qmrh"><svg viewBox="0 0 90 150" aria-hidden="true"><rect x="3" y="3" width="84" height="144" rx="14" fill="#1b1033" stroke="#cdb8ff" stroke-width="2"/>' + ic + '</svg><figcaption>' + alt + '</figcaption></figure>'; };
+    var halka = function (x, y, r) { return '<circle cx="' + x + '" cy="' + y + '" r="' + r + '" fill="none" stroke="#f2c35b" stroke-width="3"><animate attributeName="r" values="' + r + ';' + (r + 3) + ';' + r + '" dur="1.4s" repeatCount="indefinite"/></circle>'; };
+    var sayfa = '<rect x="10" y="14" width="70" height="8" rx="4" fill="#3a2a66"/><rect x="10" y="30" width="70" height="40" rx="6" fill="#2a1a4e"/><rect x="10" y="76" width="33" height="26" rx="6" fill="#2a1a4e"/><rect x="47" y="76" width="33" height="26" rx="6" fill="#2a1a4e"/>';
+    var s1 = ios ? sayfa + '<rect x="3" y="124" width="84" height="23" rx="0" fill="#2d1f52"/><path d="M45 140v-9M41.5 134l3.5-3.5 3.5 3.5M40 136h-1v6h12v-6h-1" fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>' + halka(45, 136, 9)
+                 : sayfa + '<rect x="3" y="3" width="84" height="10" fill="#2d1f52"/><g fill="#fff"><circle cx="78" cy="6" r="1.3"/><circle cx="78" cy="9" r="1.3"/><circle cx="78" cy="12" r="1.3"/></g>' + halka(78, 9, 7);
+    var satir = function (y, t, on) { return '<rect x="10" y="' + y + '" width="70" height="15" rx="4" fill="' + (on ? "#3d2a78" : "#2a1a4e") + '"/><text x="16" y="' + (y + 10) + '" font-size="7" font-family="Nunito,sans-serif" font-weight="800" fill="' + (on ? "#fff" : "#a99bd0") + '">' + t + '</text>'; };
+    var s2 = ios ? satir(40, "Kopyala") + satir(58, "Yer İşareti Ekle") + satir(76, "Ana Ekrana Ekle", 1) + '' + '<rect x="7" y="73" width="76" height="21" rx="6" fill="none" stroke="#f2c35b" stroke-width="2.5"/>' + satir(94, "Yazdır")
+                 : satir(30, "Yeni sekme") + satir(48, "Geçmiş") + satir(66, "Ana ekrana ekle", 1) + '<rect x="7" y="63" width="76" height="21" rx="6" fill="none" stroke="#f2c35b" stroke-width="2.5"/>' + satir(84, "Paylaş") + satir(102, "Ayarlar");
+    var s3 = '<g fill="#2a1a4e"><rect x="13" y="20" width="16" height="16" rx="4"/><rect x="37" y="20" width="16" height="16" rx="4"/><rect x="61" y="20" width="16" height="16" rx="4"/><rect x="13" y="46" width="16" height="16" rx="4"/><rect x="61" y="46" width="16" height="16" rx="4"/></g><image href="ikon/app-192.png" x="35" y="44" width="20" height="20"/>' + halka(45, 54, 13) + '<text x="45" y="74" text-anchor="middle" font-size="6.5" font-family="Nunito,sans-serif" font-weight="800" fill="#fff">YEC Games</text>';
+    return '<div class="qmrehber">' + tel(s1, ios ? "1 · Paylaş'a dokun" : "1 · ⋮ menüsünü aç") + tel(s2, ios ? "2 · Ana Ekrana Ekle" : "2 · Ana ekrana ekle") + tel(s3, "3 · Simgeden aç") + '</div>';
+  }
   kart.addEventListener("click", function () {
     if (istem) { istem.prompt(); istem.userChoice.then(function () { istem = null; }); return; }
-    if (ig) sheet('<ol><li>Sağ üstteki <b>⋯</b> menüsüne dokun, <b>Tarayıcıda aç</b>' + (ios ? " (Safari)" : "") + ' de.</li><li>' + (ios ? 'Safari\'de alttaki ' + paylas + ' <b>Paylaş</b> düğmesine, sonra <b>Ana Ekrana Ekle</b>\'ye dokun.' : 'Chrome menüsünden <b>Ana ekrana ekle</b> / <b>Uygulamayı yükle</b>\'yi seç.') + '</li><li>Ana ekrandaki <b>YEC Games</b> simgesinden açınca adres çubuğu olmadan, tam ekran açılır.</li></ol><p class="qmsoonnote">İlk açılışta bir kez giriş yapman yeter; ilerlemen hesabından gelir.</p>');
-    else if (ios) sheet('<ol><li>Alttaki ' + paylas + ' <b>Paylaş</b> düğmesine dokun.</li><li>Aşağı kaydırıp <b>Ana Ekrana Ekle</b>\'yi seç, <b>Ekle</b> de.</li><li>Ana ekrandaki <b>YEC Games</b> simgesinden açınca adres çubuğu olmadan, tam ekran açılır.</li></ol><p class="qmsoonnote">İlk açılışta bir kez giriş yapman yeter; ilerlemen hesabından gelir.</p>');
-    else sheet('<ol><li>Tarayıcı menüsünden (<b>⋮</b>) <b>Ana ekrana ekle</b> ya da <b>Uygulamayı yükle</b>\'yi seç.</li><li>Ana ekrandaki <b>YEC Games</b> simgesinden açınca tam ekran açılır.</li></ol><p class="qmsoonnote">İlk açılışta bir kez giriş yapman yeter; ilerlemen hesabından gelir.</p>');
+    if (ig) sheet('<ol><li>Sağ üstteki <b>⋯</b> menüsüne dokun, <b>Tarayıcıda aç</b>' + (ios ? " (Safari)" : "") + ' de.</li><li>' + (ios ? 'Safari\'de alttaki ' + paylas + ' <b>Paylaş</b> düğmesine, sonra <b>Ana Ekrana Ekle</b>\'ye dokun.' : 'Chrome menüsünden <b>Ana ekrana ekle</b> / <b>Uygulamayı yükle</b>\'yi seç.') + '</li><li>Ana ekrandaki <b>YEC Games</b> simgesinden açınca adres çubuğu olmadan, tam ekran açılır.</li></ol>' + anahtarNot() + '');
+    else if (ios) sheet(rehber(true) + '<ol><li>Alttaki ' + paylas + ' <b>Paylaş</b> düğmesine dokun.</li><li>Aşağı kaydırıp <b>Ana Ekrana Ekle</b>\'yi seç, <b>Ekle</b> de.</li><li>Ana ekrandaki <b>YEC Games</b> simgesinden açınca adres çubuğu olmadan, tam ekran açılır.</li></ol>' + anahtarNot() + '');
+    else sheet(rehber(false) + '<ol><li>Tarayıcı menüsünden (<b>⋮</b>) <b>Ana ekrana ekle</b> ya da <b>Uygulamayı yükle</b>\'yi seç.</li><li>Ana ekrandaki <b>YEC Games</b> simgesinden açınca tam ekran açılır.</li></ol>' + anahtarNot() + '');
   });
 })();
 /* Özel ikonlar: elle çizilmiş SVG'ler ikon/oyun-<ad>.svg olarak eklenince adını bu listeye yaz (ör. "kelime"). Kartın resim alanına (92×56 oranında) oturur. */

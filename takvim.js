@@ -52,9 +52,22 @@
     var k = b.getAttribute("data-k"); benim[k] = !benim[k]; if (!benim[k]) delete benim[k];
     snd(benim[k] ? (onun[k] ? "ortak" : "ac") : "kapa");
     ciz();
-    if (benim[k] && onun[k]) { msg(uzun(k) + " — ikiniz de boşsunuz!"); var el = $("grid").querySelector('[data-k="' + k + '"]'); if (el) { el.classList.add("pat"); setTimeout(function () { el.classList.remove("pat"); }, 700); } }
+    if (benim[k] && onun[k]) { msg(uzun(k) + " — ikiniz de boşsunuz!"); var el = $("grid").querySelector('[data-k="' + k + '"]'); if (el) { patla(el); el.classList.add("pat"); setTimeout(function () { el.classList.remove("pat"); }, 700); } }
     kaydet(k, benim[k]);
   });
+  /* kalpler: arkada yavaşça süzülenler + ortak gün tutunca küçük patlama */
+  var KALP = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7.5-5.2-9.5-10A5.3 5.3 0 0 1 12 6a5.3 5.3 0 0 1 9.5 5c-2 4.8-9.5 10-9.5 10z"/></svg>', RENK = ["#ff8fb3", "#f2c35b", "#b9a1ff", "#ff6f91"];
+  (function () {
+    var k = document.createElement("div"); k.className = "tkkalpler"; k.setAttribute("aria-hidden", "true"); var h = "";
+    for (var i = 0; i < 12; i++) h += '<i style="left:' + Math.round(4 + Math.random() * 92) + '%;--s:' + Math.round(10 + Math.random() * 16) + 'px;--d:' + Math.round(11 + Math.random() * 10) + 's;--g:' + (-Math.random() * 20).toFixed(1) + 's;--x:' + Math.round(-40 + Math.random() * 80) + 'px;--o:' + (0.12 + Math.random() * 0.16).toFixed(2) + ';--r:' + RENK[i % 4] + '">' + KALP + "</i>";
+    k.innerHTML = h; document.body.insertBefore(k, document.body.firstChild);
+  })();
+  function patla(el) {
+    var r = el.getBoundingClientRect(), x = r.left + r.width / 2, y = r.top + r.height / 2;
+    for (var i = 0; i < 10; i++) { var a = i / 10 * Math.PI * 2, d = 40 + Math.random() * 30, p = document.createElement("i"); p.className = "tkpatla"; p.innerHTML = KALP;
+      p.style.cssText = "left:" + x + "px;top:" + y + "px;--x:" + Math.round(Math.cos(a) * d) + "px;--y:" + Math.round(Math.sin(a) * d - 10) + "px;--r:" + RENK[i % 4];
+      document.body.appendChild(p); setTimeout(function (q) { return function () { if (q.parentNode) q.parentNode.removeChild(q); }; }(p), 1000); }
+  }
   function msg(t) { var m = $("msg"); m.textContent = t; clearTimeout(msg.t); msg.t = setTimeout(function () { m.textContent = ""; }, 2800); }
 
   /* ---- bulut ---- */

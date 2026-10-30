@@ -84,7 +84,7 @@
   });
   var G = null, ben = null, bakilan = 0, kelimeler = [], ipuclari = [], kirli = false, kaydediyor = false, sonCizim = {}, sonKelime = null, sonIpHtml = "";
   function adet() { return (G && G.adet) || ADET_OTO; }
-  function ekE(ad) { var k = String(ad).toLocaleLowerCase("tr"), v = k.match(/[aeıioöuü](?=[^aeıioöuü]*$)/), on = v && "eiöü".indexOf(v[0]) >= 0; return ad + "'" + (/[aeıioöuü]$/.test(k) ? "y" : "") + (on ? "e" : "a"); }   /* Büşra'ya, Yunus'a */
+  function ekE(ad) { var k = String(ad).toLocaleLowerCase("tr"), v = k.match(/[aeıioöuü](?=[^aeıioöuü]*$)/), on = v && "eiöü".indexOf(v[0]) >= 0; return ad + "'" + (/[aeıioöuü]$/.test(k) ? "y" : "") + (on ? "e" : "a"); }   /* Ayşe'ye, Mert'e */
   function yazAnahtar(n, i, yazan) { return anahtar(n, i) + "-" + yazan; }
   function kelimeleriCoz(d) {                                                /* bana düşen kelimeler: oto → ortak liste, yaz → onun yazdıkları */
     if (d.mod === "yaz") {

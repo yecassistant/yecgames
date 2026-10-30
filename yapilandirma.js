@@ -2,10 +2,10 @@
    Firebase konsolu → Proje ayarları (dişli) → Genel → "Uygulamalarınız" → Web uygulaması → firebaseConfig içindeki değerleri buraya yapıştır.
    Bu değerler gizli değildir (tarayıcıya zaten gider); güvenlik Firestore kurallarıyla sağlanır (yec-kurallar.txt). */
 window.YEC_FIREBASE = {
-  apiKey: "AIzaSyDPDS_KLR8d347CSle_oVNR8MtAEPGq_Ac",
-  authDomain: "yec-games.firebaseapp.com",
-  projectId: "yec-games",
-  storageBucket: "yec-games.firebasestorage.app",
-  messagingSenderId: "122635772599",
-  appId: "1:122635772599:web:75e9251edc4196982a2332"
+  apiKey: "AIzaSyBuW7fiWqj-ruBJujEI7Mk7fdJZSM23INU",
+  authDomain: "yec-games-6b1a9.firebaseapp.com",
+  projectId: "yec-games-6b1a9",
+  storageBucket: "yec-games-6b1a9.firebasestorage.app",
+  messagingSenderId: "645828733489",
+  appId: "1:645828733489:web:de931ca2c15fe11c1c8310"
 };
