@@ -21,7 +21,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="YEC Games">
 <link rel="apple-touch-icon" href="ikon/app-180.png">
-<link rel="stylesheet" href="style.css?v=yec1">
+<link rel="stylesheet" href="style.css?v=yec4">
 <script>try { if (!localStorage.getItem("yg_oda") && location.search.indexOf("deneme") < 0) location.replace("baslat.html"); } catch (e) {}</script>
 </head>
 <body data-page="oyunlar">
@@ -206,10 +206,10 @@
   <p class="qmimza">YEC Games · Nunu &amp; Büş yapımı · <a href="gizlilik.html">Gizlilik</a></p>
 </main>
 
-<script src="app.js?v=yec1"></script>
-<script src="yapilandirma.js?v=yec1"></script>
-<script src="deneme.js?v=yec1"></script>
-<script src="hesap.js?v=yec1"></script>
+<script src="app.js?v=yec4"></script>
+<script src="yapilandirma.js?v=yec4"></script>
+<script src="deneme.js?v=yec4"></script>
+<script src="hesap.js?v=yec4"></script>
 <script>
 /* oda çubuğu: iki koltuk, adlar, durum */
 (function () {
@@ -222,7 +222,7 @@
     avaA.textContent = (a || "?").charAt(0).toUpperCase(); avaB.textContent = dolu ? (b || "?").charAt(0).toUpperCase() : "+";
     avaB.classList.toggle("bos", !dolu);
     adlar.textContent = dolu ? a + " & " + b : a;
-    sub.textContent = dolu ? "İkiniz aynı odadasınız; sıra sende olan oyunlar yeşil." : (o && o.kod ? "Arkadaşın henüz katılmadı · kod: " + o.kod.slice(0, 4) + "-" + o.kod.slice(4) : "Arkadaşın henüz katılmadı; kodu Oda Ayarları'nda bul.");
+    if (!(dolu && sub.hasAttribute("data-yer"))) sub.textContent = dolu ? "İkiniz aynı odadasınız; sıra sende olan oyunlar yeşil." : (o && o.kod ? "Arkadaşın henüz katılmadı · kod: " + o.kod.slice(0, 4) + "-" + o.kod.slice(4) : "Arkadaşın henüz katılmadı; kodu Oda Ayarları'nda bul.");
     btn.textContent = dolu ? "Oda ayarları" : "Kodu paylaş"; kart.href = "ayar.html";
     try { var c = (o && o.ayar && o.ayar.cumle) || ""; if (c) localStorage.setItem("yg_cumle", c); else localStorage.removeItem("yg_cumle"); } catch (e) {}
   }
@@ -233,7 +233,7 @@
     if (!k || !k.kesin || duBakti) return; duBakti = true;
     Hesap.db().then(function (db) {
       [["sayi", "sayiBadge", "sayiSub", "tahmin"], ["amiral", "amiralBadge", "amiralSub", "atis"], ["kelimeavi", "kelimeaviBadge", "kelimeaviSub", "tur"], ["xox", "xoxBadge", "xoxSub", "hamle"], ["tepe", "tepeBadge", "tepeSub", "hamle"], ["zincir", "zincirBadge", "zincirSub", "hamle"], ["sonkart", "sonkartBadge", "sonkartSub", "hamle"], ["dort", "dortBadge", "dortSub", "hamle"], ["ciz", "cizBadge", "cizSub", "hamle"]].filter(function (x) { return !(window.geliyorMu && geliyorMu(x[0])); }).forEach(function (x) {
-        db.collection(x[0]).doc("mac").get().then(function (snap) {
+        Hesap.macOku(x[0]).then(function (snap) {
           var d = snap.exists ? snap.data() : null, badge = document.getElementById(x[1]), sub = document.getElementById(x[2]); if (!d) return;
           if (d.bitti) { badge.textContent = "yeni oyun"; sub.textContent = d.kazanan ? (d.kazanan === k.uid ? "Son oyunu sen kazandın." : "Son oyunu kaybettin.") + " Yeni oyunu ikiniz de kurabilirsiniz." : "Son oyun berabere bitti."; return; }
           if (x[0] === "zincir" && d.mod === "yaz" && (!d.hazir || !d.hazir[k.uid])) { badge.textContent = "sıra sende"; badge.className = "qmnew qmturn"; sub.textContent = "Zincirini yaz, o çözecek."; return; }
@@ -254,7 +254,7 @@
   var amBakti = false;
   Hesap.izle(function (k) {
     if (!k || !k.kesin || amBakti) return; amBakti = true;
-    Hesap.db().then(function (db) { return db.collection("asmaca").doc("mac").get(); }).then(function (snap) {
+    Hesap.macOku("asmaca").then(function (snap) {
       var d = snap.exists ? snap.data() : null, badge = document.getElementById("asmacaBadge"), sub = document.getElementById("asmacaSub"); if (!d) return;
       var o = d.a === k.uid ? d.b : d.a, il = d.ilerleme || {}, bi = il[k.uid] && il[k.uid].s ? il[k.uid].s.length : 0, oi = il[o] && il[o].s ? il[o].s.length : 0;
       if (d.bitti) { badge.textContent = "yeni oyun"; sub.textContent = d.kazanan ? (d.kazanan === k.uid ? "Son oyunu sen kazandın." : "Son oyunu kaybettin.") + " Yeni kelimeler bekliyor." : "Son oyun berabere bitti."; return; }
@@ -270,7 +270,7 @@
   var stBakti = false;
   Hesap.izle(function (k) {
     if (!k || !k.kesin || stBakti) return; stBakti = true;
-    Hesap.db().then(function (db) { return db.collection("satranc").doc("mac").get(); }).then(function (snap) {
+    Hesap.macOku("satranc").then(function (snap) {
       var d = snap.exists ? snap.data() : null, badge = document.getElementById("satrancBadge"), sub = document.getElementById("satrancSub");
       if (!d) return;
       if (d.bitti) { badge.textContent = "yeni oyun"; sub.textContent = d.kazanan ? (d.kazanan === k.uid ? "Son oyunu sen kazandın." : "Son oyunu kaybettin.") + " Yeni oyunda " + (d.siyah === k.uid ? "sen beyazsın." : "o beyaz.") : "Son oyun berabere bitti."; return; }
@@ -283,7 +283,7 @@
   var hsBakti = false;
   Hesap.izle(function (k) {
     if (!k || !k.kesin || hsBakti) return; hsBakti = true;
-    Hesap.db().then(function (db) { return db.collection("hafiza").doc("mac").get(); }).then(function (snap) {
+    Hesap.macOku("hafiza").then(function (snap) {
       var d = snap.exists ? snap.data() : null, badge = document.getElementById("hafizaBadge"), sub = document.getElementById("hafizaSub");
       if (!d || d.bitti) { if (d && d.bitti) { badge.textContent = "yeni oyun"; sub.textContent = d.kazanan === k.uid ? "Son oyunu sen kazandın. Yeni oyunda ilk hamle onun." : "Son oyunu kaybettin. Yeni oyunda ilk hamle senin."; } return; }
       if (d.sira === k.uid) { badge.textContent = "sıra sende"; badge.className = "qmnew qmturn"; sub.textContent = "Sıra sende, hamleni bekliyor."; }
@@ -328,6 +328,43 @@
 /* Stilobat kartı: rekor varsa rozet "rekor N" */
 (function () { var b = 0; try { b = +localStorage.getItem("stb_best") || 0; } catch (e) {} if (b > 0) document.getElementById("stilobatBadge").textContent = "rekor " + b; })();
 
+/* iki kişilik kartlarda seri skoru (sen – o) ve oda çubuğunda arkadaşın nerede olduğu */
+(function () {
+  if (!window.Hesap) return;
+  var AD = { oyunlar: "menüde", tablo: "Skor Tablosu'nda", ayar: "Oda Ayarları'nda", baslat: "girişte", kelimeavi: "Kelime Avı'nda", zincir: "Kelime Zinciri'nde", sonkart: "Son Kart'ta", dort: "Dört Taş'ta", ciz: "Çiz Bil'de", xox: "XOX'ta", hafiza: "Hafıza Düellosu'nda", sayi: "Sayı Düellosu'nda", satranc: "Satranç'ta", amiral: "Amiral Battı'da", asmaca: "Adam Asmaca'da", tepe: "Tepe Savaşı'nda", yasak: "Yasak Kelime'de", gunun: "Günün Kelimesi'nde", stilobat: "Stilobat'ta", yikim: "Yıkım'da", kelime: "Kelime Bahçesi'nde", ok: "Eros'un Oku'nda", kase: "Meyve Kasesi'nde", oda: "Oda Döşe'de", oyun: "Bahçe Planı'nda", gizlilik: "gizlilik sayfasında" };
+  function saat(t) {
+    var d = new Date(t), simdi = new Date(), dk = Math.round((simdi - d) / 60000), hh = ("0" + d.getHours()).slice(-2) + ":" + ("0" + d.getMinutes()).slice(-2);
+    if (dk < 60) return dk <= 1 ? "az önce" : dk + " dk önce";
+    var dun = new Date(simdi); dun.setDate(simdi.getDate() - 1);
+    if (d.toDateString() === simdi.toDateString()) return "bugün " + hh;
+    if (d.toDateString() === dun.toDateString()) return "dün " + hh;
+    return d.getDate() + "." + ("0" + (d.getMonth() + 1)).slice(-2) + " " + hh;
+  }
+  var bakildi = false;
+  Hesap.izle(function (k) {
+    if (!k || !k.kesin || bakildi) return; var o = Hesap.oda(); if (!o) return; bakildi = true;
+    /* arkadaş nerede */
+    Hesap.digerIzle(function (v) {
+      var oo = Hesap.oda(), sub = document.getElementById("odaSub"); if (!oo || !oo.dolu || !sub) return;
+      var ad = Hesap.gorunenAd(Hesap.kim().kul === "a" ? "b" : "a") || "Arkadaşın", son = v && v.son, t = son ? Hesap.zaman(son.t) : 0, yer = son && AD[son.o];
+      if (!t) { sub.textContent = ad + " henüz bir oyuna girmedi."; return; }
+      var cevrim = Date.now() - t < 6 * 60000;
+      sub.innerHTML = ""; sub.setAttribute("data-yer", "1");
+      var nokta = document.createElement("i"); nokta.className = "qmnokta" + (cevrim ? " on" : ""); sub.appendChild(nokta);
+      sub.appendChild(document.createTextNode(cevrim ? ad + " şu an " + (yer || "sitede") : ad + " en son " + saat(t) + (yer && son.o !== "oyunlar" ? ", " + yer : "")));
+    });
+    /* seri skorları */
+    ["kelimeavi", "zincir", "sonkart", "dort", "ciz", "xox", "hafiza", "sayi", "satranc", "amiral", "asmaca", "tepe"].forEach(function (g) {
+      Hesap.macOku(g, "seri").then(function (snap) {
+        var v = snap.exists ? snap.data() : null; if (!v || !v.g) return;
+        var ben = v.g[k.uid] || 0, o2 = v.g[k.uid === "a" ? "b" : "a"] || 0; if (!ben && !o2 && !v.b) return;
+        var b = document.querySelector('.qmt[data-g="' + g + '"] .qmtx b'); if (!b) return;
+        var e = b.querySelector(".qmskor") || b.appendChild(document.createElement("i"));
+        e.className = "qmskor" + (ben > o2 ? " onde" : ben < o2 ? " geride" : ""); e.textContent = ben + " – " + o2; e.title = "Seri: sen " + ben + ", o " + o2 + (v.b ? ", " + v.b + " berabere" : "");
+      }).catch(function () {});
+    });
+  });
+})();
 /* son oynanan oyun: menüye ait küçük kayıt (qg_last) */
 (function () {
   [].forEach.call(document.querySelectorAll(".qmt[data-g]"), function (a) { a.addEventListener("click", function () { try { localStorage.setItem("qg_last", a.getAttribute("data-g")); } catch (e) {} }); });

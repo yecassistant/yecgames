@@ -2823,7 +2823,8 @@ body[data-page="kelimeavi"] .sdfoot{min-height:0}
 /* ===== YEC: menü başlığı, açılış logosu, oda çubuğu ===== */
 .qmhead-logo{padding:6px 0 4px}
 .qmlogoimg{width:min(220px,58vw);height:auto;filter:drop-shadow(0 8px 20px rgba(0,0,0,.35))}
-.qmac-logoimg{width:min(260px,70vw);height:auto;-webkit-animation:qmLogo .7s .1s ease-out both;animation:qmLogo .7s .1s ease-out both;filter:drop-shadow(0 12px 28px rgba(0,0,0,.4))}
+.qmac-logoimg{width:min(260px,70vw);height:auto;-webkit-animation:qmLogoImg .6s .1s ease-out both;animation:qmLogoImg .6s .1s ease-out both}
+@-webkit-keyframes qmLogoImg{0%{opacity:0;-webkit-transform:translateY(10px)}100%{opacity:1;-webkit-transform:none}}@keyframes qmLogoImg{0%{opacity:0;transform:translateY(10px)}100%{opacity:1;transform:none}}
 .qmac-imza:empty{display:none}
 .qmoda .qmodaavalar{display:flex;flex:none}
 .qmoda .qmodaavalar .hsava{width:36px;height:36px;font-size:1rem;box-shadow:0 0 0 2px #241046}
@@ -2862,3 +2863,10 @@ body[data-tema="bordo"] .qmacilis{background:radial-gradient(90% 70% at 50% 40%,
 .gzmetin p+p{margin-top:8px}
 .gzmetin ul{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:6px}
 .gzmetin a{color:#ffd166}
+
+/* ===== YEC: kartta seri skoru, oda çubuğunda arkadaşın durumu ===== */
+.qmskor{display:inline-block;vertical-align:2px;margin-left:7px;padding:2px 7px;border-radius:999px;background:rgba(255,255,255,.2);font-style:normal;font-size:.68rem;font-weight:800;letter-spacing:.02em;line-height:1.3;white-space:nowrap}
+.qmskor.onde{background:rgba(120,230,160,.3)}
+.qmskor.geride{background:rgba(255,140,160,.28)}
+.qmnokta{display:inline-block;width:7px;height:7px;margin-right:6px;border-radius:50%;background:rgba(255,255,255,.35);vertical-align:1px}
+.qmnokta.on{background:#5be08a;box-shadow:0 0 0 3px rgba(91,224,138,.22)}

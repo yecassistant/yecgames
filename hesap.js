@@ -263,6 +263,51 @@
     });
   }
 
+  /* ---- menü önbelleği ----
+     Menü her açılışta 12 maç belgesini okumasın: bir oyunun yerel kopyası, ben o oyuna girmediysem,
+     arkadaşım o oyunda görünmediyse (oyuncular/{öteki}.son) ve 15 dakikadan yeniyse yeniden okunmaz. */
+  var MC_SURE = 900000, MC_PAY = 120000, MC_OYUN = ["sayi", "amiral", "kelimeavi", "xox", "tepe", "zincir", "sonkart", "dort", "ciz", "asmaca", "satranc", "hafiza"], digerSon = null;
+  if (MC_OYUN.indexOf(oyunKodu) >= 0) ls("yg_mz_" + oyunKodu, String(now()));          /* bu oyuna girildi: menüdeki kopyası eskidi */
+  function ms(t) { return t && t.toMillis ? t.toMillis() : num(t); }
+  function incelt(v, d) {   /* önbelleğe hafif kopya: uzun diziler yalnız boyuyla, uzun yazılar boş */
+    if (Array.isArray(v)) return v.length > 60 ? new Array(v.length) : v.map(function (x) { return incelt(x, d + 1); });
+    if (v && typeof v === "object") { if (v.toMillis) return v.toMillis(); var o = {}; for (var k in v) o[k] = d > 5 ? null : incelt(v[k], d + 1); return o; }
+    return typeof v === "string" && v.length > 300 ? "" : v;
+  }
+  function snapGibi(v) { return { exists: !!v, data: function () { return v; } }; }
+  /* öteki koltuğun oyuncu belgesi canlı izlenir: menüde "şu an XOX'ta / en son 14:20, Satranç" ve önbelleğin tazeliği için */
+  var digerSozC = null, digerVeri = null, digerCb = [];
+  function digerDinle() {
+    if (digerSozC) return digerSozC;
+    digerSozC = window.Hesap.db().then(function (d) {
+      return new Promise(function (res) {
+        d.collection("oyuncular").doc(oda.koltuk === "a" ? "b" : "a").onSnapshot(function (s) {
+          digerVeri = s.exists ? s.data() : null; digerSon = (digerVeri && digerVeri.son) || null; res();
+          digerCb.forEach(function (f) { try { f(digerVeri); } catch (e) {} });
+        }, function () { res(); });
+      });
+    }).catch(function () {});
+    return digerSozC;
+  }
+  function digerIzle(f) { digerCb.push(f); if (digerVeri) f(digerVeri); digerDinle(); }
+  function macOku(kol, belge) {
+    if (!oda) return Promise.reject(new Error("oda"));
+    belge = belge || "mac";
+    var anah = "yg_mc_" + oda.oda + "_" + kol + (belge === "mac" ? "" : "_" + belge), c = null, z = num(ls("yg_mz_" + kol));
+    try { c = JSON.parse(ls(anah) || "null"); } catch (e) {}
+    return window.Hesap.db().then(function (d) {
+      return digerDinle().then(function () {
+        var taze = c && now() - c.t < MC_SURE && c.t > z && !(digerSon && digerSon.o === kol && ms(digerSon.t) > c.t - MC_PAY);
+        if (taze) return snapGibi(c.d);
+        return d.collection(kol).doc(belge).get().then(function (s) {
+          var v = s.exists ? incelt(s.data(), 0) : null;
+          try { localStorage.setItem(anah, JSON.stringify({ t: now(), d: v })); } catch (e) {}
+          return snapGibi(v);
+        });
+      });
+    });
+  }
+
   /* ---- dışa açılan arayüz ---- */
   var durumCb = [];
   function durum() { durumCb.forEach(function (f) { try { f(kim()); } catch (e) {} }); }
@@ -275,6 +320,9 @@
     odaIzle: function (f) { odaCb.push(f); if (odaVeri) f(odaVeri); },
     oyun: function (list) { hazirOl(function () { (function sira(i) { if (i >= list.length) return; var s = document.createElement("script"); s.src = list[i]; s.onload = s.onerror = function () { sira(i + 1); }; document.body.appendChild(s); })(0); }); },
     odaKur: odaKur, katil: katil, geriDon: geriDon, ayarYaz: ayarYaz, adYaz: adYaz, yeniKod: yeniKod, ayril: ayril, odayiSil: odayiSil,
+    macOku: macOku,
+    digerIzle: digerIzle,
+    zaman: ms,
     db: function () { if (!oda) return Promise.reject(new Error("oda")); return baglan().then(function () { return sarmala(); }); },
     fb: function () { return baglan().then(function () { return firebase; }); },
     tms: tms, kural: kural, birlestir: birlestir, birles: birles, yerel: yerel,

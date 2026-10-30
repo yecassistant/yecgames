@@ -90,8 +90,14 @@
     var L = (G.cizim || []).slice(); if (canliVuru && !hemen) { var v = JSON.parse(JSON.stringify(canliVuru)); delete v.pid; L.push(v); }
     var toplam = 0; L.forEach(function (x) { toplam += x.p.length; });
     if (toplam > 40000) { D.msg("Çizim çok kalabalıklaştı; biraz silip devam et."); return; }
-    D.ref.set({ cizim: L, sira: D.other, t: firebase.firestore.FieldValue.serverTimestamp() }, { merge: true }).catch(function () {});
+    /* yolda tek yazım: önceki gönderim bitmeden yenisi kuyruğa girmez; bitince en güncel hâl gider (yavaş bağlantıda karşı taraf geride kalmasın) */
+    if (yolda) { bekleyen = true; return; }
+    yolda = true; bekleyen = false;
+    D.ref.set({ cizim: L, sira: D.other, t: firebase.firestore.FieldValue.serverTimestamp() }, { merge: true }).catch(function () {}).then(function () {
+      yolda = false; if (bekleyen) { bekleyen = false; cizimYaz(!canliVuru); }
+    });
   }
+  var yolda = false, bekleyen = false;
   $("araclar").addEventListener("click", function (e) {
     var b = e.target.closest ? e.target.closest("button") : null; if (!b) return;
     if (b.hasAttribute("data-renk")) { arac.c = b.getAttribute("data-renk"); arac.e = false; }
