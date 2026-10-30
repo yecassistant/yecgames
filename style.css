@@ -2990,3 +2990,7 @@ body[data-page="ok"][data-okt="5"]{--o-bg:#231810;--o-sf:#38281c;--o-line:#5b423
 .qmanahtar{margin:12px 0 0;padding:10px 12px;border-radius:14px;background:rgba(255,255,255,.08);box-shadow:inset 0 0 0 1px rgba(242,195,91,.4);display:flex;flex-direction:column;gap:6px;align-items:center;text-align:center}
 .qmanahtar small{font-size:.78rem;line-height:1.35;color:#eadcff}
 .qmanahtar>b{font-size:1.05rem;letter-spacing:.06em;color:#f2c35b;word-break:break-all}
+
+/* ===== oyun bitti kartı: "… bak" + "Menüye dön" yan yana ===== */
+.gkbitsira{width:100%}
+.gkbitsira>*{flex:1 1 0;min-width:0;display:flex;align-items:center;justify-content:center;text-align:center;text-decoration:none;box-sizing:border-box}

@@ -214,6 +214,17 @@
     no.addEventListener("click", function (e) { e.preventDefault(); e.stopPropagation(); });
     no.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") dodge(e); });
   }
-  window.__makeDodger = makeDodger;   /* kase.html'deki hediye kutusunun "Hayır"ı da aynı mekanizmayı kullanır */
+  window.__makeDodger = makeDodger;
+
+  /* oyun bitti kartı: "… bak" düğmesinin yanına "Menüye dön" (iki kişilik oyunların hepsi aynı kalıbı kullanır) */
+  (function () {
+    var kapat = document.getElementById("doneClose"), yeni = document.getElementById("doneNew");
+    var kart = document.getElementById("done");
+    if (!kapat || !yeni || !kart || document.getElementById("doneMenu") || kart.querySelector('a[href="oyunlar.html"]')) return;
+    var sira = document.createElement("div"); sira.className = "gkbtnrow gkbitsira";
+    kapat.parentNode.insertBefore(sira, kapat); sira.appendChild(kapat);
+    var m = document.createElement("a"); m.className = "gkghost"; m.id = "doneMenu"; m.href = "oyunlar.html"; m.textContent = "Menüye dön";
+    sira.appendChild(m);
+  })();   /* kase.html'deki hediye kutusunun "Hayır"ı da aynı mekanizmayı kullanır */
 
 })();
