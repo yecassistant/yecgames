@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<title>Bahçe Planı</title>
+<meta name="description" content="Çiçekli blok bulmaca: kat planını doldur.">
+<meta property="og:title" content="Bahçe Planı 🧩">
+<meta property="og:description" content="Tek başına, kendi hızında: çiçekli blok bulmaca.">
+<meta name="color-scheme" content="light">
+<meta property="og:type" content="website">
+<meta property="og:image" content="onizleme.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#ec6f9a">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Ctext y=%27.9em%27 font-size=%2790%27%3E%F0%9F%8C%B8%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;1,9..144,600&family=Nunito:wght@600;700;800&family=Caveat:wght@600;700&display=swap">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="YEC Games">
+<link rel="apple-touch-icon" href="ikon/app-180.png">
+<link rel="stylesheet" href="style.css?v=yec1">
+</head>
+<body data-page="oyun" data-tone="lil">
+
+<main class="stage game">
+  <div class="gtop">
+    <a class="gback" href="oyunlar.html">← Geri</a>
+    <div class="gtitle"><b>Bahçe Planı</b><small>Bahçeni planla 🌿</small></div>
+    <div class="gscore"><span>Puan <b id="score">0</b></span><span>En iyi <b id="best">0</b></span></div>
+  </div>
+  <div class="boardwrap">
+    <div class="board" id="board"></div>
+    <svg class="vines" id="vines" aria-hidden="true"></svg>
+  </div>
+  <div class="tray" id="tray"></div>
+  <div class="gfoot">
+    <p class="hint gmsg" id="gmsg"></p>
+    <button type="button" class="grestart" id="restart">Yeni proje ↻</button>
+  </div>
+</main>
+
+<div class="over" id="over" hidden>
+  <div class="overcard">
+    <div class="eyebrow">bahçe teslim 🏗️</div>
+    <h2>Puan: <em id="overScore">0</em></h2>
+    <p class="lead" id="overText"></p>
+    <div class="btns"><button type="button" class="btn pink" id="again2">Yeni proje</button><a class="btn ghost" href="kase.html">Meyve Kasesi 🍉</a><a class="btn ghost" href="oda.html">Oda Döşe 🛋️</a><a class="btn ghost" href="oyunlar.html">Geri dön</a></div>
+  </div>
+</div>
+
+<script src="app.js?v=yec1"></script>
+<script src="yapilandirma.js?v=yec1"></script>
+<script src="deneme.js?v=yec1"></script>
+<script src="hesap.js?v=yec1"></script>
+<script>(window.Hesap ? Hesap.oyun : function (l) { l.forEach(function (x) { document.write('<script src="' + x + '"><\/script>'); }); })(["oyun.js?v=yec1"]);</script>
+</body>
+</html>

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<title>Kelime Avı</title>
+<meta name="description" content="İki kişilik Kelime Avı: aynı harf tablosu, 90 saniye, kim daha çok kelime bulur?">
+<meta property="og:title" content="Kelime Avı">
+<meta property="og:description" content="Aynı tablo ikimize; 90 saniyede kim daha çok kelime bulur?">
+<meta name="color-scheme" content="dark">
+<meta property="og:type" content="website">
+<meta property="og:image" content="onizleme.jpg">
+<meta name="theme-color" content="#1e1433">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Crect width=%27100%27 height=%27100%27 rx=%2724%27 fill=%27%231e1433%27/%3E%3Crect x=%2718%27 y=%2718%27 width=%2728%27 height=%2728%27 rx=%277%27 fill=%27%23fbf4e6%27/%3E%3Crect x=%2754%27 y=%2718%27 width=%2728%27 height=%2728%27 rx=%277%27 fill=%27%23ffd166%27/%3E%3Crect x=%2718%27 y=%2754%27 width=%2728%27 height=%2728%27 rx=%277%27 fill=%27%23ffd166%27/%3E%3Crect x=%2754%27 y=%2754%27 width=%2728%27 height=%2728%27 rx=%277%27 fill=%27%23fbf4e6%27/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@1,9..144,600&family=Nunito:wght@600;700;800;900&display=swap">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="YEC Games">
+<link rel="apple-touch-icon" href="ikon/app-180.png">
+<link rel="stylesheet" href="style.css?v=yec1">
+</head>
+<body data-page="kelimeavi">
+
+<main class="sd ka" id="stage">
+  <header class="hdbar">
+    <a class="gkbtn" href="oyunlar.html" aria-label="Geri"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 5.5L8 12l6.5 6.5"/></svg></a>
+    <div class="hdtitle"><b>Kelime Avı</b><span id="sub">Bağlanıyor…</span></div>
+    <button type="button" class="gkbtn" id="bHelp" aria-label="Nasıl oynanır"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M9.6 9.4a2.5 2.5 0 0 1 4.8.9c0 1.8-2.4 2.1-2.4 3.7"/><path d="M12 16.9v.2"/></svg></button>
+  </header>
+
+  <!-- duello.js'nin beklediği kimlik alanları (Kelime Avı'nda skor çubuğu kullanılmaz) -->
+  <div class="kakimlik" hidden><span id="avaMe"></span><span id="adMe"></span><span id="avaOther"></span><span id="adOther"></span></div>
+
+  <!-- hazır: tura başlamadan -->
+  <section class="kahazir" id="hazir" hidden>
+    <div class="kahzkart">
+      <div class="kahzharf" aria-hidden="true"><span>K</span><span>E</span><span>L</span><span>İ</span><span>M</span><span>E</span><span>A</span><span>V</span><span>I</span></div>
+      <h2>Hazır mısın?</h2>
+      <p id="hzOn"></p>
+      <p class="gksmall">Başla'ya basınca 90 saniye başlar; tablo o anda açılır. Tur bitmeden çıkarsan süre akmaya devam eder.</p>
+      <button type="button" class="hsbtn" id="hzGo">Başla · 90 sn</button>
+    </div>
+  </section>
+
+  <!-- tur -->
+  <section class="kaoyun" id="oyun" hidden>
+    <div class="kaust">
+      <div class="kapuan"><b id="puanBen">0</b><small id="kelSay">0 kelime</small></div>
+      <div class="kasure"><b id="sureYazi">1:30</b><i class="kasurecubuk"><span id="sureCubuk"></span></i></div>
+      <div class="kapuan o"><small id="puanO"></small></div>
+    </div>
+    <div class="kakelkap"><div class="kakel" id="kelime"></div><div class="kames" id="kaMesaj"></div></div>
+    <div class="katablokap">
+      <div class="katablo" id="tablo"></div>
+      <svg class="kaiz" id="iz" viewBox="0 0 400 400" aria-hidden="true"><polyline id="izYol" points=""/></svg>
+    </div>
+    <div class="kabulunan" id="bulunan"></div>
+    <div class="kaalt"><button type="button" class="stbtn" id="kaBitir">Erken bitir</button></div>
+  </section>
+
+  <!-- ben bitirdim, o henüz -->
+  <section class="kabekle" id="bekle" hidden>
+    <div class="kabkkart">
+      <div class="gkkick">Turun bitti</div>
+      <b class="kabkpuan" id="bkPuan">0</b><small id="bkSay"></small>
+      <p id="bkYazi"></p>
+      <div class="kabkliste" id="bkListe"></div>
+    </div>
+  </section>
+
+  <!-- ikimiz de bitirdik: karşılaştırma -->
+  <section class="kaozet" id="ozet" hidden>
+    <div class="kavs">
+      <div class="kavsk" id="ozBen"><span class="hsava b" id="ozAvaBen">S</span><b id="ozBenP">0</b><small id="ozBenK"></small></div>
+      <i class="kavsvs">vs</i>
+      <div class="kavsk" id="ozO"><span class="hsava a" id="ozAvaO">?</span><b id="ozOP">0</b><small id="ozOK"></small><em id="ozAdO"></em></div>
+    </div>
+    <div class="kamini" id="miniTablo"></div>
+    <p class="gksmall kaminino">Bir kelimeye dokun, tabloda yolunu gör.</p>
+    <div class="kakutu"><h4>İkimiz de bulduk</h4><div class="kacipler" id="ozIkimiz"></div></div>
+    <div class="kakutu"><h4 id="ozSadeceOBas">Sadece o</h4><div class="kacipler" id="ozSadeceO"></div></div>
+    <div class="kakutu"><h4>Sadece sen</h4><div class="kacipler" id="ozSadeceBen"></div></div>
+    <div class="kakutu"><h4>İkimiz de kaçırdık</h4><div class="kacipler" id="ozKacan"></div></div>
+    <button type="button" class="hsbtn" id="ozYeni">Yeni tur</button>
+  </section>
+
+  <div class="hdfoot sdfoot" id="foot"><p class="hdmsg" id="msg"></p><button type="button" class="stbtn" id="bResign" hidden>—</button></div>
+</main>
+
+<div class="gkover" id="gate" hidden>
+  <div class="gkcard hdcard">
+    <h2>Kelime Avı</h2>
+    <p>İki kişilik oyun. Oynamak için bir oda açman ya da arkadaşının odasına katılman gerekiyor; üyelik yok, takma ad yeter.</p>
+    <a class="hsbtn" href="baslat.html?d=kelimeavi.html">Oda aç / odaya katıl</a>
+  </div>
+</div>
+
+<div class="gkover" id="start" hidden>
+  <div class="gkcard hdcard">
+    <div class="gkkick" id="startKick">İlk oyun</div>
+    <h2 id="startTitle">Hazır mısın?</h2>
+    <p id="startText"></p>
+    <button type="button" class="hsbtn" id="startGo">Tabloyu kur</button>
+    <a class="gkghost hdlink" href="oyunlar.html">Menü</a>
+  </div>
+</div>
+
+<div class="gkover" id="done" hidden>
+  <div class="gkcard hdcard">
+    <div class="gkkick" id="doneKick">Oyun bitti</div>
+    <h2 id="doneTitle">—</h2>
+    <p id="doneText"></p>
+    <div class="gkstats" id="doneStats"></div>
+    <button type="button" class="hsbtn" id="doneNew">Yeni tur</button>
+    <button type="button" class="gkghost" id="doneClose">Kelimelere bak</button>
+  </div>
+</div>
+
+<div class="gkover" id="erken" hidden>
+  <div class="gkcard hdcard">
+    <h2>Turu bitiriyor musun?</h2>
+    <p>Kalan süre gider; bulduğun kelimeler sayılır.</p>
+    <button type="button" class="hsbtn" id="erkenEvet">Evet, bitir</button>
+    <button type="button" class="gkghost" id="erkenHayir">Devam et</button>
+  </div>
+</div>
+
+<div class="gkover" id="help" hidden>
+  <div class="gkcard hdcard">
+    <h2>Kelime Avı</h2>
+    <p>İkinize aynı 4×4 harf tablosu gelir. Parmağını kaldırmadan komşu harfleri (çapraz da olur) birleştirip kelime yap; aynı kutu bir kelimede bir kez kullanılır.</p>
+    <p>En az 3 harf. 3 harf 100, 4 harf 200, 5 harf 400, 6 harf 800, 7 harf 1.400, 8 harf 2.000 puan. Kelimenin yalın hali ya da fiil kökü (gel, oku) geçerli; çekimli halleri (geldi, okuyor) geçmez.</p>
+    <p>Herkes kendi zamanında 90 saniye oynar. İkiniz de bitirince kim neyi bulmuş, kim neyi kaçırmış görürsünüz.</p>
+    <p class="gksmall">Aynı anda girmeniz gerekmiyor; tablo seni bekler.</p>
+    <button type="button" class="gkprimary" id="helpGo">Tamam</button>
+  </div>
+</div>
+
+<script src="app.js?v=yec1"></script>
+<script src="yapilandirma.js?v=yec1"></script>
+<script src="deneme.js?v=yec1"></script>
+<script src="hesap.js?v=yec1"></script>
+<script src="duello.js?v=yec1"></script>
+<script src="kelimeavi-sozluk.js?v=yec1"></script>
+<script src="kelimeavi.js?v=yec1"></script>
+<script src="sayi-ses.js?v=yec1"></script>
+<script src="sohbet.js?v=yec1"></script>
+</body>
+</html>

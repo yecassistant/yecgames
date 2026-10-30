@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<title>Kelime Zinciri</title>
+<meta name="description" content="İki kişilik kelime zinciri: her kelime bir öncekiyle anlamlı bir ikili kurar, sırayla bil.">
+<meta property="og:title" content="Kelime Zinciri">
+<meta property="og:description" content="Kalem → T…… → B……: zinciri sırayla tamamla.">
+<meta name="color-scheme" content="dark">
+<meta property="og:type" content="website">
+<meta property="og:image" content="onizleme.jpg">
+<meta name="theme-color" content="#102a2e">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Crect width=%27100%27 height=%27100%27 rx=%2724%27 fill=%27%23102a2e%27/%3E%3Crect x=%2716%27 y=%2734%27 width=%2738%27 height=%2726%27 rx=%2713%27 fill=%27none%27 stroke=%27%235fe3b8%27 stroke-width=%278%27/%3E%3Crect x=%2746%27 y=%2740%27 width=%2738%27 height=%2726%27 rx=%2713%27 fill=%27none%27 stroke=%27%23f2c35b%27 stroke-width=%278%27/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@1,9..144,600&family=Nunito:wght@600;700;800;900&display=swap">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="YEC Games">
+<link rel="apple-touch-icon" href="ikon/app-180.png">
+<link rel="stylesheet" href="style.css?v=yec1">
+</head>
+<body data-page="zincir">
+
+<main class="sd zc" id="stage">
+  <header class="hdbar">
+    <a class="gkbtn" href="oyunlar.html" aria-label="Geri"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 5.5L8 12l6.5 6.5"/></svg></a>
+    <div class="hdtitle"><b>Kelime Zinciri</b><span id="sub">Bağlanıyor…</span></div>
+    <button type="button" class="gkbtn" id="bHelp" aria-label="Nasıl oynanır"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M9.6 9.4a2.5 2.5 0 0 1 4.8.9c0 1.8-2.4 2.1-2.4 3.7"/><path d="M12 16.9v.2"/></svg></button>
+  </header>
+
+  <div class="sdscore" id="score" hidden>
+    <div class="hdp" id="pMe"><span class="hsava b" id="avaMe">?</span><div class="sdpt"><small id="adMe">sen</small><b class="zcpuan" id="skorMe">0</b></div></div>
+    <div class="hdturn" id="turn"><b id="turnTxt">—</b><small id="turnSub"></small></div>
+    <div class="hdp" id="pOther"><span class="hsava a" id="avaOther">?</span><div class="sdpt"><small id="adOther">rakip</small><b class="zcpuan" id="skorOther">0</b></div></div>
+  </div>
+
+  <div class="zcsekme" id="sekme" hidden><button type="button" id="sekBen" class="on"></button><button type="button" id="sekO"></button></div>
+
+  <div class="zcyaz" id="yazForm" hidden>
+    <div class="zcykart">
+      <b class="zcybas">Zincirini yaz</b>
+      <p class="zcyacik">İlk kelime açık görünür; her kelime bir öncekiyle anlamlı bir ikili kursun (KALEM → TIRAŞ → BIÇAĞI…). Kelimeyi öncekine uyan hâliyle yaz: tıraş <b>BIÇAĞI</b>.</p>
+      <div class="zcyliste" id="yazListe"></div>
+      <p class="zcynot" id="yazNot"></p>
+      <button type="button" class="zctahmin zcykilit" id="bKilitle" disabled>Zinciri kilitle</button>
+    </div>
+  </div>
+
+  <div class="zcalan" id="alan" hidden><p class="zcbeklenot" id="bekleNot" hidden>Zincirin hazır. Öbürü de yazınca sırayla başlıyoruz.</p><div class="zczincir" id="zincir"></div></div>
+
+  <div class="zcklavye" id="klavye" hidden>
+    <p class="zcnot" id="klavyeNot"></p>
+    <div class="zctuslar" id="tuslar"></div>
+    <div class="zcdugme"><button type="button" class="stbtn" id="bPas">Pas · harf aç</button><button type="button" class="zctahmin" id="bTahmin">Tahmin et</button></div>
+  </div>
+
+  <div class="hdfoot sdfoot" id="foot"><p class="hdmsg" id="msg"></p><button type="button" class="stbtn" id="bResign" hidden>Pes et</button></div>
+</main>
+
+<div class="gkover" id="gate" hidden>
+  <div class="gkcard hdcard">
+    <h2>Kelime Zinciri</h2>
+    <p>İki kişilik oyun. Oynamak için bir oda açman ya da arkadaşının odasına katılman gerekiyor; üyelik yok, takma ad yeter.</p>
+    <a class="hsbtn" href="baslat.html?d=zincir.html">Oda aç / odaya katıl</a>
+  </div>
+</div>
+
+<div class="gkover" id="start" hidden>
+  <div class="gkcard hdcard">
+    <div class="gkkick" id="startKick">İlk oyun</div>
+    <h2 id="startTitle">Hazır mısın?</h2>
+    <p id="startText"></p>
+    <div class="xoseg zcseg" data-mod-seg><button type="button" data-mod="yaz">Biz yazalım</button><button type="button" data-mod="hazir">Hazır zincir</button></div>
+    <p class="gksmall" data-mod-not></p>
+    <button type="button" class="hsbtn" id="startGo">Oyunu kur</button>
+    <a class="gkghost hdlink" href="oyunlar.html">Menü</a>
+  </div>
+</div>
+
+<div class="gkover" id="done" hidden>
+  <div class="gkcard hdcard">
+    <div class="gkkick" id="doneKick">Oyun bitti</div>
+    <h2 id="doneTitle">—</h2>
+    <p id="doneText"></p>
+    <div class="gkstats" id="doneStats"></div>
+    <div class="xoseg zcseg" data-mod-seg><button type="button" data-mod="yaz">Biz yazalım</button><button type="button" data-mod="hazir">Hazır zincir</button></div>
+    <button type="button" class="hsbtn" id="doneNew">Yeni oyun</button>
+    <button type="button" class="gkghost" id="doneClose">Tahtaya bak</button>
+  </div>
+</div>
+
+<div class="gkover" id="confirm" hidden>
+  <div class="gkcard hdcard">
+    <h2>Pes ediyor musun?</h2>
+    <p>Oyun karşı tarafın galibiyetiyle biter.</p>
+    <button type="button" class="hsbtn" id="confirmYes">Evet, pes et</button>
+    <button type="button" class="gkghost" id="confirmNo">Vazgeç</button>
+  </div>
+</div>
+
+<div class="gkover" id="help" hidden>
+  <div class="gkcard hdcard zcyardim">
+    <h2>Kelime Zinciri</h2>
+    <p>Üstteki kelime açık. Altındaki her kelime <b>bir öncekiyle anlamlı bir ikili</b> kurar ama sadece ilk harfi görünür:</p>
+    <div class="zcornek" aria-hidden="true">
+      <div class="zcsat bas"><div class="zckel"><span class="zch acik">K</span><span class="zch acik">A</span><span class="zch acik">L</span><span class="zch acik">E</span><span class="zch acik">M</span></div></div>
+      <div class="zcbag"><i></i></div>
+      <div class="zcsat simdi"><div class="zckel"><span class="zch acik">T</span><span class="zch"></span><span class="zch"></span><span class="zch"></span><span class="zch"></span></div><i class="zcroz cev">tıraş</i></div>
+      <div class="zcbag"><i></i></div>
+      <div class="zcsat sonra"><div class="zckel"><span class="zch acik">B</span><span class="zch"></span><span class="zch"></span><span class="zch"></span><span class="zch"></span><span class="zch"></span></div><i class="zcroz cev">bıçağı</i></div>
+    </div>
+    <p class="gksmall zcornekyazi">kalem<b>tıraş</b> · tıraş <b>bıçağı</b> · bıçak <b>sırtı</b> · sırt <b>çantası</b>… Kelime öncekine göre çekimli olabilir (bıçağı), sonraki ikili kökünden de kurulabilir (bıçak sırtı).</p>
+    <p><b>Biz yazalım</b> modunda ikimiz de birbirimize 5–6 kelimelik bir zincir yazarız; herkes ötekinin zincirini çözer. <b>Hazır zincir</b> modunda aynı zinciri birlikte çözeriz.</p>
+    <p><b>Sırayla</b> tahmin ediyoruz. Bilen, kapalı harf sayısı kadar puan alır ve bir sonrakine devam eder. Bilemeyen ya da pas diyen kelimenin bir harfini açar, sıra karşıya geçer. Zincirler bitince puanı çok olan kazanır.</p>
+    <p class="gksmall">Aynı anda girmemiz gerekmiyor; tahminini yap, çık :)</p>
+    <button type="button" class="gkprimary" id="helpGo">Tamam</button>
+  </div>
+</div>
+
+<script src="app.js?v=yec1"></script>
+<script src="yapilandirma.js?v=yec1"></script>
+<script src="deneme.js?v=yec1"></script>
+<script src="hesap.js?v=yec1"></script>
+<script src="duello.js?v=yec1"></script>
+<script src="zincir-kelime.js?v=yec1"></script>
+<script src="zincir.js?v=yec1"></script>
+<script src="sayi-ses.js?v=yec1"></script>
+<script src="sohbet.js?v=yec1"></script>
+</body>
+</html>

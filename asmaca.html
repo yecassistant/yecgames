@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<title>Adam Asmaca</title>
+<meta name="description" content="İki kişilik adam asmaca: aynı 5 kelime, herkes kendi hızında çözüyor, sonunda puanlar karşılaştırılıyor.">
+<meta property="og:title" content="Adam Asmaca">
+<meta property="og:description" content="İki kişilik adam asmaca: aynı 5 kelime, herkes kendi hızında çözüyor, sonunda puanlar karşılaştırılıyor.">
+<meta name="color-scheme" content="dark">
+<meta property="og:type" content="website">
+<meta property="og:image" content="onizleme.jpg">
+<meta name="theme-color" content="#1e2b28">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Crect width=%27100%27 height=%27100%27 rx=%2724%27 fill=%27%231e2b28%27/%3E%3Cpath d=%27M22 84h56M34 84V16h34v12%27 fill=%27none%27 stroke=%27%23f3efe6%27 stroke-width=%277%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27/%3E%3Ccircle cx=%2768%27 cy=%2740%27 r=%2710%27 fill=%27none%27 stroke=%27%23f3a3c0%27 stroke-width=%276%27/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@1,9..144,600&family=Nunito:wght@600;700;800;900&family=Caveat:wght@600;700&display=swap">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="YEC Games">
+<link rel="apple-touch-icon" href="ikon/app-180.png">
+<link rel="stylesheet" href="style.css?v=yec1">
+</head>
+<body data-page="asmaca">
+
+<main class="am" id="stage">
+  <header class="hdbar">
+    <a class="gkbtn" href="oyunlar.html" aria-label="Geri"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 5.5L8 12l6.5 6.5"/></svg></a>
+    <div class="hdtitle"><b>Adam Asmaca</b><span id="sub">Bağlanıyor…</span></div>
+    <button type="button" class="gkbtn" id="bHelp" aria-label="Nasıl oynanır"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M9.6 9.4a2.5 2.5 0 0 1 4.8.9c0 1.8-2.4 2.1-2.4 3.7"/><path d="M12 16.9v.2"/></svg></button>
+  </header>
+
+  <!-- ikimizin ilerlemesi: 5 kelime, canlı -->
+  <div class="amscore" id="score" hidden>
+    <div class="hdp" id="pMe"><span class="hsava b" id="avaMe">?</span><div class="ampt"><small id="adMe">sen</small><span class="amnok" id="nokMe"></span></div><b class="ampuan" id="puanMe">0</b></div>
+    <div class="hdp" id="pOther"><span class="hsava a" id="avaOther">?</span><div class="ampt"><small id="adOther">rakip</small><span class="amnok" id="nokOther"></span></div><b class="ampuan" id="puanOther">0</b></div>
+  </div>
+
+  <!-- "biz yazalım" modu: öbürüne 3 kelime -->
+  <section class="amyaz" id="yaz" hidden>
+    <div class="amtahta amtahta-yaz">
+      <p class="amel" id="yazBaslik">Ona 3 kelime yaz ✍️</p>
+      <div class="amyazliste" id="yazListe"></div>
+      <p class="amnot" id="yazNot">Her kelime 3–14 harf, en çok 2 kelime. İpucu isteğe bağlı.</p>
+    </div>
+    <button type="button" class="hsbtn amkilit" id="bKilit" disabled>Kelimeleri gönder</button>
+  </section>
+
+  <!-- "biz yazalım": ben yazdım, onu bekliyorum -->
+  <section class="amozet" id="bekle" hidden>
+    <div class="amtahta amtahta-ozet">
+      <div class="amozbas">Kelimelerin gönderildi ✍️</div>
+      <p class="amnot" id="bekleNot"></p>
+      <ul class="ambenim" id="bekleListe"></ul>
+    </div>
+  </section>
+
+  <!-- çözme -->
+  <section class="amoyun" id="oyun" hidden>
+    <div class="amtahta">
+      <div class="amust"><span id="kelNo">Kelime 1/5</span><div class="amhak" id="hak"></div></div>
+      <svg class="amcizim" id="cizim" viewBox="14 0 160 150" aria-hidden="true">
+        <g class="iskele"><path d="M24 142h96"/><path d="M48 142V12"/><path d="M48 12h66"/><path d="M48 36l22-24"/></g>
+        <g class="ip"><path class="pp p1" pathLength="1" d="M114 12v20"/></g>
+        <g class="adam">
+          <circle class="pp p2" pathLength="1" cx="114" cy="44" r="12"/>
+          <path class="pp p3" pathLength="1" d="M114 56v36"/>
+          <path class="pp p4" pathLength="1" d="M114 66l-16 14"/>
+          <path class="pp p5" pathLength="1" d="M114 66l16 14"/>
+          <path class="pp p6" pathLength="1" d="M114 92l-14 22"/>
+          <path class="pp p7" pathLength="1" d="M114 92l14 22"/>
+          <g class="yuz"><circle cx="110" cy="42" r="1.4"/><circle cx="118" cy="42" r="1.4"/><path class="agiz" d="M110 49q4 2.6 8 0"/></g>
+          <g class="xgoz"><path d="M107.5 39.5l5 5M112.5 39.5l-5 5M115.5 39.5l5 5M120.5 39.5l-5 5"/></g>
+        </g>
+        <g class="kalpler"><path d="M150 40s-7-4.2-7-8.8a3.8 3.8 0 0 1 7-2.2 3.8 3.8 0 0 1 7 2.2c0 4.6-7 8.8-7 8.8z"/><path d="M168 58s-5-3-5-6.2a2.7 2.7 0 0 1 5-1.6 2.7 2.7 0 0 1 5 1.6c0 3.2-5 6.2-5 6.2z"/></g>
+      </svg>
+      <div class="amipucu" id="ipucu"></div>
+      <div class="amkelime" id="kelime" aria-live="polite"></div>
+      <p class="amyanlis" id="yanlis"></p>
+      <div class="amsonuc" id="sonuc" hidden></div>
+    </div>
+    <div class="amklavye" id="klavye"></div>
+    <button type="button" class="hsbtn amsonraki" id="bSonraki" hidden>Sonraki kelime →</button>
+  </section>
+
+  <!-- bitirince: puanlar yan yana -->
+  <section class="amozet" id="ozet" hidden>
+    <div class="amtahta amtahta-ozet">
+      <div class="amozbas" id="ozBaslik">Bitirdin!</div>
+      <div class="amozpuan" id="ozPuan">0</div>
+      <p class="amnot" id="ozNot"></p>
+      <table class="amtablo" id="ozTablo"></table>
+    </div>
+    <button type="button" class="hsbtn" id="bYeni" hidden>Yeni oyun</button>
+  </section>
+
+  <div class="hdfoot amfoot" id="foot"><p class="hdmsg" id="msg"></p><button type="button" class="stbtn" id="bResign" hidden>Pes et</button></div>
+</main>
+
+<div class="gkover" id="gate" hidden>
+  <div class="gkcard hdcard">
+    <h2>Adam Asmaca</h2>
+    <p>İki kişilik oyun. Oynamak için bir oda açman ya da arkadaşının odasına katılman gerekiyor; üyelik yok, takma ad yeter.</p>
+    <a class="hsbtn" href="baslat.html?d=asmaca.html">Oda aç / odaya katıl</a>
+  </div>
+</div>
+
+<div class="gkover" id="start" hidden>
+  <div class="gkcard hdcard">
+    <div class="gkkick" id="startKick">İlk oyun</div>
+    <h2 id="startTitle">Hazır mısın?</h2>
+    <p id="startText">İkimize de aynı 5 kelime geliyor; herkes kendi hızında çözüyor.</p>
+    <div class="amsec" id="startSec" role="radiogroup"><button type="button" data-mod="oto" class="on">Kelimeler otomatik gelsin</button><button type="button" data-mod="yaz">Kelimeleri biz yazalım</button></div>
+    <button type="button" class="hsbtn" id="startGo">Oyunu kur</button>
+    <a class="gkghost hdlink" href="oyunlar.html">Menü</a>
+  </div>
+</div>
+
+<div class="gkover" id="done" hidden>
+  <div class="gkcard hdcard">
+    <div class="gkkick" id="doneKick">Oyun bitti</div>
+    <h2 id="doneTitle">—</h2>
+    <p id="doneText"></p>
+    <div class="amkarsi" id="doneEk"></div>
+    <div class="gkstats" id="doneStats"></div>
+    <div class="amsec" id="doneSec" role="radiogroup"><button type="button" data-mod="oto" class="on">Otomatik</button><button type="button" data-mod="yaz">Biz yazalım</button></div>
+    <button type="button" class="hsbtn" id="doneNew">Yeni oyun</button>
+    <button type="button" class="gkghost" id="doneClose">Tahtaya bak</button>
+  </div>
+</div>
+
+<div class="gkover" id="confirm" hidden>
+  <div class="gkcard hdcard">
+    <h2>Pes ediyor musun?</h2>
+    <p>Oyun karşı tarafın galibiyetiyle biter, kelimeler açılır.</p>
+    <button type="button" class="hsbtn" id="confirmYes">Evet, pes et</button>
+    <button type="button" class="gkghost" id="confirmNo">Vazgeç</button>
+  </div>
+</div>
+
+<div class="gkover" id="help" hidden>
+  <div class="gkcard hdcard">
+    <h2>Adam Asmaca</h2>
+    <p>İki şekilde oynanıyor: <b>Otomatik</b>'te ikimize de aynı 5 kelime geliyor. <b>Biz yazalım</b>'da herkes öbürüne 3 kelime (istersek ipucuyla) yazıyor, sonra herkes kendisine yazılanları çözüyor. İki modda da herkes kendi hızında ilerliyor, kimse kimseyi beklemiyor. Üstte kimin kaçıncı kelimede olduğunu canlı görebilirsin.</p>
+    <p>Doğru harf kelimede geçtiği her yerde açılır, yanlış harfte tahtaya bir çizgi eklenir. 7 yanlışta adam asılır. Takılırsan ipucu alabilirsin ama bir hakkın gider.</p>
+    <p>Bulduğun her kelime 10 puan, her yanlış 1 puan götürür; asılırsan o kelimeden puan yok. İkimiz de bitirince puanlar karşılaştırılıyor, çok puanı olan kazanır.</p>
+    <p class="gksmall">Aynı anda girmemiz gerekmiyor ama daha tatlı olur :) Bulduğun kelimeyi bana söyleme, ben de aynılarını çözüyorum 🤫</p>
+    <button type="button" class="gkprimary" id="helpGo">Tamam</button>
+  </div>
+</div>
+
+<script src="app.js?v=yec1"></script>
+<script src="yapilandirma.js?v=yec1"></script>
+<script src="deneme.js?v=yec1"></script>
+<script src="hesap.js?v=yec1"></script>
+<script src="duello.js?v=yec1"></script>
+<script src="yasak-kart.js?v=yec1"></script>
+<script src="asmaca.js?v=yec1"></script>
+<script src="asmaca-ses.js?v=yec1"></script>
+<script src="sohbet.js?v=yec1"></script>
+</body>
+</html>

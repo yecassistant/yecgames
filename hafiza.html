@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<title>Hafıza Düellosu</title>
+<meta name="description" content="İki kişilik hafıza oyunu: sırayla iki kart aç, eşi bul, çifti kap.">
+<meta property="og:title" content="Hafıza Düellosu">
+<meta property="og:description" content="İki kişilik hafıza oyunu: sırayla iki kart aç, eşi bul, çifti kap.">
+<meta name="color-scheme" content="dark">
+<meta property="og:type" content="website">
+<meta property="og:image" content="onizleme.jpg">
+<meta name="theme-color" content="#2a1430">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Crect width=%27100%27 height=%27100%27 rx=%2724%27 fill=%27%232a1430%27/%3E%3Crect x=%2718%27 y=%2726%27 width=%2730%27 height=%2740%27 rx=%277%27 fill=%27%23f3a3c0%27/%3E%3Crect x=%2752%27 y=%2734%27 width=%2730%27 height=%2740%27 rx=%277%27 fill=%27%23b58cff%27/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;1,9..144,600&family=Nunito:wght@600;700;800;900&display=swap">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="YEC Games">
+<link rel="apple-touch-icon" href="ikon/app-180.png">
+<link rel="stylesheet" href="style.css?v=yec1">
+</head>
+<body data-page="hafiza">
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <g id="face"><circle cx="38" cy="50" r="3.8" fill="#3d2a3f"/><circle cx="62" cy="50" r="3.8" fill="#3d2a3f"/><circle cx="39.5" cy="48.4" r="1.3" fill="#fff"/><circle cx="63.5" cy="48.4" r="1.3" fill="#fff"/><path d="M43 59q7 6 14 0" fill="none" stroke="#3d2a3f" stroke-width="2.8" stroke-linecap="round"/><ellipse cx="29" cy="58" rx="5.5" ry="3.2" fill="#ff8fb0" opacity=".6"/><ellipse cx="71" cy="58" rx="5.5" ry="3.2" fill="#ff8fb0" opacity=".6"/></g>
+  <g id="face-happy"><path d="M32 50q6-7 12 0M56 50q6-7 12 0" fill="none" stroke="#3d2a3f" stroke-width="3" stroke-linecap="round"/><path d="M41 58q9 10 18 0z" fill="#3d2a3f"/><path d="M45 62q5 3 10 0z" fill="#ff8fb0"/><ellipse cx="28" cy="58" rx="6" ry="3.4" fill="#ff8fb0" opacity=".7"/><ellipse cx="72" cy="58" rx="6" ry="3.4" fill="#ff8fb0" opacity=".7"/></g>
+  <g id="face-worry"><circle cx="38" cy="50" r="3.8" fill="#3d2a3f"/><circle cx="62" cy="50" r="3.8" fill="#3d2a3f"/><circle cx="39.5" cy="48.4" r="1.3" fill="#fff"/><circle cx="63.5" cy="48.4" r="1.3" fill="#fff"/><path d="M31 41l10 3M69 41l-10 3" stroke="#3d2a3f" stroke-width="2.6" stroke-linecap="round"/><path d="M44 61q6-4 12 0" fill="none" stroke="#3d2a3f" stroke-width="2.8" stroke-linecap="round"/><path d="M26 44q-3 5 0 8" fill="none" stroke="#9bc8f0" stroke-width="3" stroke-linecap="round"/></g>
+  <g id="face-wink"><circle cx="38" cy="50" r="3.8" fill="#3d2a3f"/><circle cx="39.5" cy="48.4" r="1.3" fill="#fff"/><path d="M56 50.5q6-6 12 0" fill="none" stroke="#3d2a3f" stroke-width="3" stroke-linecap="round"/><path d="M43 58q7 7 14 0" fill="none" stroke="#3d2a3f" stroke-width="2.8" stroke-linecap="round"/><ellipse cx="29" cy="58" rx="5.5" ry="3.2" fill="#ff8fb0" opacity=".7"/><ellipse cx="71" cy="58" rx="5.5" ry="3.2" fill="#ff8fb0" opacity=".7"/></g>
+  <g id="shine"><ellipse cx="33" cy="31" rx="9" ry="5" fill="#fff" opacity=".5" transform="rotate(-32 33 31)"/><circle cx="24" cy="42" r="2.2" fill="#fff" opacity=".6"/></g>
+  <radialGradient id="g-ym" cx=".38" cy=".32" r=".75"><stop offset="0" stop-color="#8e9be0"/><stop offset=".6" stop-color="#5b6bb5"/><stop offset="1" stop-color="#3f4c8f"/></radialGradient>
+  <radialGradient id="g-ki" cx=".38" cy=".32" r=".75"><stop offset="0" stop-color="#ff7a85"/><stop offset=".6" stop-color="#e0484f"/><stop offset="1" stop-color="#a8252e"/></radialGradient>
+  <radialGradient id="g-ci" cx=".4" cy=".3" r=".8"><stop offset="0" stop-color="#ff7d8e"/><stop offset=".6" stop-color="#ec4b5f"/><stop offset="1" stop-color="#b92a40"/></radialGradient>
+  <radialGradient id="g-uz" cx=".38" cy=".3" r=".75"><stop offset="0" stop-color="#f1f9d6"/><stop offset=".6" stop-color="#cfe59f"/><stop offset="1" stop-color="#a3c46c"/></radialGradient>
+  <radialGradient id="g-ne" cx=".38" cy=".3" r=".78"><stop offset="0" stop-color="#ffc26b"/><stop offset=".55" stop-color="#f28c3b"/><stop offset="1" stop-color="#c94a2c"/></radialGradient>
+  <radialGradient id="g-na" cx=".38" cy=".3" r=".78"><stop offset="0" stop-color="#e45a73"/><stop offset=".6" stop-color="#b8324a"/><stop offset="1" stop-color="#7a1830"/></radialGradient>
+  <radialGradient id="g-ka" cx=".38" cy=".3" r=".78"><stop offset="0" stop-color="#7fcf8e"/><stop offset=".6" stop-color="#3f9d5a"/><stop offset="1" stop-color="#226b3a"/></radialGradient>
+
+  <symbol id="f-yabanmersini" viewBox="0 0 100 100"><circle cx="50" cy="52" r="45" fill="url(#g-ym)"/><circle cx="50" cy="52" r="45" fill="#c9d0f0" opacity=".16"/><path d="M50 10l5 8 9-2-4 8 7 5-9 3 1 9-9-5-9 5 1-9-9-3 7-5-4-8 9 2z" fill="#3a468a"/><circle cx="50" cy="20" r="4" fill="#2d376e"/><use href="#shine"/><use href="#face" transform="translate(0 6)"/></symbol>
+  <symbol id="f-kiraz" viewBox="0 0 100 100"><circle cx="50" cy="54" r="44" fill="url(#g-ki)"/><path d="M52 40C52 30 56 22 66 16" fill="none" stroke="#7a5a3a" stroke-width="4.5" stroke-linecap="round"/><path d="M66 16c-9 0-14 5-14 13 8 0 14-5 14-13z" fill="#6fa77f"/><circle cx="50" cy="48" r="3" fill="#8a1f2a" opacity=".45"/><use href="#shine" transform="translate(2 6)"/><use href="#face" transform="translate(0 8)"/></symbol>
+  <symbol id="f-cilek" viewBox="0 0 100 100"><path d="M50 99C26 99 7 80 7 56c0-20 17-36 43-38 26 2 43 18 43 38 0 24-19 43-43 43z" fill="url(#g-ci)"/><g fill="#ffe08a" opacity=".9"><ellipse cx="26" cy="62" rx="2.6" ry="3.6"/><ellipse cx="50" cy="82" rx="2.6" ry="3.6"/><ellipse cx="74" cy="62" rx="2.6" ry="3.6"/><ellipse cx="20" cy="46" rx="2.4" ry="3.3"/><ellipse cx="80" cy="46" rx="2.4" ry="3.3"/><ellipse cx="36" cy="90" rx="2.2" ry="3"/><ellipse cx="64" cy="90" rx="2.2" ry="3"/><ellipse cx="34" cy="44" rx="2.2" ry="3"/><ellipse cx="66" cy="44" rx="2.2" ry="3"/><ellipse cx="50" cy="34" rx="2.2" ry="3"/></g><path d="M50 26c-6-8-16-10-26-6 8 2 12 5 15 10-8-1-14 1-18 6 9 0 16-2 24-2-3 5-3 9-1 14 3-5 5-8 6-8s3 3 6 8c2-5 2-9-1-14 8 0 15 2 24 2-4-5-10-7-18-6 3-5 7-8 15-10-10-4-20-2-26 6z" fill="#5fa36f"/><path d="M50 18v8" stroke="#4e8a5e" stroke-width="3" stroke-linecap="round"/><use href="#face" transform="translate(0 12)"/></symbol>
+  <symbol id="f-uzum" viewBox="0 0 100 100"><circle cx="50" cy="54" r="44" fill="url(#g-uz)"/><circle cx="50" cy="54" r="44" fill="none" stroke="#b9d47f" stroke-width="1.5" opacity=".6"/><path d="M50 10v10" stroke="#7a5a3a" stroke-width="4" stroke-linecap="round"/><path d="M50 10c-6-4-12-4-16 0" fill="none" stroke="#6fa77f" stroke-width="3" stroke-linecap="round"/><use href="#shine" transform="translate(0 4)"/><use href="#face" transform="translate(0 8)"/></symbol>
+  <symbol id="f-nektarin" viewBox="0 0 100 100"><circle cx="50" cy="55" r="44" fill="url(#g-ne)"/><path d="M50 12c3 16 3 30 0 46" fill="none" stroke="#b9432a" stroke-width="3.2" stroke-linecap="round" opacity=".55"/><path d="M53 14c7-8 18-7 23-2-8 3-15 5-23 2z" fill="#6fa77f"/><path d="M57 12c5-2 10-2 15 0" fill="none" stroke="#4e8a5e" stroke-width="1.3"/><use href="#shine" transform="translate(0 6)"/><use href="#face" transform="translate(0 10)"/></symbol>
+  <symbol id="f-nar" viewBox="0 0 100 100"><circle cx="50" cy="56" r="43" fill="url(#g-na)"/><path d="M36 20l5-12 9 7 9-7 5 12c-6 4-22 4-28 0z" fill="#8a1f36"/><path d="M38 19c8 2 16 2 24 0" fill="none" stroke="#5e1024" stroke-width="2"/><use href="#shine" transform="translate(0 8)"/><use href="#face" transform="translate(0 12)"/></symbol>
+  <radialGradient id="g-mu" cx=".4" cy=".3" r=".8"><stop offset="0" stop-color="#f7d79a"/><stop offset=".6" stop-color="#e2ad5c"/><stop offset="1" stop-color="#b9823a"/></radialGradient>
+  <linearGradient id="g-cup" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#d9c8f3"/><stop offset="1" stop-color="#a88fd6"/></linearGradient>
+  <radialGradient id="g-gold" cx=".4" cy=".35" r=".75"><stop offset="0" stop-color="#fff2c2"/><stop offset=".55" stop-color="#f6c64a"/><stop offset="1" stop-color="#c98a12"/></radialGradient>
+  <!-- sürpriz: yaban mersinli muffin (en son) -->
+  <symbol id="f-muffin" viewBox="0 0 100 100"><path d="M16 60l6 36h56l6-36z" fill="url(#g-cup)"/><g stroke="#8f74c4" stroke-width="2" opacity=".55"><path d="M26 61l4 34M36 61l2 34M50 61v34M64 61l-2 34M74 61l-4 34"/></g><path d="M8 54c0-26 18-42 42-42s42 16 42 42c0 8-6 12-14 12H22c-8 0-14-4-14-12z" fill="url(#g-mu)"/><path d="M22 66c6-6 50-6 56 0" fill="none" stroke="#b9823a" stroke-width="2" opacity=".6"/><g fill="#4b5aa8"><circle cx="30" cy="34" r="5"/><circle cx="70" cy="30" r="5.5"/><circle cx="50" cy="20" r="4.5"/><circle cx="20" cy="50" r="4"/><circle cx="80" cy="50" r="4"/><circle cx="60" cy="40" r="3.5"/></g><g fill="#8e9be0" opacity=".8"><circle cx="28" cy="32" r="1.6"/><circle cx="68" cy="28" r="1.8"/><circle cx="48" cy="18" r="1.4"/></g><use href="#shine" transform="translate(4 -4)"/><use href="#face" transform="translate(0 2)"/></symbol>
+  <!-- ikinci sürpriz: atom tost (iki muffin birleşince) — üstten, bütün tost; kenarlardan kaşar taşar, yanlardan sucuk görünür -->
+  <linearGradient id="g-ust" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f9dfa6"/><stop offset=".7" stop-color="#e9b969"/><stop offset="1" stop-color="#d49a45"/></linearGradient>
+  <clipPath id="c-tost"><rect x="8" y="8" width="84" height="84" rx="34"/></clipPath>
+  <symbol id="f-tost" viewBox="0 0 100 100"><path d="M11 34q-8 5-7 14t8 8zM89 34q8 5 7 14t-8 8zM36 90q4 8 14 8t13-8z" fill="#f4a92a"/><path d="M9 40q-5 4-4 9t6 5zM91 40q5 4 4 9t-6 5zM40 91q3 6 10 6t10-6z" fill="#ffd659"/><circle cx="7" cy="64" r="4.5" fill="#f4a92a"/><circle cx="93" cy="62" r="4.5" fill="#f4a92a"/><circle cx="23" cy="91" r="3.6" fill="#f4a92a"/><circle cx="77" cy="91" r="3.6" fill="#f4a92a"/><g><circle cx="14" cy="78" r="7" fill="#9c2f2a"/><circle cx="14" cy="78" r="5" fill="#c8453b"/><circle cx="12.5" cy="76.5" r="1" fill="#f5d9d2" opacity=".85"/></g><g><circle cx="86" cy="78" r="7" fill="#9c2f2a"/><circle cx="86" cy="78" r="5" fill="#c8453b"/><circle cx="84.5" cy="76.5" r="1" fill="#f5d9d2" opacity=".85"/></g><rect x="8" y="8" width="84" height="84" rx="34" fill="url(#g-ust)"/><g clip-path="url(#c-tost)" stroke="#a85f22" stroke-width="5" stroke-linecap="round" opacity=".38"><path d="M0 40L40 0M0 64L64 0M6 88L88 6M28 100L100 28M52 100L100 52"/></g><rect x="8" y="8" width="84" height="84" rx="34" fill="none" stroke="#c98a3a" stroke-width="3" opacity=".75"/><use href="#shine" transform="translate(0 -4)"/><use href="#face" transform="translate(0 2)"/></symbol>
+  <!-- üçüncü sürpriz: kalp (iki atom tost birleşince). Atış ve göz kırpma kase.js'de sadece çizimde yapılır; fizik dairesi değişmez -->
+  <radialGradient id="g-kalp" cx=".36" cy=".3" r=".8"><stop offset="0" stop-color="#ff93a4"/><stop offset=".55" stop-color="#f0405c"/><stop offset="1" stop-color="#b51b3c"/></radialGradient>
+  <symbol id="f-kalp" viewBox="0 0 100 100"><path d="M50 93C30 78 8 63 8 40C8 26 18.5 16 31 16c8.5 0 15 4.5 19 12 4-7.5 10.5-12 19-12C81.5 16 92 26 92 40c0 23-22 38-42 53z" fill="url(#g-kalp)"/><path d="M50 93C30 78 8 63 8 40C8 26 18.5 16 31 16c8.5 0 15 4.5 19 12 4-7.5 10.5-12 19-12C81.5 16 92 26 92 40c0 23-22 38-42 53z" fill="none" stroke="#9c1533" stroke-width="2" opacity=".35"/><path d="M50 30c-3-6-8-9-14-9" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" opacity=".35"/><use href="#shine" transform="translate(-4 -4)"/><path d="M78 24l1.6 3.6 3.6 1.6-3.6 1.6-1.6 3.6-1.6-3.6-3.6-1.6 3.6-1.6z" fill="#fff" opacity=".9"/><use href="#face" transform="translate(0 -2)"/></symbol>
+  <!-- zincirdeki altın soru işareti -->
+  <symbol id="f-gizli" viewBox="0 0 100 100"><circle cx="50" cy="52" r="44" fill="url(#g-gold)"/><circle cx="50" cy="52" r="44" fill="none" stroke="#fff" stroke-width="3" opacity=".6"/><text x="50" y="68" text-anchor="middle" font-family="Fraunces, Georgia, serif" font-weight="700" font-size="52" fill="#7a4e07">?</text><use href="#shine"/></symbol>
+  <symbol id="f-karpuz" viewBox="0 0 100 100"><circle cx="50" cy="52" r="46" fill="url(#g-ka)"/><g fill="#1f6b36" opacity=".8"><path d="M50 7c-7 26-7 64 0 90-4-26-4-64 0-90z"/><path d="M27 13c-11 24-11 54 0 78-15-24-15-54 0-78z"/><path d="M73 13c11 24 11 54 0 78 15-24 15-54 0-78z"/><path d="M11 30c-6 14-6 30 0 44-10-14-10-30 0-44z"/><path d="M89 30c6 14 6 30 0 44 10-14 10-30 0-44z"/></g><path d="M50 7v6" stroke="#7a5a3a" stroke-width="4" stroke-linecap="round"/><path d="M50 7c6-4 12-4 16 0" fill="none" stroke="#6fa77f" stroke-width="3" stroke-linecap="round"/><use href="#shine"/><use href="#face" transform="translate(0 8)"/></symbol>
+
+  <!-- büyük boy sufle (iki kalp birleşince çıkar): beyaz porselen sufle kabı, kabından yükselen çikolatalı sufle, pudra şekeri, çilek.
+       kase.js animasyonda parçaları ayrı çizer (kap → sufle → kabın ön dudağı → şeker → çilek); zincir ikonu f-sufle hepsini birleştirir -->
+  <linearGradient id="g-su-kap" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#d6c8ec"/><stop offset=".16" stop-color="#f5f0fc"/><stop offset=".4" stop-color="#ffffff"/><stop offset=".8" stop-color="#ece4f7"/><stop offset="1" stop-color="#c8b8e2"/></linearGradient>
+  <linearGradient id="g-su-sut" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#4a2314"/><stop offset=".22" stop-color="#7a4327"/><stop offset=".5" stop-color="#9a5c37"/><stop offset=".78" stop-color="#7a4327"/><stop offset="1" stop-color="#43200f"/></linearGradient>
+  <radialGradient id="g-su-tep" cx=".42" cy=".3" r=".75"><stop offset="0" stop-color="#b87a4c"/><stop offset=".6" stop-color="#8c5030"/><stop offset="1" stop-color="#6a361d"/></radialGradient>
+  <clipPath id="c-su-kap"><path d="M15 56v31.5q0 5 5 5.7Q50 96.6 80 93.2q5-.7 5-5.7V56z"/></clipPath>
+  <g id="su-kap"><path d="M15 56v31.5q0 5 5 5.7Q50 96.6 80 93.2q5-.7 5-5.7V56z" fill="url(#g-su-kap)"/><g clip-path="url(#c-su-kap)" fill="none" stroke="#cbbde3" stroke-width="1.1" opacity=".6"><path d="M20 60v36M26.5 61v36M33.5 61.6v36M41.5 62v36M58.5 62v36M66.5 61.6v36M73.5 61v36M80 60v36"/></g><path d="M15 85.5Q50 91 85 85.5" fill="none" stroke="#c8b8e2" stroke-width="1.3" opacity=".8"/><path d="M21 63v20" stroke="#fff" stroke-width="3.4" stroke-linecap="round" opacity=".9"/><path d="M15 56v31.5q0 5 5 5.7Q50 96.6 80 93.2q5-.7 5-5.7V56z" fill="none" stroke="#b6a3da" stroke-width="1.4" opacity=".75"/><ellipse cx="50" cy="56" rx="35.5" ry="6.6" fill="#fdfbff" stroke="#c4b3df" stroke-width="1.3"/><ellipse cx="50" cy="56.3" rx="31" ry="4.5" fill="#e4d9f3"/></g>
+  <g id="su-ust"><path d="M19.5 57.5V33.5C19.5 23.5 33 16.5 50 16.5S80.5 23.5 80.5 33.5V57.5z" fill="url(#g-su-sut)"/><path d="M20.5 34C21 24.5 34 18 50 18s29 6.5 29.5 16c-4 3.6-15.5 5.6-29.5 5.6S24.5 37.6 20.5 34z" fill="url(#g-su-tep)"/><path d="M20.5 34.5c4.5 3.8 15.5 6 29.5 6s25-2.2 29.5-6" fill="none" stroke="#3b1a0c" stroke-width="1.3" opacity=".45"/><path d="M29 27.5q6 3.4 12 1.2M54 22.5q6 4.4 13 2.4M37 34.5q7 2 14-.4M64 31q4.4 1.6 8.5 0" fill="none" stroke="#e0ab7b" stroke-width="1.6" stroke-linecap="round" opacity=".85"/><ellipse cx="33" cy="24.5" rx="8" ry="3" fill="#fff" opacity=".22" transform="rotate(-22 33 24.5)"/><path d="M24 40v15M76 40v15" stroke="#3b1a0c" stroke-width="1.2" stroke-linecap="round" opacity=".18"/><path d="M27.5 42v12" stroke="#c98a5a" stroke-width="2.2" stroke-linecap="round" opacity=".35"/></g>
+  <path id="su-on" d="M14.5 56A35.5 6.6 0 0 0 85.5 56H81A31 4.5 0 0 1 19 56z" fill="#fdfbff" stroke="#c4b3df" stroke-width="1.3" stroke-linejoin="round"/>
+  <g id="su-seker" fill="#fff"><ellipse cx="50" cy="24" rx="24" ry="6" opacity=".26"/><ellipse cx="44" cy="21" rx="12" ry="3" opacity=".28"/><circle cx="31.7" cy="27.8" r="0.98" opacity="0.74"/><circle cx="68.0" cy="31.6" r="1.09" opacity="0.94"/><circle cx="78.8" cy="34.6" r="0.69" opacity="0.77"/><circle cx="44.1" cy="18.5" r="0.97" opacity="0.78"/><circle cx="76.9" cy="32.9" r="0.65" opacity="0.74"/><circle cx="24.5" cy="33.7" r="0.84" opacity="0.82"/><circle cx="32.1" cy="32.4" r="0.89" opacity="0.75"/><circle cx="45.4" cy="21.5" r="1.08" opacity="0.90"/><circle cx="58.2" cy="19.1" r="0.63" opacity="0.78"/><circle cx="65.8" cy="23.9" r="0.54" opacity="0.74"/><circle cx="54.8" cy="22.1" r="0.72" opacity="0.82"/><circle cx="73.7" cy="34.2" r="0.61" opacity="0.89"/><circle cx="45.4" cy="19.2" r="1.08" opacity="0.77"/><circle cx="61.9" cy="22.4" r="0.86" opacity="0.79"/><circle cx="31.2" cy="32.1" r="0.64" opacity="0.85"/><circle cx="70.4" cy="29.9" r="1.05" opacity="0.77"/><circle cx="46.9" cy="18.3" r="0.72" opacity="0.85"/><circle cx="54.9" cy="19.9" r="0.51" opacity="0.93"/><circle cx="72.0" cy="32.3" r="0.94" opacity="0.85"/><circle cx="25.9" cy="32.8" r="0.86" opacity="0.83"/><circle cx="73.5" cy="30.9" r="1.04" opacity="0.80"/><circle cx="59.6" cy="21.2" r="0.98" opacity="0.93"/><circle cx="54.8" cy="23.6" r="0.80" opacity="0.91"/><circle cx="37.1" cy="20.6" r="0.67" opacity="0.77"/><circle cx="62.1" cy="29.0" r="0.97" opacity="0.72"/><circle cx="28.9" cy="26.6" r="1.00" opacity="0.77"/><circle cx="76.6" cy="31.4" r="0.79" opacity="0.76"/><circle cx="62.4" cy="20.8" r="0.71" opacity="0.88"/><circle cx="75.1" cy="32.2" r="0.77" opacity="0.86"/><circle cx="49.3" cy="17.6" r="0.54" opacity="0.90"/><circle cx="31.0" cy="24.0" r="0.58" opacity="0.75"/><circle cx="53.5" cy="23.5" r="1.01" opacity="0.93"/><circle cx="54.2" cy="21.2" r="0.80" opacity="0.86"/><circle cx="48.4" cy="19.7" r="0.99" opacity="0.93"/><circle cx="48.6" cy="23.7" r="0.87" opacity="0.93"/><circle cx="28.5" cy="33.4" r="0.62" opacity="0.77"/><circle cx="60.8" cy="23.8" r="0.87" opacity="0.74"/><circle cx="50.6" cy="22.3" r="0.82" opacity="0.82"/><circle cx="26.6" cy="34.5" r="0.97" opacity="0.75"/><circle cx="78.4" cy="36.5" r="0.54" opacity="0.94"/><circle cx="44.5" cy="21.1" r="0.81" opacity="0.72"/><circle cx="70.9" cy="30.2" r="0.86" opacity="0.84"/><circle cx="78.0" cy="33.9" r="1.05" opacity="0.89"/><circle cx="65.4" cy="25.5" r="0.54" opacity="0.80"/><circle cx="35.9" cy="25.4" r="0.62" opacity="0.81"/><circle cx="73.5" cy="28.6" r="1.08" opacity="0.85"/></g>
+  <g id="su-cilek"><g transform="translate(49.5 2.6) rotate(14 9.5 10.5) scale(.19)"><path d="M50 99C26 99 7 80 7 56c0-20 17-36 43-38 26 2 43 18 43 38 0 24-19 43-43 43z" fill="url(#g-ci)"/><g fill="#ffe08a" opacity=".9"><ellipse cx="26" cy="62" rx="2.6" ry="3.6"/><ellipse cx="50" cy="82" rx="2.6" ry="3.6"/><ellipse cx="74" cy="62" rx="2.6" ry="3.6"/><ellipse cx="20" cy="46" rx="2.4" ry="3.3"/><ellipse cx="80" cy="46" rx="2.4" ry="3.3"/><ellipse cx="36" cy="90" rx="2.2" ry="3"/><ellipse cx="64" cy="90" rx="2.2" ry="3"/><ellipse cx="34" cy="44" rx="2.2" ry="3"/><ellipse cx="66" cy="44" rx="2.2" ry="3"/><ellipse cx="50" cy="34" rx="2.2" ry="3"/></g><path d="M50 26c-6-8-16-10-26-6 8 2 12 5 15 10-8-1-14 1-18 6 9 0 16-2 24-2-3 5-3 9-1 14 3-5 5-8 6-8s3 3 6 8c2-5 2-9-1-14 8 0 15 2 24 2-4-5-10-7-18-6 3-5 7-8 15-10-10-4-20-2-26 6z" fill="#5fa36f"/><path d="M50 18v8" stroke="#4e8a5e" stroke-width="3" stroke-linecap="round"/></g></g>
+  <symbol id="f-sufle" viewBox="0 0 100 100"><use href="#su-kap"/><use href="#face" transform="translate(0 25)"/><use href="#su-ust"/><use href="#su-on"/><use href="#su-seker"/><use href="#su-cilek"/></symbol>
+
+  <!-- Hafıza Düellosu'na özel 4 kart -->
+  <symbol id="f-lavanta" viewBox="0 0 100 100"><path d="M50 92V40" stroke="#6f9a5a" stroke-width="5" stroke-linecap="round"/><path d="M50 78c-10-2-18-8-22-18M50 70c10-2 18-8 22-18" fill="none" stroke="#6f9a5a" stroke-width="4" stroke-linecap="round"/><g fill="#9b7fd1"><ellipse cx="42" cy="36" rx="7" ry="5"/><ellipse cx="58" cy="36" rx="7" ry="5"/><ellipse cx="42" cy="26" rx="7" ry="5"/><ellipse cx="58" cy="26" rx="7" ry="5"/><ellipse cx="42" cy="16" rx="6.5" ry="4.6"/><ellipse cx="58" cy="16" rx="6.5" ry="4.6"/><ellipse cx="50" cy="8" rx="5.5" ry="4.2"/><ellipse cx="50" cy="44" rx="7" ry="5"/></g><g fill="#c3aef0" opacity=".85"><circle cx="44" cy="25" r="1.6"/><circle cx="56" cy="35" r="1.6"/><circle cx="58" cy="15" r="1.4"/><circle cx="43" cy="37" r="1.4"/><circle cx="50" cy="43" r="1.4"/></g></symbol>
+  <symbol id="f-sakayik" viewBox="0 0 100 100"><path d="M50 94V66" stroke="#5fa36f" stroke-width="5" stroke-linecap="round"/><path d="M50 84c-9 0-16-5-19-13 9-1 16 3 19 13zM50 78c9 0 16-5 19-13-9-1-16 3-19 13z" fill="#7cc48f"/><g transform="translate(50 42)"><g fill="#f49ac0"><ellipse cx="0" cy="-20" rx="12" ry="18"/><ellipse cx="0" cy="-20" rx="12" ry="18" transform="rotate(45)"/><ellipse cx="0" cy="-20" rx="12" ry="18" transform="rotate(90)"/><ellipse cx="0" cy="-20" rx="12" ry="18" transform="rotate(135)"/><ellipse cx="0" cy="-20" rx="12" ry="18" transform="rotate(180)"/><ellipse cx="0" cy="-20" rx="12" ry="18" transform="rotate(225)"/><ellipse cx="0" cy="-20" rx="12" ry="18" transform="rotate(270)"/><ellipse cx="0" cy="-20" rx="12" ry="18" transform="rotate(315)"/></g><g fill="#ffc2da"><ellipse cx="0" cy="-12" rx="8" ry="12"/><ellipse cx="0" cy="-12" rx="8" ry="12" transform="rotate(60)"/><ellipse cx="0" cy="-12" rx="8" ry="12" transform="rotate(120)"/><ellipse cx="0" cy="-12" rx="8" ry="12" transform="rotate(180)"/><ellipse cx="0" cy="-12" rx="8" ry="12" transform="rotate(240)"/><ellipse cx="0" cy="-12" rx="8" ry="12" transform="rotate(300)"/></g><circle r="7" fill="#f6c64a"/><circle r="3" fill="#e89a1c"/></g></symbol>
+  <symbol id="f-americano" viewBox="0 0 100 100"><ellipse cx="50" cy="86" rx="30" ry="6" fill="#3d2a3f" opacity=".12"/><path d="M24 38h46l-4 40q-1 8-9 8H37q-8 0-9-8z" fill="#fbf8ff" stroke="#c9b8e3" stroke-width="2.5"/><path d="M70 46h6q10 0 10 11t-10 11h-8" fill="none" stroke="#c9b8e3" stroke-width="5" stroke-linecap="round"/><ellipse cx="47" cy="40" rx="20" ry="6" fill="#4a2a17"/><ellipse cx="47" cy="40" rx="14" ry="3.6" fill="#6b3d22"/><ellipse cx="41" cy="39" rx="4" ry="1.6" fill="#8a5a38" opacity=".8"/><path d="M38 28q-4-6 0-12M47 26q-4-6 0-12M56 28q-4-6 0-12" fill="none" stroke="#c9b8e3" stroke-width="2.6" stroke-linecap="round" opacity=".8"/></symbol>
+  <symbol id="f-lilyum" viewBox="0 0 100 100"><path d="M50 95V62" stroke="#5fa36f" stroke-width="5" stroke-linecap="round"/><path d="M50 88c-9-1-15-7-18-15 9 0 15 6 18 15z" fill="#7cc48f"/><g transform="translate(50 48)"><g fill="#fff0f6" stroke="#ea9dbb" stroke-width="2" stroke-linejoin="round"><path d="M0 0C-9-9-11-30 0-40 11-30 9-9 0 0z"/><path d="M0 0C-9-9-11-30 0-40 11-30 9-9 0 0z" transform="rotate(60)"/><path d="M0 0C-9-9-11-30 0-40 11-30 9-9 0 0z" transform="rotate(120)"/><path d="M0 0C-9-9-11-30 0-40 11-30 9-9 0 0z" transform="rotate(180)"/><path d="M0 0C-9-9-11-30 0-40 11-30 9-9 0 0z" transform="rotate(240)"/><path d="M0 0C-9-9-11-30 0-40 11-30 9-9 0 0z" transform="rotate(300)"/></g><g fill="#ef8db5" opacity=".7"><circle cx="0" cy="-14" r="1.4"/><circle cx="12" cy="-7" r="1.4"/><circle cx="12" cy="7" r="1.4"/><circle cx="0" cy="14" r="1.4"/><circle cx="-12" cy="7" r="1.4"/><circle cx="-12" cy="-7" r="1.4"/><circle cx="5" cy="-20" r="1.1"/><circle cx="-5" cy="20" r="1.1"/></g><g stroke="#e8b04a" stroke-width="1.8" stroke-linecap="round"><path d="M0 0l-4-13M0 0l9-9M0 0l10 7M0 0l-2 12M0 0l-12 4"/></g><g fill="#d9741c"><ellipse cx="-4.5" cy="-14.5" rx="2.6" ry="1.5" transform="rotate(70 -4.5 -14.5)"/><ellipse cx="10" cy="-10" rx="2.6" ry="1.5" transform="rotate(-45 10 -10)"/><ellipse cx="11" cy="8" rx="2.6" ry="1.5" transform="rotate(35 11 8)"/><ellipse cx="-2.2" cy="13.5" rx="2.6" ry="1.5" transform="rotate(100 -2.2 13.5)"/><ellipse cx="-13.5" cy="4.5" rx="2.6" ry="1.5" transform="rotate(-20 -13.5 4.5)"/></g><circle r="2.2" fill="#9ac46a"/></g></symbol>
+  <symbol id="f-tiyatro" viewBox="0 0 100 100"><path d="M30 70q-10 14-18 20M70 70q10 14 18 20" fill="none" stroke="#f3a3c0" stroke-width="3" stroke-linecap="round" opacity=".7"/><g transform="translate(62 52) rotate(12)"><path d="M-21-24q21-9 42 0 2 28-21 44-23-16-21-44z" fill="#9b7fd1" stroke="#6a4fa0" stroke-width="2.2" stroke-linejoin="round"/><path d="M-13-5q5 5 10 0M3-5q5 5 10 0" fill="none" stroke="#2f1c52" stroke-width="2.6" stroke-linecap="round"/><path d="M-10 16q10-10 20 0" fill="none" stroke="#2f1c52" stroke-width="3.2" stroke-linecap="round"/></g><g transform="translate(38 48) rotate(-12)"><path d="M-21-24q21-9 42 0 2 28-21 44-23-16-21-44z" fill="#f6c64a" stroke="#c98a1a" stroke-width="2.2" stroke-linejoin="round"/><path d="M-13-4q5-5 10 0M3-4q5-5 10 0" fill="none" stroke="#5a3a0a" stroke-width="2.6" stroke-linecap="round"/><path d="M-11 8q11 12 22 0z" fill="#5a3a0a"/><path d="M-7 10q7 5 14 0" fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round" opacity=".8"/><path d="M-14-20q6-3 12-2" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" opacity=".45"/></g></symbol>
+  <symbol id="f-sinema" viewBox="0 0 100 100"><ellipse cx="50" cy="92" rx="30" ry="4" fill="#3d2a3f" opacity=".12"/><g transform="rotate(-22 16 40)"><rect x="14" y="26" width="74" height="15" rx="4" fill="#2c2238"/><g fill="#fbf7fd"><path d="M24 26h11l-9 15H15z"/><path d="M47 26h11l-9 15H38z"/><path d="M70 26h11l-9 15H61z"/></g></g><rect x="14" y="40" width="74" height="48" rx="7" fill="#3a2d48" stroke="#5a4a6e" stroke-width="2"/><rect x="14" y="40" width="74" height="13" rx="5" fill="#2c2238"/><g fill="#fbf7fd"><path d="M24 40h11l-8 13H16z"/><path d="M47 40h11l-8 13H39z"/><path d="M70 40h11l-8 13H62z"/></g><circle cx="20" cy="33" r="3" fill="#f6c64a"/><path d="M44 61v18l15-9z" fill="#f6c64a"/><path d="M22 82h18M64 82h16" stroke="#9b8ab0" stroke-width="2" stroke-linecap="round" opacity=".7"/></symbol>
+  <symbol id="f-kedi" viewBox="0 0 100 100"><path d="M22 44L18 14l20 14zM78 44l4-30-20 14z" fill="#f4f1f6" stroke="#d9d1e3" stroke-width="2.5" stroke-linejoin="round"/><path d="M26 36l-2-14 11 8zM74 36l2-14-11 8z" fill="#ffb3c6"/><ellipse cx="50" cy="56" rx="32" ry="28" fill="#f8f6fb" stroke="#d9d1e3" stroke-width="2.5"/><ellipse cx="38" cy="54" rx="4" ry="5" fill="#5aa0d8"/><ellipse cx="62" cy="54" rx="4" ry="5" fill="#8a6b4e"/><circle cx="39.5" cy="52" r="1.4" fill="#fff"/><circle cx="63.5" cy="52" r="1.4" fill="#fff"/><path d="M47 63l3 3 3-3z" fill="#f08aa6"/><path d="M50 66v3M50 69q-4 4-8 2M50 69q4 4 8 2" fill="none" stroke="#3d2a3f" stroke-width="2" stroke-linecap="round"/><path d="M14 58l20 2M14 66l20-2M86 58l-20 2M86 66l-20-2" stroke="#c9b8e3" stroke-width="1.6" stroke-linecap="round"/><ellipse cx="30" cy="64" rx="5" ry="3" fill="#ff8fb0" opacity=".55"/><ellipse cx="70" cy="64" rx="5" ry="3" fill="#ff8fb0" opacity=".55"/></symbol>
+</defs></svg>
+
+<main class="hd" id="stage">
+  <header class="hdbar">
+    <a class="gkbtn" href="oyunlar.html" aria-label="Geri"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 5.5L8 12l6.5 6.5"/></svg></a>
+    <div class="hdtitle"><b>Hafıza Düellosu</b><span id="hdSub">Bağlanıyor…</span></div>
+    <button type="button" class="gkbtn" id="bHelp" aria-label="Nasıl oynanır"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M9.6 9.4a2.5 2.5 0 0 1 4.8.9c0 1.8-2.4 2.1-2.4 3.7"/><path d="M12 16.9v.2"/></svg></button>
+  </header>
+
+  <div class="hdscore" id="score" hidden>
+    <div class="hdp" id="pMe"><span class="hsava b" id="avaMe">?</span><b id="skorMe">0</b><small id="adMe">sen</small></div>
+    <div class="hdturn" id="turn"><b id="turnTxt">—</b><small id="turnSub"></small></div>
+    <div class="hdp" id="pOther"><span class="hsava a" id="avaOther">?</span><b id="skorOther">0</b><small id="adOther">rakip</small></div>
+  </div>
+
+  <div class="hdboardwrap" id="wrap">
+    <div class="hdboard" id="board"></div>
+  </div>
+
+  <div class="hdfoot" id="foot"><div class="hdcap" id="cap" hidden></div><p class="hdmsg" id="msg"></p></div>
+</main>
+
+<div class="gkover" id="gate" hidden>
+  <div class="gkcard hdcard">
+    <h2>Hafıza Düellosu</h2>
+    <p>İki kişilik oyun. Oynamak için bir oda açman ya da arkadaşının odasına katılman gerekiyor; üyelik yok, takma ad yeter.</p>
+    <a class="hsbtn" href="baslat.html?d=hafiza.html">Oda aç / odaya katıl</a>
+  </div>
+</div>
+
+
+<div class="gkover" id="start" hidden>
+  <div class="gkcard hdcard">
+    <div class="gkkick" id="startKick">Yeni oyun</div>
+    <h2 id="startTitle">Hazır mısın?</h2>
+    <p id="startText">Kartları sen karıştır, ilk hamle senin.</p>
+    <button type="button" class="hsbtn" id="startGo">Oyunu başlat</button>
+    <a class="gkghost hdlink" href="oyunlar.html">Menü</a>
+  </div>
+</div>
+
+<div class="gkover" id="done" hidden>
+  <div class="gkcard hdcard">
+    <div class="gkkick" id="doneKick">Oyun bitti</div>
+    <h2 id="doneTitle">—</h2>
+    <p id="doneText"></p>
+    <div class="gkstats" id="doneStats"></div>
+    <button type="button" class="hsbtn" id="doneNew">Yeni oyun</button>
+    <button type="button" class="gkghost" id="doneClose">Tahtaya bak</button>
+  </div>
+</div>
+
+<div class="gkover" id="help" hidden>
+  <div class="gkcard hdcard">
+    <h2>Hafıza Düellosu</h2>
+    <p>30 kapalı kart, 15 çift. Sırayla iki kart açılır: eş gelirse çift senindir ve bir daha oynarsın; gelmezse kartlar kapanır, sıra karşıya geçer.</p>
+    <p>Aynı anda girmemiz gerekmiyor ama daha tatlı olur :) Hamleni yap, çık; sıra bana geçer. Sen yokken yaptığım hamleleri girince sana tek tek gösterir.</p>
+    <p class="gksmall">15 çift olduğu için berabere olmaz. Oyun bitince yeni oyunu kaybeden başlatır :)</p>
+    <button type="button" class="gkprimary" id="helpGo">Tamam</button>
+  </div>
+</div>
+
+<script src="app.js?v=yec1"></script>
+<script src="yapilandirma.js?v=yec1"></script>
+<script src="deneme.js?v=yec1"></script>
+<script src="hesap.js?v=yec1"></script>
+<script src="hafiza.js?v=yec1"></script>
+<script src="hafiza-ses.js?v=yec1"></script>
+<script src="sohbet.js?v=yec1"></script>
+</body>
+</html>

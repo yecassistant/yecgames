@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<title>Yıkım</title>
+<meta name="description" content="Yıkım: 3D kuleyi kat kat kır. Basılı tut, top katları parçalasın; siyaha dikkat.">
+<meta property="og:title" content="Yıkım">
+<meta property="og:description" content="3D kuleyi kat kat kır. Basılı tut, siyaha dikkat.">
+<meta name="color-scheme" content="dark">
+<meta property="og:type" content="website">
+<meta property="og:image" content="onizleme.jpg">
+<meta name="theme-color" content="#2a1d4a">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Crect width=%27100%27 height=%27100%27 rx=%2724%27 fill=%27%232a1d4a%27/%3E%3Crect x=%2744%27 y=%2710%27 width=%2712%27 height=%2780%27 rx=%274%27 fill=%27%23f7f1ea%27/%3E%3Cpath d=%27M20 52h60l-6 10H26z%27 fill=%27%23f7a9c4%27/%3E%3Cpath d=%27M20 66h60l-6 10H26z%27 fill=%27%23b9a1ea%27/%3E%3Ccircle cx=%2750%27 cy=%2740%27 r=%278%27 fill=%27%233d63ff%27/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;600;700;800;900&display=swap">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="YEC Games">
+<link rel="apple-touch-icon" href="ikon/app-180.png">
+<link rel="stylesheet" href="style.css?v=yec1">
+</head>
+<body data-page="yikim">
+
+<main class="yk" id="stage">
+  <div class="ykbokeh" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+  <canvas id="cv" aria-label="Yıkım oyun alanı"></canvas>
+  <header class="ykbar">
+    <a class="ykbtn" href="oyunlar.html" aria-label="Geri"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 5.5L8 12l6.5 6.5"/></svg></a>
+    <div class="ykilerle" id="ilerle">
+      <span class="ykseviye" id="lvA">1</span>
+      <div class="ykbarr"><i id="ilerleBar"></i></div>
+      <span class="ykseviye son" id="lvB">2</span>
+    </div>
+    <button type="button" class="ykbtn" id="bSes" aria-label="Ses"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 10v4h3l4 3.5v-11L8 10z"/><path d="M15.5 9.5a3.5 3.5 0 0 1 0 5" class="w1"/><path d="M18 7a7 7 0 0 1 0 10" class="w2"/></svg></button>
+  </header>
+  <div class="ykhud" id="hud">
+    <div class="ykpuan" id="puan">0</div>
+    <div class="ykrekor"><svg viewBox="0 0 64 44" aria-hidden="true"><path d="M8 38L4 12l14 11L32 4l14 19 14-11-4 26z" fill="none" stroke="currentColor" stroke-width="4" stroke-linejoin="round"/></svg><span id="rekor">0</span></div>
+    <div class="ykates" id="ates"><i id="atesBar"></i></div>
+  </div>
+  <div class="ykyazi" id="yazi" aria-live="polite"></div>
+  <div class="ykintro" id="intro">
+    <div class="ykad">YIKIM</div>
+    <p>Kuleyi kat kat kır</p>
+    <div class="yktap">Basılı tut</div>
+    <p class="ykipucu">Basılı tuttukça top katları parçalar, bırakınca zıplar. <b>Siyah katlara çarpma.</b> Durmadan kırarsan alev alırsın; alevliyken siyahı da kırarsın 🔥</p>
+  </div>
+  <div class="ykover" id="over" hidden>
+    <div class="ykkart">
+      <div class="ykkick" id="overKick">Siyaha çarptın</div>
+      <div class="ykbig" id="overPuan">0</div>
+      <div class="yksub" id="overSub">puan</div>
+      <div class="ykstats"><span><small>Seviye</small><b id="overSeviye">1</b></span><span><small>İlerleme</small><b id="overYuzde">0%</b></span><span><small>Rekor</small><b id="overRekor">0</b></span></div>
+      <button type="button" class="ykana" id="tekrar">Tekrar dene</button>
+      <a class="ykghost" href="oyunlar.html">Menü</a>
+    </div>
+  </div>
+  <div class="ykhata" id="hata" hidden><b>3D açılamadı</b><span>Bu tarayıcı 3D grafiği desteklemiyor ya da kapalı. Safari'de ya da ana ekrandan açmayı dene.</span><a class="ykana" href="oyunlar.html">Menüye dön</a></div>
+</main>
+
+<script src="app.js?v=yec1"></script>
+<script src="yapilandirma.js?v=yec1"></script>
+<script src="deneme.js?v=yec1"></script>
+<script src="hesap.js?v=yec1"></script>
+<script>(window.Hesap ? Hesap.oyun : function (l) { l.forEach(function (x) { document.write('<script src="' + x + '"><\/script>'); }); })(["lib/three.min.js?v=149", "yikim.js?v=yec1", "yikim-ses.js?v=yec1"]);</script>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<title>Oda Ayarları · YEC Games</title>
+<meta name="description" content="Oda ayarları: takma adlar, açılış cümlesi, özel kelimeler, oda kodu ve kurtarma anahtarı.">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#241046">
+<link rel="icon" href="ikon/simge.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800;900&display=swap">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="YEC Games">
+<link rel="apple-touch-icon" href="ikon/app-180.png">
+<link rel="stylesheet" href="style.css?v=yec1">
+</head>
+<body data-page="giris">
+
+<main class="hs ay">
+  <header class="tbhead ayhead"><a class="ayback" href="oyunlar.html" aria-label="Menüye dön">‹</a><b>Oda Ayarları</b><span id="aySub">bağlanıyor…</span></header>
+
+  <div class="hscard" id="ayYok" hidden>
+    <h1>Henüz bir odan yok</h1>
+    <p class="hslead">Oda aç ya da arkadaşının odasına katıl; ayarlar o zaman gelir.</p>
+    <a class="hsbtn" href="baslat.html">Başla</a>
+  </div>
+
+  <div id="ayVar" hidden>
+    <!-- kişiler -->
+    <section class="hscard">
+      <h2 class="ayh">Kim kimdir</h2>
+      <div class="aykisi"><span class="hsava a" id="ayAvaA">?</span><div class="aykisitx"><b id="ayAdA">—</b><small>A koltuğu</small></div></div>
+      <div class="aykisi"><span class="hsava b" id="ayAvaB">?</span><div class="aykisitx"><b id="ayAdB">—</b><small id="ayBnot">B koltuğu</small></div></div>
+      <label class="hsfield"><span>Benim takma adım</span><span class="ayyan"><input type="text" id="ayAd" maxlength="16" autocomplete="nickname"><button type="button" class="hsghost kucuk" id="ayAdKaydet">Kaydet</button></span></label>
+    </section>
+
+    <!-- davet kodu (B boşken) -->
+    <section class="hscard" id="ayDavet" hidden>
+      <h2 class="ayh">Arkadaşını davet et</h2>
+      <p class="hslead">Bu kodu gönder; "Koda katıl" deyip yazınca oda dolar.</p>
+      <div class="bskodbuyuk" id="ayKod">—</div>
+      <p class="hsnote" id="ayKodNot"></p>
+      <div class="bsyan"><button type="button" class="hsghost" id="ayKodKopya">Kodu kopyala</button><a class="hsghost" id="ayKodWa" href="#" target="_blank" rel="noopener">WhatsApp'ta gönder</a></div>
+      <button type="button" class="hsghost" id="ayKodYeni">Yeni kod üret</button>
+    </section>
+
+    <!-- bize özel -->
+    <section class="hscard">
+      <h2 class="ayh">Bize özel</h2>
+      <label class="hsfield"><span>Açılış cümlesi</span><input type="text" id="ayCumle" maxlength="40" placeholder="örn. kahve molası takımı ☕"><small class="ayipucu">Uygulama açılırken logonun altında görünür. En fazla 40 harf.</small></label>
+      <label class="hsfield"><span>Çiz Bil için kelimelerimiz</span><textarea id="ayCiz" rows="3" placeholder="virgülle ayır: kedi kafe, pazar kahvaltısı, …"></textarea><small class="ayipucu">Genel kelimelerin arasına karışır; en fazla 60 kelime.</small></label>
+      <label class="hsfield"><span>Yasak Kelime için kartlarımız</span><textarea id="ayYasak" rows="3" placeholder="her satıra bir kart: KELİME: yasak1, yasak2, yasak3"></textarea><small class="ayipucu">Örn. "Kahve: sabah, fincan, sıcak". Yasaklar yazılmazsa sadece kelimenin kendisi yasak olur.</small></label>
+      <label class="hsfield"><span>Renk</span><span class="aytema" id="ayTema"><button type="button" data-tema="mor"><i style="background:#2a1350"></i>Mor</button><button type="button" data-tema="gece"><i style="background:#0f1a3a"></i>Gece</button><button type="button" data-tema="bordo"><i style="background:#3a1024"></i>Bordo</button></span></label>
+      <p class="hserr" id="ayErr" hidden></p>
+      <button type="button" class="hsbtn" id="ayKaydet">Kaydet</button>
+    </section>
+
+    <!-- anahtar -->
+    <section class="hscard">
+      <h2 class="ayh">Kurtarma anahtarım</h2>
+      <p class="hslead">Telefon değiştirirsen ya da tarayıcı verisi silinirse bu anahtarla odana geri dönersin. Kimseyle paylaşma.</p>
+      <div class="bsanahtar"><b id="ayAnahtar">—</b><button type="button" class="hsghost kucuk" id="ayAnKopya">Kopyala</button></div>
+    </section>
+
+    <!-- tehlikeli -->
+    <section class="hscard aytehlike">
+      <h2 class="ayh">Oda</h2>
+      <button type="button" class="hsghost" id="ayAyril">Bu cihazı odadan çıkar</button>
+      <small class="ayipucu">Oda ve kayıtlar durur; anahtarınla geri dönebilirsin.</small>
+      <button type="button" class="hsghost kirmizi" id="aySil">Odayı tamamen sil</button>
+      <small class="ayipucu">İkiniz için de biter: bütün oyun kayıtları, mesajlar ve ayarlar silinir. Geri alınamaz.</small>
+    </section>
+
+    <p class="bsimza">YEC Games · Nunu &amp; Büş yapımı · <a href="gizlilik.html">Gizlilik ve şartlar</a></p>
+  </div>
+</main>
+
+<script src="yapilandirma.js?v=yec1"></script>
+<script src="deneme.js?v=yec1"></script>
+<script src="hesap.js?v=yec1"></script>
+<script src="ayar.js?v=yec1"></script>
+</body>
+</html>

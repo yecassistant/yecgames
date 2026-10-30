@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<title>Yasak Kelime</title>
+<meta name="description" content="Yüz yüze Yasak Kelime: tek telefon, sesli oynanır. Yasak kelimeleri kullanmadan anlat, karşındaki bulsun.">
+<meta property="og:title" content="Yasak Kelime">
+<meta property="og:description" content="İki kişilik Yasak Kelime: yasak kelimeleri kullanmadan anlat, karşındaki bulsun.">
+<meta name="color-scheme" content="dark">
+<meta property="og:type" content="website">
+<meta property="og:image" content="onizleme.jpg">
+<meta name="theme-color" content="#2a1220">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Crect width=%27100%27 height=%27100%27 rx=%2724%27 fill=%27%232a1220%27/%3E%3Crect x=%2726%27 y=%2716%27 width=%2748%27 height=%2768%27 rx=%278%27 fill=%27%23fff4f0%27/%3E%3Crect x=%2726%27 y=%2716%27 width=%2748%27 height=%2720%27 rx=%278%27 fill=%27%23e2455f%27/%3E%3Cpath d=%27M36 50h28M36 60h28M36 70h20%27 stroke=%27%23e2455f%27 stroke-width=%274%27 stroke-linecap=%27round%27/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@1,9..144,600&family=Nunito:wght@600;700;800;900&family=Caveat:wght@600;700&display=swap">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="YEC Games">
+<link rel="apple-touch-icon" href="ikon/app-180.png">
+<link rel="stylesheet" href="style.css?v=yec1">
+</head>
+<body data-page="yasak">
+
+<main class="tu" id="stage">
+  <header class="hdbar">
+    <a class="gkbtn" href="oyunlar.html" aria-label="Geri"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 5.5L8 12l6.5 6.5"/></svg></a>
+    <div class="hdtitle"><b>Yasak Kelime</b><span id="sub">yüz yüze · sesli</span></div>
+    <button type="button" class="gkbtn" id="bHelp" aria-label="Nasıl oynanır"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M9.6 9.4a2.5 2.5 0 0 1 4.8.9c0 1.8-2.4 2.1-2.4 3.7"/><path d="M12 16.9v.2"/></svg></button>
+  </header>
+
+  <!-- kurulum -->
+  <section class="tuekran" id="kurulum">
+    <div class="tusirt kucuk"><b>YASAK KELİME</b><small>Yüz yüze · tek telefon · sesli</small></div>
+    <div class="tuform">
+      <div class="tuetiket">Oyuncular</div>
+      <div class="tuadlar"><input type="text" id="ad1" maxlength="14" autocomplete="off" autocapitalize="words" spellcheck="false" aria-label="1. oyuncu"><i>&amp;</i><input type="text" id="ad2" maxlength="14" autocomplete="off" autocapitalize="words" spellcheck="false" aria-label="2. oyuncu"></div>
+      <div class="tusec"><span>Tur süresi</span><div class="tuseg" id="segSure"><button type="button" data-v="45">45 sn</button><button type="button" data-v="60" class="on">60 sn</button><button type="button" data-v="90">90 sn</button></div></div>
+      <div class="tusec"><span>Kişi başı tur</span><div class="tuseg" id="segTur"><button type="button" data-v="2">2</button><button type="button" data-v="3" class="on">3</button><button type="button" data-v="4">4</button></div></div>
+      <div class="tusec"><span>Pas hakkı</span><div class="tuseg" id="segPas"><button type="button" data-v="1">1</button><button type="button" data-v="3" class="on">3</button><button type="button" data-v="5">5</button></div></div>
+    </div>
+    <button type="button" class="hsbtn tubuyuk" id="bBasla">Oyunu başlat</button>
+  </section>
+
+  <!-- sıra kimde: telefonu ver -->
+  <section class="tuekran" id="sira" hidden>
+    <div class="tusirt"><b id="siraAd">—</b><small id="siraTxt">anlatıyor</small></div>
+    <p class="tunot" id="siraNot"></p>
+    <button type="button" class="hsbtn tubuyuk" id="bHazir">Hazırım, süre başlasın</button>
+    <div class="tuskor" id="skorTablo"></div>
+  </section>
+
+  <!-- oyun -->
+  <section class="tuekran tuoyun" id="oyun" hidden>
+    <div class="tusure" id="sure"><i id="sureBar"></i><b id="sureTxt"></b></div>
+    <div class="tuturbilgi"><span id="anlatanAd">—</span><b id="turPuan">0</b></div>
+    <div class="tukart" id="kart">
+      <div class="tukbas"><small>Anlat</small><b id="kKelime">—</b></div>
+      <ul class="tuyasak" id="kYasak"></ul>
+    </div>
+    <div class="tuaksiyon">
+      <button type="button" class="tuak yasak" id="bTabu"><b>✗</b><span>Yasak</span><small>−1</small></button>
+      <button type="button" class="tuak pas" id="bPas"><b>↷</b><span>Pas</span><small id="pasKalan">3</small></button>
+      <button type="button" class="tuak dogru" id="bDogru"><b>✓</b><span>Doğru</span><small>+1</small></button>
+    </div>
+  </section>
+
+  <!-- tur sonu -->
+  <section class="tuekran" id="turSonu" hidden>
+    <div class="tukick" id="tsBaslik">Süre doldu!</div>
+    <div class="tubig" id="tsPuan">+0</div>
+    <p class="tunot" id="tsOzet"></p>
+    <ol class="tuliste" id="tsListe"></ol>
+    <button type="button" class="hsbtn tubuyuk" id="bDevam">Devam</button>
+  </section>
+
+  <!-- oyun sonu -->
+  <section class="tuekran" id="son" hidden>
+    <div class="tukick">Oyun bitti</div>
+    <h2 class="tukazanan" id="sonBaslik">—</h2>
+    <div class="tuskor buyuk" id="sonSkor"></div>
+    <p class="tunot" id="sonNot"></p>
+    <button type="button" class="hsbtn tubuyuk" id="bTekrar">Tekrar oyna</button>
+    <button type="button" class="gkghost tughost" id="bAyar">Ayarları değiştir</button>
+  </section>
+</main>
+
+<div class="gkover" id="help" hidden>
+  <div class="gkcard hdcard">
+    <h2>Yasak Kelime · yüz yüze</h2>
+    <p>Bu sürüm yan yanayken, tek telefonla, sesli oynanıyor. Sırası gelen telefonu alır, "Hazırım"a basar; ekrandaki kelimeyi, alttaki 5 yasak kelimeyi (ve kelimenin kendisini) söylemeden anlatır. Öbürü sesli tahmin eder.</p>
+    <p>Bilince <b>Doğru</b> (+1), yanlışlıkla yasak bir kelime söylersen <b>Yasak Kelime</b> (−1), geçmek istersen <b>Pas</b>. Süre bitince telefon öbürüne geçer.</p>
+    <p class="gksmall">Puan anlatana yazılır; en çok puanı toplayan "en iyi anlatan" olur. Dürüstlük esastır :)</p>
+    <button type="button" class="gkprimary" id="helpGo">Tamam</button>
+  </div>
+</div>
+
+<div class="gkover" id="cikis" hidden>
+  <div class="gkcard hdcard">
+    <h2>Oyunu bitirelim mi?</h2>
+    <p>Bu oyunun puanları silinir.</p>
+    <button type="button" class="hsbtn" id="cikisEvet">Evet, bitir</button>
+    <button type="button" class="gkghost" id="cikisHayir">Devam et</button>
+  </div>
+</div>
+
+<script src="app.js?v=yec1"></script>
+<script src="yapilandirma.js?v=yec1"></script>
+<script src="deneme.js?v=yec1"></script>
+<script src="hesap.js?v=yec1"></script>
+<script src="yasak-kart.js?v=yec1"></script>
+<script src="yasak.js?v=yec1"></script>
+<script src="yasak-ses.js?v=yec1"></script>
+</body>
+</html>

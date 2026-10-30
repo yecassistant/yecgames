@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<title>Oda Döşe</title>
+<meta name="description" content="Odayı döşe: sürükle, renk ver, mimar onayına sun.">
+<meta property="og:title" content="Oda Döşe 🛋️">
+<meta property="og:description" content="Tek başına, kendi hızında: odayı döşe, mimar onayına sun.">
+<meta name="color-scheme" content="light">
+<meta property="og:type" content="website">
+<meta property="og:image" content="onizleme.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#9b7fd1">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Ctext y=%27.9em%27 font-size=%2790%27%3E%F0%9F%9B%8B%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;1,9..144,600&family=Nunito:wght@600;700;800&family=Caveat:wght@600;700&display=swap">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="YEC Games">
+<link rel="apple-touch-icon" href="ikon/app-180.png">
+<link rel="stylesheet" href="style.css?v=yec1">
+</head>
+<body data-page="oda" data-tone="lav">
+
+<main class="stage oda">
+  <div class="gtop">
+    <a class="gback" href="oyunlar.html">← Geri</a>
+    <div class="gtitle"><b>Oda Döşe</b><small>Odayı döşe 🛋️</small></div>
+    <div class="gscore"><span>Parça <b id="cnt">0</b></span></div>
+  </div>
+
+  <div class="roomwrap">
+    <svg class="room" id="oda" viewBox="0 0 400 320" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+      <rect id="wall" x="0" y="0" width="400" height="215" fill="#e9e1f7"/>
+      <rect id="floor" x="0" y="215" width="400" height="105" fill="#e3c9a3"/>
+      <g id="planks"></g>
+      <rect id="skirt" x="0" y="211" width="400" height="6" fill="#fbfaf7"/>
+      <g id="items"></g>
+    </svg>
+    <div class="odaHint" id="odaHint"></div>
+  </div>
+
+  <div class="tools" id="toolsRoom">
+    <button type="button" class="tb" id="rWall">Duvar</button>
+    <button type="button" class="tb" id="rFloor">Zemin</button>
+    <button type="button" class="tb icon" id="rShare" title="Paylaş" aria-label="Paylaş">📷</button>
+    <button type="button" class="tb icon" id="rClear" title="Boşalt" aria-label="Boşalt">🗑</button>
+    <button type="button" class="tb main" id="rCheck">Mimar onayı ✓</button>
+  </div>
+  <div class="tools" id="toolsSel" hidden>
+    <button type="button" class="tb" id="tColor">Renk 🎨</button>
+    <button type="button" class="tb icon" id="tFlip" title="Çevir">↔</button>
+    <button type="button" class="tb icon" id="tBig" title="Büyüt">＋</button>
+    <button type="button" class="tb icon" id="tSmall" title="Küçült">－</button>
+    <button type="button" class="tb icon" id="tDel" title="Kaldır">🗑</button>
+    <button type="button" class="tb main" id="tDone">Tamam</button>
+  </div>
+
+  <div class="trayh" id="tray"></div>
+</main>
+
+<div class="over" id="over" hidden>
+  <div class="overcard">
+    <div class="eyebrow">şef onayı 🏗️</div>
+    <h2><em id="ovScore">0/10</em></h2>
+    <p class="lead" id="ovTitle"></p>
+    <ul class="ovNotes" id="ovNotes"></ul>
+    <div class="btns"><button type="button" class="btn pink" id="ovClose">Devam et</button><button type="button" class="btn ghost" id="ovShare">📷 Paylaş</button><a class="btn ghost" href="kase.html">Peki Madem (: 🍉</a></div>
+  </div>
+</div>
+
+<div class="lightbox" id="lightbox" hidden>
+  <div class="lbwrap"><img id="lbImg" alt="Odanın görseli"></div>
+  <p>Görsele basılı tut → Fotoğraflara kaydet. Kapatmak için dokun.</p>
+</div>
+
+<script src="app.js?v=yec1"></script>
+<script src="yapilandirma.js?v=yec1"></script>
+<script src="deneme.js?v=yec1"></script>
+<script src="hesap.js?v=yec1"></script>
+<script>(window.Hesap ? Hesap.oyun : function (l) { l.forEach(function (x) { document.write('<script src="' + x + '"><\/script>'); }); })(["oda.js?v=yec1"]);</script>
+</body>
+</html>

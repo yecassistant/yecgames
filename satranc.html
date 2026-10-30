@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<title>Satranç</title>
+<meta name="description" content="İkimizin satrancı: normal kurallar, sırayla, aynı anda girmek gerekmez.">
+<meta property="og:title" content="Satranç">
+<meta property="og:description" content="İkimizin satrancı: normal kurallar, sırayla, aynı anda girmek gerekmez.">
+<meta name="color-scheme" content="dark">
+<meta property="og:type" content="website">
+<meta property="og:image" content="onizleme.jpg">
+<meta name="theme-color" content="#1e1526">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Crect width=%27100%27 height=%27100%27 rx=%2724%27 fill=%27%231e1526%27/%3E%3Crect x=%2720%27 y=%2720%27 width=%2730%27 height=%2730%27 fill=%27%23eedcc5%27/%3E%3Crect x=%2750%27 y=%2750%27 width=%2730%27 height=%2730%27 fill=%27%23eedcc5%27/%3E%3Crect x=%2750%27 y=%2720%27 width=%2730%27 height=%2730%27 fill=%27%23b48a68%27/%3E%3Crect x=%2720%27 y=%2750%27 width=%2730%27 height=%2730%27 fill=%27%23b48a68%27/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@1,9..144,600&family=Nunito:wght@600;700;800;900&display=swap">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="YEC Games">
+<link rel="apple-touch-icon" href="ikon/app-180.png">
+<link rel="stylesheet" href="style.css?v=yec1">
+</head>
+<body data-page="satranc">
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <symbol id="pz-p" viewBox="0 0 100 100"><g stroke-width="3" stroke-linejoin="round"><path d="M26 84h48c0-10-8-14-14-20h-20c-6 6-14 10-14 20z"/><path d="M38 64c0-8 4-14 12-14s12 6 12 14"/><circle cx="50" cy="34" r="12"/><path d="M36 48h28" fill="none"/><rect x="22" y="84" width="56" height="8" rx="3"/></g></symbol>
+  <symbol id="pz-r" viewBox="0 0 100 100"><g stroke-width="3" stroke-linejoin="round"><rect x="22" y="84" width="56" height="8" rx="3"/><path d="M30 84V56h40v28z"/><path d="M28 56V32h9v8h9v-8h8v8h9v-8h9v24z"/><path d="M36 62v16M50 62v16M64 62v16" fill="none" stroke="currentColor" stroke-width="2" opacity=".55"/></g></symbol>
+  <symbol id="pz-b" viewBox="0 0 100 100"><g stroke-width="3" stroke-linejoin="round"><rect x="22" y="84" width="56" height="8" rx="3"/><path d="M30 84c0-8 6-12 10-16h20c4 4 10 8 10 16z"/><path d="M40 68c-4-10-4-22 6-36l4-6 4 6c10 14 10 26 6 36z"/><circle cx="50" cy="18" r="5"/><path d="M50 44l8-12" fill="none" stroke="currentColor" stroke-width="3"/><path d="M38 68h24" fill="none"/></g></symbol>
+  <symbol id="pz-n" viewBox="0 0 100 100"><g stroke-width="3" stroke-linejoin="round"><rect x="22" y="84" width="56" height="8" rx="3"/><path d="M30 84c0-18 6-30 16-38 2-6 0-10-2-14l-8 10c-6 2-10-2-8-8 2-4 8-10 14-14 2-6 6-8 10-8l2 6c16 4 26 18 28 42l-2 24z"/><path d="M38 40l-8 8" fill="none" stroke="currentColor" stroke-width="2.5"/><circle cx="46" cy="30" r="2.4" fill="currentColor" stroke="none"/><path d="M52 24c6 0 12 4 16 10" fill="none" stroke="currentColor" stroke-width="2" opacity=".6"/><path d="M60 46c6 8 8 20 8 34" fill="none" stroke="currentColor" stroke-width="2" opacity=".45"/></g></symbol>
+  <symbol id="pz-q" viewBox="0 0 100 100"><g stroke-width="3" stroke-linejoin="round"><rect x="22" y="84" width="56" height="8" rx="3"/><path d="M30 84l4-16h32l4 16z"/><path d="M28 52L24 26l9 15 4-26 7 25 6-28 6 28 7-25 4 26 9-15-4 26z"/><path d="M31 52h38l-3 16H34z"/><circle cx="24" cy="22" r="3.4"/><circle cx="37" cy="11" r="3.4"/><circle cx="50" cy="8" r="3.4"/><circle cx="63" cy="11" r="3.4"/><circle cx="76" cy="22" r="3.4"/><path d="M35 60h30" fill="none" stroke="currentColor" stroke-width="2" opacity=".55"/></g></symbol>
+  <symbol id="pz-k" viewBox="0 0 100 100"><g stroke-width="3" stroke-linejoin="round"><rect x="22" y="84" width="56" height="8" rx="3"/><path d="M30 84l4-16h32l4 16z"/><path d="M50 30c-6-10-20-10-22 2-1 8 6 14 10 20h24c4-6 11-12 10-20-2-12-16-12-22-2z"/><path d="M34 52h32l-2 16H36z"/><path d="M50 6v20M42 14h16" fill="none" stroke-width="5" stroke-linecap="round"/><path d="M50 30v22" fill="none" stroke="currentColor" stroke-width="2" opacity=".5"/></g></symbol>
+</defs></svg>
+
+<main class="st" id="stage">
+  <header class="hdbar">
+    <a class="gkbtn" href="oyunlar.html" aria-label="Geri"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 5.5L8 12l6.5 6.5"/></svg></a>
+    <div class="hdtitle"><b>Satranç</b><span id="stSub">Bağlanıyor…</span></div>
+    <button type="button" class="gkbtn" id="bHelp" aria-label="Nasıl oynanır"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M9.6 9.4a2.5 2.5 0 0 1 4.8.9c0 1.8-2.4 2.1-2.4 3.7"/><path d="M12 16.9v.2"/></svg></button>
+  </header>
+
+  <div class="stp" id="pOther" hidden><span class="hsava a" id="avaOther">?</span><div class="stpt"><b id="adOther">rakip</b><span class="stcap" id="capOther"></span></div><i class="stclr" id="clrOther"></i></div>
+
+  <div class="stboardwrap" id="wrap">
+    <div class="stboard" id="board"></div>
+  </div>
+
+  <div class="stp me" id="pMe" hidden><span class="hsava b" id="avaMe">?</span><div class="stpt"><b id="adMe">sen</b><span class="stcap" id="capMe"></span></div><i class="stclr" id="clrMe"></i></div>
+
+  <div class="stturn" id="turn" hidden><b id="turnTxt">—</b><small id="turnSub"></small></div>
+  <div class="stmoves" id="moves" aria-label="Hamleler"></div>
+  <div class="stfoot" id="foot">
+    <p class="hdmsg stmsg" id="msg"></p>
+    <div class="stbtns" id="btns" hidden>
+      <button type="button" class="stbtn" id="bDraw">Berabere teklif et</button>
+      <button type="button" class="stbtn" id="bResign">Pes et</button>
+    </div>
+    <div class="stbtns" id="offer" hidden>
+      <span id="offerTxt">Berabere teklif ediyor.</span>
+      <button type="button" class="stbtn ok" id="bAccept">Kabul</button>
+      <button type="button" class="stbtn" id="bDecline">Reddet</button>
+    </div>
+  </div>
+</main>
+
+<div class="gkover" id="gate" hidden>
+  <div class="gkcard hdcard">
+    <h2>Satranç</h2>
+    <p>İki kişilik oyun. Oynamak için bir oda açman ya da arkadaşının odasına katılman gerekiyor; üyelik yok, takma ad yeter.</p>
+    <a class="hsbtn" href="baslat.html?d=satranc.html">Oda aç / odaya katıl</a>
+  </div>
+</div>
+
+<div class="gkover" id="start" hidden>
+  <div class="gkcard hdcard">
+    <div class="gkkick" id="startKick">İlk oyun</div>
+    <h2 id="startTitle">Hazır mısın?</h2>
+    <p id="startText">Oyunu kuran beyaz oynar, ilk hamle onun. Sonraki oyunlarda renkler değişir.</p>
+    <button type="button" class="hsbtn" id="startGo">Oyunu kur</button>
+    <a class="gkghost hdlink" href="oyunlar.html">Menü</a>
+  </div>
+</div>
+
+<div class="gkover" id="done" hidden>
+  <div class="gkcard hdcard">
+    <div class="gkkick" id="doneKick">Oyun bitti</div>
+    <h2 id="doneTitle">—</h2>
+    <p id="doneText"></p>
+    <div class="gkstats" id="doneStats"></div>
+    <button type="button" class="hsbtn" id="doneNew">Yeni oyun</button>
+    <button type="button" class="gkghost" id="doneClose">Tahtaya bak</button>
+  </div>
+</div>
+
+<div class="gkover" id="promo" hidden>
+  <div class="gkcard hdcard">
+    <div class="gkkick">Terfi</div>
+    <h2>Piyon hangi taş olsun?</h2>
+    <div class="stpromo" id="promoRow"></div>
+  </div>
+</div>
+
+<div class="gkover" id="confirm" hidden>
+  <div class="gkcard hdcard">
+    <h2 id="confirmTitle">Pes ediyor musun?</h2>
+    <p id="confirmText">Oyun karşı tarafın galibiyetiyle biter.</p>
+    <button type="button" class="hsbtn" id="confirmYes">Evet, pes et</button>
+    <button type="button" class="gkghost" id="confirmNo">Vazgeç</button>
+  </div>
+</div>
+
+<div class="gkover" id="help" hidden>
+  <div class="gkcard hdcard">
+    <h2>Satranç</h2>
+    <p>Sadece ikimiz oynuyoruz, normal satranç kuralları geçerli: rok, geçerken alma, piyon terfisi, pat, elli hamle, üç tekrar… hepsi var.</p>
+    <p>Taşa dokun, gidebileceği kareler görünür; kareye dokun, hamle gider. Aynı anda girmemiz gerekmiyor ama daha tatlı olur :) Hamleni yap, çık; sıra bana geçer, girince oynarım.</p>
+    <p class="gksmall">Oyunu kuran beyaz başlar, sonraki oyunlarda renkler değişir. Berabere teklif ve pes etme altta.</p>
+    <button type="button" class="gkprimary" id="helpGo">Tamam</button>
+  </div>
+</div>
+
+<script src="app.js?v=yec1"></script>
+<script src="yapilandirma.js?v=yec1"></script>
+<script src="deneme.js?v=yec1"></script>
+<script src="hesap.js?v=yec1"></script>
+<script src="satranc-motor.js?v=yec1"></script>
+<script src="satranc.js?v=yec1"></script>
+<script src="satranc-ses.js?v=yec1"></script>
+<script src="sohbet.js?v=yec1"></script>
+</body>
+</html>

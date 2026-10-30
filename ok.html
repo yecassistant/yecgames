@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<title>Eros'un Oku</title>
+<meta name="description" content="Her ok baktığı yöne kayar. Önü kapalıysa çarpar. Tahtayı boşalt.">
+<meta property="og:title" content="Eros'un Oku">
+<meta property="og:description" content="Her ok baktığı yöne kayar. Önü kapalıysa çarpar.">
+<meta name="color-scheme" content="dark">
+<meta property="og:type" content="website">
+<meta property="og:image" content="onizleme.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#1d2036">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Crect width=%27100%27 height=%27100%27 rx=%2724%27 fill=%27%231d2036%27/%3E%3Cpath d=%27M50 80S20 62 20 39a14 14 0 0 1 30-8 14 14 0 0 1 30 8c0 23-30 41-30 41z%27 fill=%27%23ff8597%27/%3E%3Cpath d=%27M16 84L76 24%27 stroke=%27%23ecebf6%27 stroke-width=%278%27 stroke-linecap=%27round%27/%3E%3Cpath d=%27M84 16L62 22l16 16z%27 fill=%27%23ffd27a%27/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="YEC Games">
+<link rel="apple-touch-icon" href="ikon/app-180.png">
+<link rel="stylesheet" href="style.css?v=yec1">
+</head>
+<body data-page="ok">
+
+<main class="okstage" id="stage">
+  <header class="okbar">
+    <a class="okback" href="oyunlar.html" aria-label="Geri"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 5.5L8 12l6.5 6.5"/></svg></a>
+    <button type="button" class="oklvl" id="lvlBtn" aria-label="Bölümler"><span>Bölüm</span><b id="lvlNo">01</b><i id="lvlTot">/100</i></button>
+    <div class="okhearts" id="hearts" aria-label="Kalpler"><svg viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg><svg viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg><svg viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg></div>
+  </header>
+
+  <div class="okmeta"><span class="okleft"><b id="leftNo">0</b> ok</span><span class="okmsg" id="msg"></span></div>
+
+  <div class="okwrap" id="wrap"><svg class="okboard" id="board" xmlns="http://www.w3.org/2000/svg"></svg></div>
+
+  <footer class="okfoot">
+    <button type="button" class="okbtn" id="bRestart" aria-label="Baştan başla"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 12a7.5 7.5 0 1 0 2.2-5.3"/><path d="M4.5 4.5v4h4"/></svg></button>
+    <button type="button" class="okbtn okhint" id="bHint"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.5 18h5M10.5 21h3M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2V16h5v-.1c0-.8.4-1.5 1-2A6 6 0 0 0 12 3z"/></svg><span>İpucu</span><b id="hintNo">3</b></button>
+    <button type="button" class="okbtn" id="bLevels" aria-label="Bölümler"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="6.5" height="6.5" rx="2"/><rect x="13.5" y="4" width="6.5" height="6.5" rx="2"/><rect x="4" y="13.5" width="6.5" height="6.5" rx="2"/><rect x="13.5" y="13.5" width="6.5" height="6.5" rx="2"/></svg></button>
+  </footer>
+</main>
+
+<div class="okover" id="intro" hidden>
+  <div class="okcard">
+    <svg class="okintroart" viewBox="0 0 300 96" aria-hidden="true"><g fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="11"><path d="M24 74V30h56" stroke="#dfe1ee"/><path d="M118 20v40h40" stroke="#dfe1ee"/><path d="M196 76h46V36" stroke="#dfe1ee"/></g><g stroke-linejoin="round" stroke-width="3"><path d="M96 30l-16-11v22z" fill="#dfe1ee" stroke="#dfe1ee"/><path d="M174 60l-16-11v22z" fill="#dfe1ee" stroke="#dfe1ee"/><path d="M242 18l-11 16h22z" fill="#dfe1ee" stroke="#dfe1ee"/></g></svg>
+    <h2>Eros'un Oku</h2>
+    <ul class="okrules">
+      <li>Bir oka dokun, ucunun baktığı yöne kayıp tahtadan çıkar.</li>
+      <li>Önünde başka bir ok varsa çarpar ve bir kalp gider.</li>
+      <li>Hepsini çıkar. Hatasız bitirene üç yıldız.</li>
+    </ul>
+    <button type="button" class="okprimary" id="introGo">Başla</button>
+  </div>
+</div>
+
+<div class="okover" id="done" hidden>
+  <div class="okcard">
+    <div class="okkicker" id="doneKick">Bölüm 01</div>
+    <h2 id="doneTitle">Temiz.</h2>
+    <div class="okstars" id="doneStars"></div>
+    <p class="oktext" id="doneText"></p>
+    <div class="okstats" id="doneStats"></div>
+    <div class="okbtns">
+      <button type="button" class="okprimary" id="doneNext">Sonraki</button>
+      <button type="button" class="okghost" id="doneAgain">Tekrar</button>
+    </div>
+  </div>
+</div>
+
+<div class="okover" id="lvlOv" hidden>
+  <div class="okcard wide">
+    <h2 class="oksmallh">Bölümler</h2>
+    <p class="oktext" id="lvlNote"></p>
+    <div class="oklvlgrid" id="lvlGrid"></div>
+    <button type="button" class="okghost" id="lvlClose">Kapat</button>
+  </div>
+</div>
+
+<script src="app.js?v=yec1"></script>
+<script src="yapilandirma.js?v=yec1"></script>
+<script src="deneme.js?v=yec1"></script>
+<script src="hesap.js?v=yec1"></script>
+<script>(window.Hesap ? Hesap.oyun : function (l) { l.forEach(function (x) { document.write('<script src="' + x + '"><\/script>'); }); })(["ok-bolum2.js?v=yec1", "ok.js?v=yec1", "ok-ses.js?v=yec1"]);</script>
+</body>
+</html>

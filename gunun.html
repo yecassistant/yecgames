@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<title>Günün Kelimesi</title>
+<meta name="description" content="Her gün yeni bir kelime. 5 harfli kelimeyi 5 tahminde bul.">
+<meta property="og:title" content="Günün Kelimesi">
+<meta property="og:description" content="Her gün yeni bir kelime. 5 harfli kelimeyi 5 tahminde bul.">
+<meta name="color-scheme" content="dark">
+<meta property="og:type" content="website">
+<meta property="og:image" content="onizleme.jpg">
+<meta name="theme-color" content="#1c1411">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Crect width=%27100%27 height=%27100%27 rx=%2724%27 fill=%27%231c1411%27/%3E%3Crect x=%2714%27 y=%2732%27 width=%2734%27 height=%2736%27 rx=%278%27 fill=%27%233fb86a%27/%3E%3Crect x=%2752%27 y=%2732%27 width=%2734%27 height=%2736%27 rx=%278%27 fill=%27%23f2c35b%27/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@1,9..144,600&family=Nunito:wght@600;700;800;900&display=swap">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="YEC Games">
+<link rel="apple-touch-icon" href="ikon/app-180.png">
+<link rel="stylesheet" href="style.css?v=yec1">
+</head>
+<body data-page="gunun">
+
+<main class="gk" id="stage">
+  <header class="gkbar">
+    <a class="gkbtn" href="oyunlar.html" aria-label="Geri"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 5.5L8 12l6.5 6.5"/></svg></a>
+    <div class="gktitle"><b>Günün Kelimesi</b><span id="gkDate"></span></div>
+    <div class="gkbtns">
+      <button type="button" class="gkbtn" id="bStats" aria-label="İstatistik"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 19v-6M12 19V6M18 19v-9"/></svg></button>
+      <button type="button" class="gkbtn" id="bHelp" aria-label="Nasıl oynanır"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M9.6 9.4a2.5 2.5 0 0 1 4.8.9c0 1.8-2.4 2.1-2.4 3.7"/><path d="M12 16.9v.2"/></svg></button>
+    </div>
+  </header>
+
+  <div class="gkboardwrap" id="wrap">
+    <div class="gktoast" id="toast" role="status" aria-live="polite"></div>
+    <div class="gkboard" id="board" aria-label="Tahminler"></div>
+  </div>
+
+  <div class="gkkeys" id="keys" aria-label="Klavye"></div>
+</main>
+
+<div class="gkover" id="help" hidden>
+  <div class="gkcard">
+    <h2>Günün Kelimesi</h2>
+    <p>Her gün yeni bir kelime. 5 harfli kelimeyi 5 tahminde bul.</p>
+    <div class="gkex" aria-hidden="true"><span class="gkt sm g">K</span><span class="gkt sm y">A</span><span class="gkt sm x">L</span><span class="gkt sm g">E</span><span class="gkt sm x">M</span></div>
+    <ul class="gklegend">
+      <li><span class="gkt xs g"></span><span><b>Yeşil:</b> harf doğru yerde</span></li>
+      <li><span class="gkt xs y"></span><span><b>Sarı:</b> harf var ama başka yerde</span></li>
+      <li><span class="gkt xs x"></span><span><b>Renksiz:</b> harf kelimede yok</span></li>
+    </ul>
+    <p class="gksmall">Tahminin sözlükte olan bir kelime olmalı. Kelime her gece yarısı yenilenir.</p>
+    <button type="button" class="gkprimary" id="helpGo">Başla</button>
+  </div>
+</div>
+
+<div class="gkover" id="done" hidden>
+  <div class="gkcard">
+    <div class="gkkick" id="doneKick">Günün kelimesi</div>
+    <h2 id="doneTitle">Bildin!</h2>
+    <div class="gkword" id="doneWord" aria-hidden="true"></div>
+    <p class="gkmean" id="doneMean"></p>
+    <div class="gkstats" id="doneStats"></div>
+    <div class="gkdist" id="doneDist"></div>
+    <p class="gknext" id="doneNext"></p>
+    <div class="gkbtnrow"><button type="button" class="gkghost" id="doneClose">Tahtaya bak</button><a class="gkprimary" href="oyunlar.html">Menü</a></div>
+  </div>
+</div>
+
+<script src="app.js?v=yec1"></script>
+<script src="yapilandirma.js?v=yec1"></script>
+<script src="deneme.js?v=yec1"></script>
+<script src="hesap.js?v=yec1"></script>
+<script>(window.Hesap ? Hesap.oyun : function (l) { l.forEach(function (x) { document.write('<script src="' + x + '"><\/script>'); }); })(["gunun.js?v=yec1"]);</script>
+</body>
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<title>XOX</title>
+<meta name="description" content="İki kişilik XOX: klasik ya da sonsuz (herkesin sadece 3 işareti kalır).">
+<meta property="og:title" content="XOX">
+<meta property="og:description" content="İki kişilik XOX: klasik ya da sonsuz.">
+<meta name="color-scheme" content="dark">
+<meta property="og:type" content="website">
+<meta property="og:image" content="onizleme.jpg">
+<meta name="theme-color" content="#1e1433">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Crect width=%27100%27 height=%27100%27 rx=%2724%27 fill=%27%231e1433%27/%3E%3Cpath d=%27M24 24l22 22M46 24L24 46%27 stroke=%27%23ff8fb3%27 stroke-width=%278%27 stroke-linecap=%27round%27/%3E%3Ccircle cx=%2766%27 cy=%2766%27 r=%2712%27 fill=%27none%27 stroke=%27%23f2c35b%27 stroke-width=%278%27/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@1,9..144,600&family=Nunito:wght@600;700;800;900&display=swap">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="YEC Games">
+<link rel="apple-touch-icon" href="ikon/app-180.png">
+<link rel="stylesheet" href="style.css?v=yec1">
+</head>
+<body data-page="xox">
+
+<main class="sd xo" id="stage">
+  <header class="hdbar">
+    <a class="gkbtn" href="oyunlar.html" aria-label="Geri"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 5.5L8 12l6.5 6.5"/></svg></a>
+    <div class="hdtitle"><b>XOX</b><span id="sub">Bağlanıyor…</span></div>
+    <button type="button" class="gkbtn" id="bHelp" aria-label="Nasıl oynanır"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M9.6 9.4a2.5 2.5 0 0 1 4.8.9c0 1.8-2.4 2.1-2.4 3.7"/><path d="M12 16.9v.2"/></svg></button>
+  </header>
+
+  <div class="sdscore" id="score" hidden>
+    <div class="hdp" id="pMe"><span class="hsava b" id="avaMe">?</span><div class="sdpt"><small id="adMe">sen</small><i class="xoben" id="isMe"></i></div></div>
+    <div class="hdturn" id="turn"><b id="turnTxt">—</b><small id="turnSub"></small></div>
+    <div class="hdp" id="pOther"><span class="hsava a" id="avaOther">?</span><div class="sdpt"><small id="adOther">rakip</small><i class="xoben" id="isOther"></i></div></div>
+  </div>
+
+  <div class="xoalan" id="alan" hidden>
+    <div class="xotahta" id="tahta"></div>
+    <svg class="xocizgi" id="cizgi" viewBox="0 0 300 300" aria-hidden="true"><line id="cizgiL" x1="0" y1="0" x2="0" y2="0"/></svg>
+  </div>
+  <p class="xomod" id="modYazi" hidden></p>
+
+  <div class="hdfoot sdfoot" id="foot"><p class="hdmsg" id="msg"></p><button type="button" class="stbtn" id="bResign" hidden>Pes et</button></div>
+</main>
+
+<div class="gkover" id="gate" hidden>
+  <div class="gkcard hdcard">
+    <h2>XOX</h2>
+    <p>İki kişilik oyun. Oynamak için bir oda açman ya da arkadaşının odasına katılman gerekiyor; üyelik yok, takma ad yeter.</p>
+    <a class="hsbtn" href="baslat.html?d=xox.html">Oda aç / odaya katıl</a>
+  </div>
+</div>
+
+<div class="gkover" id="start" hidden>
+  <div class="gkcard hdcard">
+    <div class="gkkick" id="startKick">İlk oyun</div>
+    <h2 id="startTitle">Hazır mısın?</h2>
+    <p id="startText"></p>
+    <div class="xoseg" data-mod-seg><button type="button" data-mod="klasik">Klasik</button><button type="button" data-mod="sonsuz">Sonsuz</button></div>
+    <p class="gksmall xomodnot" data-mod-not></p>
+    <button type="button" class="hsbtn" id="startGo">Oyunu kur</button>
+    <a class="gkghost hdlink" href="oyunlar.html">Menü</a>
+  </div>
+</div>
+
+<div class="gkover" id="done" hidden>
+  <div class="gkcard hdcard">
+    <div class="gkkick" id="doneKick">Oyun bitti</div>
+    <h2 id="doneTitle">—</h2>
+    <p id="doneText"></p>
+    <div class="gkstats" id="doneStats"></div>
+    <div class="xoseg" data-mod-seg><button type="button" data-mod="klasik">Klasik</button><button type="button" data-mod="sonsuz">Sonsuz</button></div>
+    <button type="button" class="hsbtn" id="doneNew">Yeni oyun</button>
+    <button type="button" class="gkghost" id="doneClose">Tahtaya bak</button>
+  </div>
+</div>
+
+<div class="gkover" id="confirm" hidden>
+  <div class="gkcard hdcard">
+    <h2>Pes ediyor musun?</h2>
+    <p>Oyun karşı tarafın galibiyetiyle biter.</p>
+    <button type="button" class="hsbtn" id="confirmYes">Evet, pes et</button>
+    <button type="button" class="gkghost" id="confirmNo">Vazgeç</button>
+  </div>
+</div>
+
+<div class="gkover" id="help" hidden>
+  <div class="gkcard hdcard">
+    <h2>XOX</h2>
+    <p>Sırayla işaret koyuyoruz; yan yana, alt alta ya da çapraz üçünü önce dizen kazanır. İlk başlayan X olur, sıra oyun oyun değişir.</p>
+    <p><b>Sonsuz</b> modda herkesin tahtada en fazla 3 işareti kalır: 4. işaretini koyunca en eskisi silinir (silinecek olan soluk görünür). Böylece berabere bitmez.</p>
+    <p class="gksmall">Aynı anda girmemiz gerekmiyor; hamleni yap, çık :)</p>
+    <button type="button" class="gkprimary" id="helpGo">Tamam</button>
+  </div>
+</div>
+
+<script src="app.js?v=yec1"></script>
+<script src="yapilandirma.js?v=yec1"></script>
+<script src="deneme.js?v=yec1"></script>
+<script src="hesap.js?v=yec1"></script>
+<script src="duello.js?v=yec1"></script>
+<script src="xox.js?v=yec1"></script>
+<script src="sayi-ses.js?v=yec1"></script>
+<script src="sohbet.js?v=yec1"></script>
+</body>
+</html>

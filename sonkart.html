@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<title>Son Kart</title>
+<meta name="description" content="İki kişilik Son Kart (renk-sayı kart oyunu); istersen bir bot ekle. Klasik, 7–0, yığmalı, çekene kadar ve kaos modları.">
+<meta property="og:title" content="Son Kart">
+<meta property="og:description" content="İkimiz, bir de bot; beş farklı mod.">
+<meta name="color-scheme" content="dark">
+<meta property="og:type" content="website">
+<meta property="og:image" content="onizleme.jpg">
+<meta name="theme-color" content="#1a0d22">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Crect width=%27100%27 height=%27100%27 rx=%2724%27 fill=%27%231a0d22%27/%3E%3Crect x=%2720%27 y=%2716%27 width=%2738%27 height=%2758%27 rx=%278%27 fill=%27%23e8505b%27 transform=%27rotate(-12 39 45)%27/%3E%3Crect x=%2742%27 y=%2726%27 width=%2738%27 height=%2758%27 rx=%278%27 fill=%27%233b82f6%27 transform=%27rotate(10 61 55)%27/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@1,9..144,600&family=Nunito:wght@600;700;800;900&display=swap">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="YEC Games">
+<link rel="apple-touch-icon" href="ikon/app-180.png">
+<link rel="stylesheet" href="style.css?v=yec1">
+</head>
+<body data-page="sonkart">
+
+<main class="uk-sahne" id="stage">
+  <header class="hdbar">
+    <a class="gkbtn" href="oyunlar.html" aria-label="Geri"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 5.5L8 12l6.5 6.5"/></svg></a>
+    <div class="hdtitle"><b>Son Kart</b><span id="sub">Bağlanıyor…</span></div>
+    <button type="button" class="gkbtn" id="bHelp" aria-label="Nasıl oynanır"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M9.6 9.4a2.5 2.5 0 0 1 4.8.9c0 1.8-2.4 2.1-2.4 3.7"/><path d="M12 16.9v.2"/></svg></button>
+  </header>
+
+  <div class="ukrakipler" id="rakipler" hidden>
+    <div class="ukrakip" id="pOther" data-id=""><div class="ukkim"><span class="hsava a" id="avaOther">?</span><div><b id="adOther">rakip</b><small class="uksay"></small></div><i class="ukunoroz">UNO!</i></div><div class="ukyelpaze"></div></div>
+    <div class="ukrakip bot" id="pBot" data-id="bot" hidden><div class="ukkim"><span class="hsava ukbotava">🤖</span><div><b>Bot</b><small class="uksay"></small></div><i class="ukunoroz">UNO!</i></div><div class="ukyelpaze"></div></div>
+  </div>
+
+  <div class="ukmasa" id="masa" hidden>
+    <div class="ukyon" id="yon" aria-hidden="true"><svg viewBox="0 0 100 100"><path d="M50 8a42 42 0 1 1-36 20"/><path d="M6 22l8 8 9-6"/></svg></div>
+    <button type="button" class="ukdeste" id="deste" aria-label="Kart çek"><span class="uk arka"></span><span class="uk arka"></span><span class="uk arka"></span><small id="desteSay"></small></button>
+    <div class="ukatik" id="atik"></div>
+    <div class="ukrenk" id="renk"><i></i><small id="renkAd"></small></div>
+    <div class="ukceza" id="ceza" hidden></div>
+  </div>
+
+  <div class="ukdurum" id="durum" hidden><b id="turnTxt">—</b><small id="turnSub"></small></div>
+  <div class="ukel" id="el"></div>
+  <div class="ukalt" id="alt" hidden>
+    <div class="hdp ukben" id="pMe"><span class="hsava b" id="avaMe">?</span><small id="adMe">sen</small></div>
+    <button type="button" class="ukunobtn" id="bUno">Son kart!</button>
+    <button type="button" class="stbtn ukpas" id="bPas" hidden>Pas</button>
+    <button type="button" class="stbtn ukpes" id="bResign" hidden>Pes</button>
+  </div>
+  <p class="hdmsg ukmsg" id="msg"></p>
+  <div id="score" hidden></div><div id="turn" hidden></div>
+</main>
+
+<div class="gkover" id="renkSec" hidden>
+  <div class="gkcard hdcard ukrenkkart">
+    <h2>Renk seç</h2>
+    <div class="ukrenkler"><button type="button" class="r" data-r="r">Kırmızı</button><button type="button" class="y" data-r="y">Sarı</button><button type="button" class="g" data-r="g">Yeşil</button><button type="button" class="b" data-r="b">Mavi</button></div>
+    <button type="button" class="gkghost" id="renkIptal">Vazgeç</button>
+  </div>
+</div>
+<div class="gkover" id="hedefSec" hidden>
+  <div class="gkcard hdcard">
+    <h2>Elini kiminle değişiyorsun?</h2>
+    <div class="ukhedefler" id="hedefler"></div>
+    <button type="button" class="gkghost" id="hedefIptal">Vazgeç</button>
+  </div>
+</div>
+
+<div class="gkover" id="gate" hidden>
+  <div class="gkcard hdcard">
+    <h2>Son Kart</h2>
+    <p>İki kişilik oyun. Oynamak için bir oda açman ya da arkadaşının odasına katılman gerekiyor; üyelik yok, takma ad yeter.</p>
+    <a class="hsbtn" href="baslat.html?d=sonkart.html">Oda aç / odaya katıl</a>
+  </div>
+</div>
+
+<div class="gkover" id="start" hidden>
+  <div class="gkcard hdcard">
+    <div class="gkkick" id="startKick">İlk oyun</div>
+    <h2 id="startTitle">Hazır mısın?</h2>
+    <p id="startText"></p>
+    <div class="uksec">
+      <div class="uksecbas">Kimler oynuyor</div>
+      <div class="xoseg" data-sec="tip"><button type="button" data-v="2">İkimiz</button><button type="button" data-v="3">İkimiz + bot</button></div>
+      <div class="xoseg" data-sec="bot"><button type="button" data-v="orta">Bot: orta</button><button type="button" data-v="zor">Bot: zor</button></div>
+      <div class="uksecbas">Mod</div>
+      <div class="ukmodlar" data-sec="mod"></div>
+    </div>
+    <button type="button" class="hsbtn" id="startGo">Oyunu kur</button>
+    <a class="gkghost hdlink" href="oyunlar.html">Menü</a>
+  </div>
+</div>
+
+<div class="gkover" id="done" hidden>
+  <div class="gkcard hdcard">
+    <div class="gkkick" id="doneKick">Oyun bitti</div>
+    <h2 id="doneTitle">—</h2>
+    <p id="doneText"></p>
+    <div class="gkstats" id="doneStats"></div>
+    <div class="uksec">
+      <div class="uksecbas">Kimler oynuyor</div>
+      <div class="xoseg" data-sec="tip"><button type="button" data-v="2">İkimiz</button><button type="button" data-v="3">İkimiz + bot</button></div>
+      <div class="xoseg" data-sec="bot"><button type="button" data-v="orta">Bot: orta</button><button type="button" data-v="zor">Bot: zor</button></div>
+      <div class="uksecbas">Mod</div>
+      <div class="ukmodlar" data-sec="mod"></div>
+    </div>
+    <button type="button" class="hsbtn" id="doneNew">Yeni oyun</button>
+    <button type="button" class="gkghost" id="doneClose">Tahtaya bak</button>
+  </div>
+</div>
+
+<div class="gkover" id="confirm" hidden>
+  <div class="gkcard hdcard">
+    <h2>Pes ediyor musun?</h2>
+    <p>Oyun karşı tarafın galibiyetiyle biter.</p>
+    <button type="button" class="hsbtn" id="confirmYes">Evet, pes et</button>
+    <button type="button" class="gkghost" id="confirmNo">Vazgeç</button>
+  </div>
+</div>
+
+<div class="gkover" id="help" hidden>
+  <div class="gkcard hdcard">
+    <h2>Son Kart</h2>
+    <p>Herkese 7 kart. Ortadaki kartın <b>rengine</b> ya da <b>sayısına/simgesine</b> uyan bir kart atarsın; renk seç kartları her zaman atılır. Atacak kartın yoksa desteden çekersin; çektiğin kart uyarsa hemen atabilirsin, yoksa sıra geçer.</p>
+    <p><b>Pas</b> sıradakini atlatır, <b>yön</b> yönü çevirir (ikimizken pas gibi), <b>+2 / +4</b> sıradakine kart çektirir. Elinde 2 kart varken ikinciyi atmadan önce <b>UNO!</b>'ya bas; unutursan 2 kart ceza. Elini ilk bitiren kazanır.</p>
+    <p><b>Modlar:</b> Klasik · 7–0 (7: biriyle el değiş, 0: herkes elini sıradakine verir) · Yığmalı (+2/+4 üst üste, ceza birikir) · Çekene kadar (uyan kart çıkana dek çek) · Kaos (hepsi bir arada).</p>
+    <p class="gksmall">İstersen üçüncü oyuncu olarak bir bot ekle: orta ya da zor. Botun sırasını ikimizden kim ekrandaysa onun telefonu oynatır.</p>
+    <button type="button" class="gkprimary" id="helpGo">Tamam</button>
+  </div>
+</div>
+
+<script src="app.js?v=yec1"></script>
+<script src="yapilandirma.js?v=yec1"></script>
+<script src="deneme.js?v=yec1"></script>
+<script src="hesap.js?v=yec1"></script>
+<script src="duello.js?v=yec1"></script>
+<script src="sonkart-kural.js?v=yec1"></script>
+<script src="sonkart-ses.js?v=yec1"></script>
+<script src="sonkart.js?v=yec1"></script>
+<script src="sohbet.js?v=yec1"></script>
+</body>
+</html>

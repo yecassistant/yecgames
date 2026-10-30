@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<title>YEC Games</title>
+<meta name="description" content="İki kişilik oyun odası: üyelik yok, takma ad yeter. Oda aç, kodu arkadaşına gönder, oynamaya başlayın.">
+<meta property="og:title" content="YEC Games">
+<meta property="og:description" content="İki kişilik oyun odası: üyelik yok, takma ad yeter.">
+<meta name="color-scheme" content="dark">
+<meta property="og:type" content="website">
+<meta property="og:image" content="onizleme.jpg">
+<meta name="theme-color" content="#241046">
+<link rel="icon" href="ikon/simge.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800;900&display=swap">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="YEC Games">
+<link rel="apple-touch-icon" href="ikon/app-180.png">
+<link rel="stylesheet" href="style.css?v=yec1">
+</head>
+<body data-page="giris">
+
+<main class="hs bs">
+  <div class="bslogo"><img src="ikon/logo-koyu.svg" alt="YEC Games" width="260" height="180"></div>
+
+  <!-- seçim -->
+  <section class="hscard" id="secim">
+    <h1>İki kişilik oyun odası</h1>
+    <p class="hslead">Üyelik yok, e-posta yok. Bir takma ad yaz, oda aç, kodu arkadaşına gönder. İkiniz aynı odada, kendi zamanınızda oynarsınız.</p>
+    <div class="bssec">
+      <button type="button" class="bssecbtn" data-mod="ac"><b>Oda aç</b><small>Yeni bir oda kur, kodu paylaş</small></button>
+      <button type="button" class="bssecbtn" data-mod="katil"><b>Koda katıl</b><small>Arkadaşın sana kod gönderdi</small></button>
+      <button type="button" class="bssecbtn kucuk" data-mod="anahtar"><b>Kurtarma anahtarım var</b><small>Telefon değiştirdim, odama dönmek istiyorum</small></button>
+    </div>
+    <p class="hserr" id="secimNot" hidden></p>
+  </section>
+
+  <!-- oda aç -->
+  <form class="hscard" id="fAc" hidden novalidate>
+    <button type="button" class="bsgeri" data-geri>‹ Geri</button>
+    <h1>Oda aç</h1>
+    <label class="hsfield"><span>Takma adın</span><input type="text" id="acAd" maxlength="16" autocomplete="nickname" placeholder="örn. Ayşe" inputmode="text"></label>
+    <label class="bsonay"><input type="checkbox" id="acOnay"><span>18 yaşından büyüğüm; <a href="gizlilik.html" target="_blank" rel="noopener">gizlilik notunu ve kullanım şartlarını</a> okudum.</span></label>
+    <p class="hserr" id="acErr" role="alert" hidden></p>
+    <button type="submit" class="hsbtn" id="acGo">Odayı kur</button>
+  </form>
+
+  <!-- koda katıl -->
+  <form class="hscard" id="fKatil" hidden novalidate>
+    <button type="button" class="bsgeri" data-geri>‹ Geri</button>
+    <h1>Koda katıl</h1>
+    <label class="hsfield"><span>Takma adın</span><input type="text" id="kaAd" maxlength="16" autocomplete="nickname" placeholder="örn. Mert" inputmode="text"></label>
+    <label class="hsfield"><span>Oda kodu</span><input type="text" id="kaKod" maxlength="9" class="bskod" autocapitalize="characters" autocorrect="off" spellcheck="false" placeholder="8 harf-rakam" inputmode="text"></label>
+    <label class="bsonay"><input type="checkbox" id="kaOnay"><span>18 yaşından büyüğüm; <a href="gizlilik.html" target="_blank" rel="noopener">gizlilik notunu ve kullanım şartlarını</a> okudum.</span></label>
+    <p class="hserr" id="kaErr" role="alert" hidden></p>
+    <button type="submit" class="hsbtn" id="kaGo">Odaya katıl</button>
+  </form>
+
+  <!-- anahtarla geri dön -->
+  <form class="hscard" id="fAnahtar" hidden novalidate>
+    <button type="button" class="bsgeri" data-geri>‹ Geri</button>
+    <h1>Odama dön</h1>
+    <p class="hslead">Oda Ayarları'nda gördüğün kurtarma anahtarını yaz; bu cihaz eski koltuğuna oturur, kayıtların yerinde durur.</p>
+    <label class="hsfield"><span>Kurtarma anahtarı</span><input type="text" id="anKey" class="bskod" autocapitalize="characters" autocorrect="off" spellcheck="false" placeholder="ODA-A-ANAHTAR" inputmode="text"></label>
+    <p class="hserr" id="anErr" role="alert" hidden></p>
+    <button type="submit" class="hsbtn" id="anGo">Geri dön</button>
+  </form>
+
+  <!-- oda kuruldu: kodu paylaş -->
+  <section class="hscard hsdone" id="kuruldu" hidden>
+    <div class="gkkick">Oda hazır</div>
+    <h1 id="kurBaslik">Kodu arkadaşına gönder</h1>
+    <div class="bskodbuyuk" id="kurKod">— — — —</div>
+    <p class="hslead">Bu kod 24 saat geçerli; arkadaşın "Koda katıl" deyip bunu yazınca oda dolar. Kod geçerliliğini yitirirse Oda Ayarları'ndan yenisini üretirsin.</p>
+    <div class="bsyan"><button type="button" class="hsghost" id="kurKopya">Kodu kopyala</button><a class="hsghost" id="kurWa" href="#" target="_blank" rel="noopener">WhatsApp'ta gönder</a></div>
+    <div class="bsanahtar"><small>Kurtarma anahtarın (bir yere kaydet)</small><b id="kurAnahtar">—</b><button type="button" class="hsghost kucuk" id="kurAnKopya">Kopyala</button></div>
+    <a class="hsbtn" id="kurGo" href="oyunlar.html">Oyunlara geç</a>
+  </section>
+
+  <!-- katıldın -->
+  <section class="hscard hsdone" id="katildin" hidden>
+    <div class="hsava a" id="katAva">?</div>
+    <h1 id="katBaslik">Hoş geldin</h1>
+    <p class="hslead" id="katText">Odaya katıldın.</p>
+    <div class="bsanahtar"><small>Kurtarma anahtarın (bir yere kaydet)</small><b id="katAnahtar">—</b><button type="button" class="hsghost kucuk" id="katAnKopya">Kopyala</button></div>
+    <a class="hsbtn" id="katGo" href="oyunlar.html">Oyunlara geç</a>
+  </section>
+
+  <p class="bsimza">YEC Games · Nunu &amp; Büş yapımı · <a href="gizlilik.html">Gizlilik</a></p>
+</main>
+
+<script src="yapilandirma.js?v=yec1"></script>
+<script src="deneme.js?v=yec1"></script>
+<script src="hesap.js?v=yec1"></script>
+<script src="baslat.js?v=yec1"></script>
+</body>
+</html>

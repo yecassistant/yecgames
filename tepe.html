@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<title>Tepe Savaşı</title>
+<meta name="description" content="İki kişilik, sıra tabanlı topçu savaşı: takımını yerleştir, açını ve gücünü ayarla, türlü silahla vur.">
+<meta property="og:title" content="Tepe Savaşı">
+<meta property="og:description" content="İki kişilik topçu savaşı: açı, güç, rüzgar ve türlü silahlar.">
+<meta name="color-scheme" content="dark">
+<meta property="og:type" content="website">
+<meta property="og:image" content="onizleme.jpg">
+<meta name="theme-color" content="#7cc4ef">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Crect width=%27100%27 height=%27100%27 rx=%2724%27 fill=%27%237cc4ef%27/%3E%3Cpath d=%27M0 80l22-30 18 14 26-34 34 50v20H0z%27 fill=%27%235f9e3a%27/%3E%3Ccircle cx=%2770%27 cy=%2728%27 r=%2710%27 fill=%27%23ffd15c%27/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@1,9..144,600&family=Nunito:wght@600;700;800;900&display=swap">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="YEC Games">
+<link rel="apple-touch-icon" href="ikon/app-180.png">
+<link rel="stylesheet" href="style.css?v=yec1">
+<style>.tps.yok small{color:rgba(255,233,168,.75);font-weight:700}</style>
+</head>
+<body data-page="tepe">
+
+<main class="tp" id="stage">
+  <canvas id="cv" aria-label="Savaş alanı"></canvas>
+
+  <header class="tpust">
+    <a class="gkbtn" href="oyunlar.html" aria-label="Geri"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 5.5L8 12l6.5 6.5"/></svg></a>
+    <div class="tptakim ben" id="pMe"><span class="hsava b" id="avaMe">?</span><div><small id="adMe">sen</small><i class="tpcan"><b id="canMe"></b></i></div></div>
+    <div class="tporta"><b id="turnTxt">Bağlanıyor…</b><span class="tpruzgar" id="ruzgar"><i id="ruzgarBar"></i></span><small id="sub"></small></div>
+    <div class="tptakim on" id="pOther"><div><small id="adOther">rakip</small><i class="tpcan"><b id="canOther"></b></i></div><span class="hsava a" id="avaOther">?</span></div>
+    <button type="button" class="gkbtn" id="bHelp" aria-label="Nasıl oynanır"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M9.6 9.4a2.5 2.5 0 0 1 4.8.9c0 1.8-2.4 2.1-2.4 3.7"/><path d="M12 16.9v.2"/></svg></button>
+  </header>
+
+  <div class="tpalt" id="kontrol" hidden>
+    <div class="tpgrup">
+      <button type="button" class="tpb" id="bSol" aria-label="Sola yürü"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button>
+      <button type="button" class="tpb" id="bSag" aria-label="Sağa yürü"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></button>
+      <button type="button" class="tpb" id="bZipla" aria-label="Zıpla"><svg viewBox="0 0 24 24"><path d="M6 15l6-6 6 6"/><path d="M6 20h12"/></svg></button>
+      <span class="tpenerji" id="enerji"><i id="enerjiBar"></i></span>
+    </div>
+    <p class="tpipucu" id="ipucu"></p>
+    <div class="tpgrup">
+      <div class="tpfitil" id="fitil" hidden><small>Fitil</small><button type="button" data-f="1">1</button><button type="button" data-f="2">2</button><button type="button" data-f="3">3</button><button type="button" data-f="4">4</button><button type="button" data-f="5">5</button></div>
+      <button type="button" class="tpb genis" id="bSilah"><span id="silahIk">🚀</span><small id="silahAd">Bazuka</small></button>
+      <button type="button" class="tpb ates" id="bAtes" hidden>Ateş!</button>
+      <button type="button" class="tpb kucuk" id="bPas">Pas</button>
+    </div>
+  </div>
+
+  <div class="tpsilahlar" id="silahlar" hidden><div class="tpsilah-in"><header><b>Silah seç</b><button type="button" class="gkbtn" id="silahKapat" aria-label="Kapat">×</button></header><div class="tpsgrid" id="silahGrid"></div></div></div>
+  <p class="hdmsg tpmsg" id="msg"></p>
+  <button type="button" class="stbtn tppes" id="bResign" hidden>Pes et</button>
+</main>
+
+<div class="gkover" id="gate" hidden>
+  <div class="gkcard hdcard">
+    <h2>Tepe Savaşı</h2>
+    <p>İki kişilik oyun. Oynamak için bir oda açman ya da arkadaşının odasına katılman gerekiyor; üyelik yok, takma ad yeter.</p>
+    <a class="hsbtn" href="baslat.html?d=tepe.html">Oda aç / odaya katıl</a>
+  </div>
+</div>
+
+<div class="gkover" id="start" hidden>
+  <div class="gkcard hdcard">
+    <div class="gkkick" id="startKick">İlk oyun</div>
+    <h2 id="startTitle">Hazır mısın?</h2>
+    <p id="startText"></p>
+    <div class="xoseg" data-adet-seg><button type="button" data-adet="3">3 karakter</button><button type="button" data-adet="4">4 karakter</button></div>
+    <div class="xoseg" data-harita-seg><button type="button" data-harita="dag">Dağ</button><button type="button" data-harita="ada">Adalar</button><button type="button" data-harita="kanyon">Kanyon</button></div>
+    <button type="button" class="hsbtn" id="startGo">Savaşı kur</button>
+    <a class="gkghost hdlink" href="oyunlar.html">Menü</a>
+  </div>
+</div>
+
+<div class="gkover" id="done" hidden>
+  <div class="gkcard hdcard">
+    <div class="gkkick" id="doneKick">Savaş bitti</div>
+    <h2 id="doneTitle">—</h2>
+    <p id="doneText"></p>
+    <div class="gkstats" id="doneStats"></div>
+    <div class="xoseg" data-adet-seg><button type="button" data-adet="3">3 karakter</button><button type="button" data-adet="4">4 karakter</button></div>
+    <div class="xoseg" data-harita-seg><button type="button" data-harita="dag">Dağ</button><button type="button" data-harita="ada">Adalar</button><button type="button" data-harita="kanyon">Kanyon</button></div>
+    <button type="button" class="hsbtn" id="doneNew">Yeni savaş</button>
+    <button type="button" class="gkghost" id="doneClose">Haritaya bak</button>
+  </div>
+</div>
+
+<div class="gkover" id="confirm" hidden>
+  <div class="gkcard hdcard">
+    <h2>Pes ediyor musun?</h2>
+    <p>Savaş karşı tarafın galibiyetiyle biter.</p>
+    <button type="button" class="hsbtn" id="confirmYes">Evet, pes et</button>
+    <button type="button" class="gkghost" id="confirmNo">Vazgeç</button>
+  </div>
+</div>
+
+<div class="gkover" id="help" hidden>
+  <div class="gkcard hdcard">
+    <h2>Tepe Savaşı</h2>
+    <p>İkimizin de 3–4 kişilik bir takımı var. Sırayla oynuyoruz; sıra gelince karakterin yürüyebilir, zıplayabilir, sonra bir kere ateş eder.</p>
+    <p><b>Nişan:</b> parmağını karakterinin üstüne koy ve sapan gibi geriye çek: yön açıyı, çekme uzunluğu gücü belirler; bırakınca ateşler. Başka yerde parmağını kaydırırsan harita kayar, iki parmakla yakınlaşır.</p>
+    <p><b>Rüzgar</b> bazuka, misket ve hava saldırısını iter (üstteki ok). Bombanın fitilini 1–5 sn ayarlayabilirsin. Suya düşen elenir; takımı biten kaybeder.</p>
+    <p><b>Gökten sandık düşer:</b> paraşütle inen sandığa yürüyüp dokun. Pembe paraşütlü sandık +25 can, sarı paraşütlü <b>?</b> sandık yeni silah verir: karpuz bombası, ateş topu, güdümlü füze, deprem gibi bazı silahlar sadece sandıktan çıkar. Patlama sandığı da yok eder.</p>
+    <p><b>Silahlar:</b> dinamit artık fırlatılıyor; mayın biri yaklaşınca patlar; koyun yürüyüp 5 sn sonra patlar; lazer hizadaki herkesi deler; kazma tünel açar; ejder yumruğu yanındakini havaya uçurur.</p>
+    <p class="gksmall">Senin atışını bir sonraki girişimde baştan izlerim; aynı anda olmamıza gerek yok :)</p>
+    <button type="button" class="gkprimary" id="helpGo">Tamam</button>
+  </div>
+</div>
+
+<script src="app.js?v=yec1"></script>
+<script src="yapilandirma.js?v=yec1"></script>
+<script src="deneme.js?v=yec1"></script>
+<script src="hesap.js?v=yec1"></script>
+<script src="duello.js?v=yec1"></script>
+<script src="tepe-ses.js?v=yec1"></script>
+<script src="tepe.js?v=yec1"></script>
+<script src="sohbet.js?v=yec1"></script>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<title>Stilobat</title>
+<meta name="description" content="Stilobat: kayan bloğu tam zamanında bırak, kat kat yüksel. Taşan kısım düşer; tam oturtursan büyür.">
+<meta property="og:title" content="Stilobat">
+<meta property="og:description" content="Kayan bloğu tam zamanında bırak, kat kat yüksel.">
+<meta name="color-scheme" content="dark">
+<meta property="og:type" content="website">
+<meta property="og:image" content="onizleme.jpg">
+<meta name="theme-color" content="#241539">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Crect width=%27100%27 height=%27100%27 rx=%2724%27 fill=%27%23241539%27/%3E%3Cpath d=%27M50 18l24 12-24 12-24-12z%27 fill=%27%23f3dff5%27/%3E%3Cpath d=%27M26 30l24 12v22L26 52z%27 fill=%27%23b58cff%27/%3E%3Cpath d=%27M74 30L50 42v22l24-12z%27 fill=%27%238a62d6%27/%3E%3Cpath d=%27M14 70l36 16 36-16-36-14z%27 fill=%27%23f2c35b%27/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@1,9..144,600&family=Nunito:wght@300;600;700;800;900&display=swap">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="YEC Games">
+<link rel="apple-touch-icon" href="ikon/app-180.png">
+<link rel="stylesheet" href="style.css?v=yec1">
+</head>
+<body data-page="stilobat">
+
+<main class="ku" id="stage">
+  <canvas id="cv" aria-label="Stilobat oyun alanı"></canvas>
+  <header class="kubar">
+    <a class="kuback" href="oyunlar.html" aria-label="Geri"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 5.5L8 12l6.5 6.5"/></svg></a>
+    <button type="button" class="kuback kuses" id="bSes" aria-label="Ses"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 10v4h3l4 3.5v-11L8 10z"/><path d="M15.5 9.5a3.5 3.5 0 0 1 0 5" class="w1"/><path d="M18 7a7 7 0 0 1 0 10" class="w2"/></svg></button>
+  </header>
+  <div class="kuhud" aria-live="polite">
+    <div class="kuscore" id="score">0</div>
+    <div class="kubest" id="bestRow"><svg viewBox="0 0 64 44" aria-hidden="true"><path d="M8 38L4 12l14 11L32 4l14 19 14-11-4 26z" fill="none" stroke="currentColor" stroke-width="4" stroke-linejoin="round"/></svg><span id="best">0</span></div>
+    <div class="kukot" id="kot" hidden>kot ±0,00</div>
+    <div class="kupop" id="pop" hidden></div>
+  </div>
+  <div class="kuintro" id="intro">
+    <svg class="kulogo" viewBox="0 0 120 64" aria-hidden="true"><g fill="none" stroke="#f2c35b" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"><path d="M10 56h100M18 50h84M26 44h68"/><path d="M36 44V20h8v24M60 44V14h8v30M84 44V20h8v24"/><path d="M32 20h16M56 14h16M80 20h16"/><path d="M60 14l-6-6h12z"/></g><g fill="#f3a3c0"><circle cx="22" cy="12" r="1.8"/><circle cx="102" cy="10" r="1.8"/><circle cx="108" cy="30" r="1.4"/></g></svg>
+    <div class="kuname">STİLOBAT</div>
+    <p>Temeli kur, kat kat yüksel</p>
+    <div class="kutap" id="tap">Dokun ve başla</div>
+    <p class="kuhint">Blok kayarken dokun. Taşan kısım düşer, tam oturtursan büyür. Her kat 30 cm; kot kulenin yanında.</p>
+  </div>
+  <div class="kuover" id="over" hidden>
+    <div class="kucard">
+      <div class="gkkick" id="overKick">Oyun bitti</div>
+      <div class="kubig" id="overScore">0</div>
+      <div class="kusub" id="overSub">kat</div>
+      <div class="kustats"><span><small>Rekor</small><b id="overBest">0</b></span><span><small>Mükemmel</small><b id="overPerfect">0</b></span><span><small>En uzun seri</small><b id="overCombo">0</b></span></div>
+      <p class="kumsg" id="overMsg"></p>
+      <button type="button" class="kubtn" id="again">Tekrar</button>
+      <a class="kughost" href="oyunlar.html">Menü</a>
+    </div>
+  </div>
+</main>
+
+<script src="app.js?v=yec1"></script>
+<script src="yapilandirma.js?v=yec1"></script>
+<script src="deneme.js?v=yec1"></script>
+<script src="hesap.js?v=yec1"></script>
+<script>(window.Hesap ? Hesap.oyun : function (l) { l.forEach(function (x) { document.write('<script src="' + x + '"><\/script>'); }); })(["stilobat.js?v=yec1", "stilobat-ses.js?v=yec1"]);</script>
+</body>
+</html>

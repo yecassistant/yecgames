@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<title>YEC Games</title>
+<meta name="description" content="İki kişilik oyun odası: kelime, kart, strateji ve çizim oyunları; arkadaşınla kendi zamanınızda.">
+<meta property="og:title" content="YEC Games">
+<meta property="og:description" content="İki kişilik oyun odası: arkadaşınla, kendi zamanınızda.">
+<meta name="color-scheme" content="dark">
+<meta property="og:type" content="website">
+<meta property="og:image" content="onizleme.jpg">
+<meta name="theme-color" content="#241046">
+<link rel="icon" href="ikon/simge.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Nunito:wght@600;700;800&display=swap">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="YEC Games">
+<link rel="apple-touch-icon" href="ikon/app-180.png">
+<link rel="stylesheet" href="style.css?v=yec1">
+<script>try { if (!localStorage.getItem("yg_oda") && location.search.indexOf("deneme") < 0) location.replace("baslat.html"); } catch (e) {}</script>
+</head>
+<body data-page="oyunlar">
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <linearGradient id="qmGold" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffe7a3"/><stop offset=".55" stop-color="#f2c35b"/><stop offset="1" stop-color="#d4912e"/></linearGradient>
+    <symbol id="qmSpark" viewBox="0 0 20 20"><path d="M10 1c.6 4.6 3.8 8 9 9-5.2 1-8.4 4.4-9 9-.6-4.6-3.8-8-9-9 5.2-1 8.4-4.4 9-9z"/></symbol>
+    <symbol id="qmUnutma" viewBox="0 0 20 20"><g fill="#9dbdff"><circle cx="10" cy="4.6" r="3.3"/><circle cx="15.2" cy="8.4" r="3.3"/><circle cx="13.2" cy="14.6" r="3.3"/><circle cx="6.8" cy="14.6" r="3.3"/><circle cx="4.8" cy="8.4" r="3.3"/></g><circle cx="10" cy="10" r="2.4" fill="#ffd84d"/><circle cx="10" cy="10" r="1" fill="#e89a1c"/></symbol>
+    <symbol id="qmChev" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="qmCrown" viewBox="0 0 64 44"><path d="M7 38L3 11l15 11L32 3l14 19 15-11-4 27z" fill="url(#qmGold)" stroke="#b5741f" stroke-width="2" stroke-linejoin="round"/><path d="M7 38h50v4H7z" fill="#e3a640" stroke="#b5741f" stroke-width="2" stroke-linejoin="round"/><path d="M32 13l5 9-5 8-5-8z" fill="#fff4cf" opacity=".9"/><circle cx="3" cy="11" r="2.6" fill="#ffe7a3"/><circle cx="61" cy="11" r="2.6" fill="#ffe7a3"/><circle cx="32" cy="3" r="2.6" fill="#ffe7a3"/></symbol>
+  </defs>
+</svg>
+
+<div class="qmacilis" id="qmAcilis" aria-hidden="true">
+  <script>try { if (sessionStorage.getItem("yg_acilis") === "1") document.getElementById("qmAcilis").className += " yok"; else sessionStorage.setItem("yg_acilis", "1"); } catch (e) {}</script>
+  <div class="qmac-fon" aria-hidden="true"><i class="qmac-aur"></i><span class="qmac-uc k1">♥</span><span class="qmac-uc k2">✦</span><span class="qmac-uc k3">♥</span><span class="qmac-uc k4">✧</span><span class="qmac-uc k5">♥</span><span class="qmac-uc k6">✦</span><span class="qmac-uc k7">♥</span><span class="qmac-uc k8">✧</span><span class="qmac-uc k9">♥</span><span class="qmac-uc k10">✦</span><span class="qmac-uc k11">♥</span><span class="qmac-uc k12">✧</span></div>
+  <div class="qmacilis-in">
+    <span class="qmac-sp a1"></span><span class="qmac-sp a2"></span><span class="qmac-sp a3"></span><span class="qmac-sp a4"></span><span class="qmac-sp a5"></span>
+    <img class="qmac-logoimg" src="ikon/logo-koyu.svg" alt="YEC Games" width="260" height="180">
+    <div class="qmac-bar"><i style="-webkit-animation-duration:1.8s;animation-duration:1.8s"></i></div>
+    <p class="qmac-imza" id="acilisCumle"></p>
+    <script>try { var c = localStorage.getItem("yg_cumle"); if (c) document.getElementById("acilisCumle").textContent = c; } catch (e) {}</script>
+  </div>
+</div>
+<main class="qm">
+  <header class="qmhead qmhead-logo">
+    <img class="qmlogoimg" src="ikon/logo-koyu.svg" alt="YEC Games" width="220" height="152">
+  </header>
+
+  <a class="qmacct qmoda" id="qmOda" href="ayar.html">
+    <span class="qmodaavalar"><span class="hsava a" id="odaAvaA">?</span><span class="hsava b" id="odaAvaB">?</span></span>
+    <span class="qmatx"><b id="odaAdlar">Oda</b><small id="odaSub">Bağlanıyor…</small></span>
+    <span class="qmabtn ghost" id="odaBtn">Oda ayarları</span>
+  </a>
+
+  <button type="button" class="qmtam" id="qmTam" hidden>
+    <span class="qmtamico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></span>
+    <span class="qmtamtx"><b>Tam ekran oyna</b><small id="qmTamSub">Adres çubuğu gitsin, ekranın hepsi oyunun olsun.</small></span>
+    <span class="qmtamx" id="qmTamX" role="button" aria-label="Gizle">×</span>
+  </button>
+
+  <div class="qmsec qmsec-iki"><span>Birlikte</span><small>2 kişilik · uzaktan da olur</small></div>
+  <div class="qmgrid" id="qmBirlikte">
+    <a class="qmc qmt qm-kelimeavi" href="kelimeavi.html" data-g="kelimeavi" id="toKelimeavi">
+      <span class="qmart"><svg viewBox="0 0 92 56" aria-hidden="true"><g font-family="Nunito,Arial,sans-serif" font-weight="900" font-size="12" text-anchor="middle"><rect x="14" y="4" width="20" height="20" rx="5" fill="#ffd166"/><text x="24" y="19" fill="#3a2410">K</text><rect x="37" y="4" width="20" height="20" rx="5" fill="#ffd166"/><text x="47" y="19" fill="#3a2410">A</text><rect x="60" y="4" width="20" height="20" rx="5" fill="#fbf4e6"/><text x="70" y="19" fill="#3a2410">L</text><rect x="14" y="28" width="20" height="20" rx="5" fill="#fbf4e6"/><text x="24" y="43" fill="#3a2410">S</text><rect x="37" y="28" width="20" height="20" rx="5" fill="#ffd166"/><text x="47" y="43" fill="#3a2410">H</text><rect x="60" y="28" width="20" height="20" rx="5" fill="#ffd166"/><text x="70" y="43" fill="#3a2410">V</text></g><path d="M24 14L47 14L47 38L70 38" fill="none" stroke="#f2c35b" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" opacity=".55"/><circle cx="8" cy="46" r="6" fill="#5fe3b8"/><text x="8" y="49" font-family="Nunito,Arial,sans-serif" font-weight="900" font-size="7" fill="#0b2a22" text-anchor="middle">90</text></svg></span>
+      <span class="qmtx"><b>Kelime Avı</b><small id="kelimeaviSub">Aynı tablo, 90 saniye; kim daha çok kelime bulur?</small></span>
+      <i class="qmnew" id="kelimeaviBadge">yeni</i>
+      <svg class="qmchev" aria-hidden="true"><use href="#qmChev"/></svg>
+    </a>
+    <a class="qmc qmt qm-zincir" href="zincir.html" data-g="zincir" id="toZincir">
+      <span class="qmart"><svg viewBox="0 0 92 56" aria-hidden="true"><g font-family="Nunito,Arial,sans-serif" font-weight="900" font-size="11" text-anchor="middle"><rect x="20" y="3" width="13" height="14" rx="3.5" fill="#f2c35b"/><text x="26.5" y="14" fill="#3b2a08">K</text><rect x="35" y="3" width="13" height="14" rx="3.5" fill="#f2c35b"/><text x="41.5" y="14" fill="#3b2a08">A</text><rect x="50" y="3" width="13" height="14" rx="3.5" fill="#f2c35b"/><text x="56.5" y="14" fill="#3b2a08">L</text><rect x="65" y="3" width="13" height="14" rx="3.5" fill="#f2c35b"/><text x="71.5" y="14" fill="#3b2a08">E</text><path d="M49 19v4" stroke="#5fe3b8" stroke-width="2.4" stroke-dasharray="2 2"/><rect x="27" y="24" width="13" height="14" rx="3.5" fill="#fbf7fd"/><text x="33.5" y="35" fill="#12312e">T</text><rect x="42" y="24" width="13" height="14" rx="3.5" fill="none" stroke="#5fe3b8" stroke-width="1.6"/><rect x="57" y="24" width="13" height="14" rx="3.5" fill="none" stroke="#5fe3b8" stroke-width="1.6"/><path d="M49 40v4" stroke="#5fe3b8" stroke-width="2.4" stroke-dasharray="2 2"/><rect x="34" y="46" width="11" height="9" rx="3" fill="rgba(255,255,255,.75)"/><text x="39.5" y="54" font-size="8" fill="#12312e">B</text><rect x="47" y="46" width="11" height="9" rx="3" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="1.4"/></g></svg></span>
+      <span class="qmtx"><b>Kelime Zinciri</b><small id="zincirSub">Her kelime bir öncekine bağlı; sırayla bil.</small></span>
+      <i class="qmnew" id="zincirBadge"></i>
+      <svg class="qmchev" aria-hidden="true"><use href="#qmChev"/></svg>
+    </a>
+    <a class="qmc qmt qm-sonkart" href="sonkart.html" data-g="sonkart" id="toSonkart">
+      <span class="qmart"><svg viewBox="0 0 92 56" aria-hidden="true"><g transform="rotate(-14 30 34)"><rect x="16" y="10" width="28" height="40" rx="6" fill="#f2b631" stroke="#fff" stroke-width="2.4"/><text x="30" y="37" font-family="Nunito,Arial,sans-serif" font-weight="900" font-size="18" fill="#fff" text-anchor="middle">7</text></g><g transform="rotate(2 46 30)"><rect x="32" y="6" width="28" height="40" rx="6" fill="#3b7ff0" stroke="#fff" stroke-width="2.4"/><text x="46" y="32" font-family="Nunito,Arial,sans-serif" font-weight="900" font-size="13" fill="#fff" text-anchor="middle">+2</text></g><g transform="rotate(16 64 32)"><rect x="50" y="10" width="28" height="40" rx="6" fill="#4a2468" stroke="#f2c35b" stroke-width="2.4"/><text x="64" y="35" font-size="12" fill="#f2c35b" text-anchor="middle">♥</text></g></svg></span>
+      <span class="qmtx"><b>Son Kart</b><small id="sonkartSub">İkimiz, istersen bir de bot; beş farklı mod.</small></span>
+      <i class="qmnew" id="sonkartBadge"></i>
+      <svg class="qmchev" aria-hidden="true"><use href="#qmChev"/></svg>
+    </a>
+    <a class="qmc qmt qm-dort" href="dort.html" data-g="dort" id="toDort">
+      <span class="qmart"><svg viewBox="0 0 92 56" aria-hidden="true"><rect x="14" y="6" width="64" height="46" rx="8" fill="#2f56c9"/><g fill="#101a45"><circle cx="26" cy="18" r="5"/><circle cx="40" cy="18" r="5"/><circle cx="54" cy="18" r="5"/><circle cx="68" cy="18" r="5"/><circle cx="26" cy="31" r="5"/><circle cx="54" cy="31" r="5"/><circle cx="68" cy="31" r="5"/><circle cx="26" cy="44" r="5"/></g><g><circle cx="40" cy="31" r="5" fill="#ff8fb3"/><circle cx="40" cy="44" r="5" fill="#a98af0"/><circle cx="54" cy="44" r="5" fill="#ff8fb3"/><circle cx="68" cy="44" r="5" fill="#a98af0"/></g><circle cx="46" cy="2" r="4" fill="#ff8fb3"/></svg></span>
+      <span class="qmtx"><b>Dört Taş</b><small id="dortSub">Dördünü önce diz; kaybeden ödülü verir.</small></span>
+      <i class="qmnew" id="dortBadge"></i>
+      <svg class="qmchev" aria-hidden="true"><use href="#qmChev"/></svg>
+    </a>
+    <a class="qmc qmt qm-ciz" href="ciz.html" data-g="ciz" id="toCiz">
+      <span class="qmart"><svg viewBox="0 0 92 56" aria-hidden="true"><rect x="18" y="4" width="50" height="50" rx="6" fill="#fffdf8"/><path d="M43 42c-10-8-14-14-12-19 2-4 8-4 12 1 4-5 10-5 12-1 2 5-2 11-12 19z" fill="none" stroke="#1c1a1f" stroke-width="2.6" stroke-linejoin="round"/><path d="M58 50l20-20" stroke="#e8505b" stroke-width="6" stroke-linecap="round"/><path d="M60 52l-5 2 2-5z" fill="#1c1a1f"/><text x="30" y="16" font-family="Caveat,Georgia,serif" font-size="9" font-weight="700" fill="#7d7366">kedi?</text></svg></span>
+      <span class="qmtx"><b>Çiz Bil</b><small id="cizSub">Biri çizer, öbürü bakarak bilir; 6 tur.</small></span>
+      <i class="qmnew" id="cizBadge"></i>
+      <svg class="qmchev" aria-hidden="true"><use href="#qmChev"/></svg>
+    </a>
+    <a class="qmc qmt qm-xox" href="xox.html" data-g="xox" id="toXox">
+      <span class="qmart"><svg viewBox="0 0 92 56" aria-hidden="true"><g stroke="rgba(255,255,255,.35)" stroke-width="2.4" stroke-linecap="round"><path d="M34 6v44M58 6v44M14 22h64M14 38h64"/></g><path d="M18 8l10 10M28 8L18 18" stroke="#ff8fb3" stroke-width="4" stroke-linecap="round"/><circle cx="46" cy="30" r="5.5" fill="none" stroke="#f2c35b" stroke-width="3.6"/><path d="M64 40l10 10M74 40L64 50" stroke="#ff8fb3" stroke-width="4" stroke-linecap="round"/><circle cx="69" cy="13" r="5.5" fill="none" stroke="#f2c35b" stroke-width="3.6"/><path d="M14 52L78 4" stroke="#fff" stroke-width="2" stroke-linecap="round" opacity=".0"/></svg></span>
+      <span class="qmtx"><b>XOX</b><small id="xoxSub">Klasik ya da sonsuz; üçünü önce dizen kazanır.</small></span>
+      <i class="qmnew" id="xoxBadge"></i>
+      <svg class="qmchev" aria-hidden="true"><use href="#qmChev"/></svg>
+    </a>
+    <a class="qmc qmt qm-hafiza" href="hafiza.html" data-g="hafiza" id="toHafiza">
+      <span class="qmart"><svg viewBox="0 0 92 56" aria-hidden="true"><g transform="rotate(-8 30 30)"><rect x="12" y="8" width="30" height="40" rx="6" fill="#4a2456" stroke="#f3a3c0" stroke-width="1.6"/><path d="M27 18l-9 7 3 11h12l3-11z" fill="none" stroke="#f3a3c0" stroke-width="1.6" stroke-linejoin="round"/></g><g transform="rotate(8 60 30)"><rect x="46" y="8" width="30" height="40" rx="6" fill="#fbf7fd"/><circle cx="61" cy="28" r="9" fill="#ec4b5f"/><path d="M61 19c-3-4-8-5-12-3 4 1 6 3 7 5-4 0-7 1-9 3 4 0 8-1 12-1-1 2-1 5 0 7 1-3 2-4 2-4s1 1 2 4c1-2 1-5 0-7 4 0 8 1 12 1-2-2-5-3-9-3 1-2 3-4 7-5-4-2-9-1-12 3z" fill="#5fa36f"/><circle cx="57" cy="30" r="1.2" fill="#ffe08a"/><circle cx="64" cy="26" r="1.2" fill="#ffe08a"/><circle cx="63" cy="33" r="1.2" fill="#ffe08a"/></g><use href="#qmSpark" x="78" y="4" width="10" height="10" fill="#f3a3c0"/><use href="#qmSpark" x="4" y="40" width="8" height="8" fill="#f3a3c0"/></svg></span>
+      <span class="qmtx"><b>Hafıza Düellosu</b><small id="hafizaSub">Sırayla kart aç, çifti kap.</small></span>
+      <i class="qmnew" id="hafizaBadge"></i>
+      <svg class="qmchev" aria-hidden="true"><use href="#qmChev"/></svg>
+    </a>
+    <a class="qmc qmt qm-sayi" href="sayi.html" data-g="sayi" id="toSayi">
+      <span class="qmart"><svg viewBox="0 0 92 56" aria-hidden="true"><g font-family="Nunito,Arial,sans-serif" font-weight="900" text-anchor="middle"><rect x="10" y="8" width="52" height="24" rx="8" fill="#fbf7fd"/><text x="36" y="26" font-size="15" fill="#1f5f63">4 7 2 9</text><rect x="52" y="30" width="22" height="16" rx="6" fill="#5fe3b8"/><text x="63" y="42" font-size="11" fill="#0b2a22">+1</text><rect x="16" y="34" width="22" height="16" rx="6" fill="#f2c35b"/><text x="27" y="46" font-size="11" fill="#3b2a08">−2</text></g><use href="#qmSpark" x="76" y="6" width="10" height="10" fill="#5fe3b8"/></svg></span>
+      <span class="qmtx"><b>Sayı Düellosu</b><small id="sayiSub">Gizli sayını tut, onunkini önce bul.</small></span>
+      <i class="qmnew" id="sayiBadge"></i>
+      <svg class="qmchev" aria-hidden="true"><use href="#qmChev"/></svg>
+    </a>
+    <a class="qmc qmt qm-satranc" href="satranc.html" data-g="satranc" id="toSatranc">
+      <span class="qmart"><svg viewBox="0 0 92 56" aria-hidden="true"><g transform="translate(14 6)"><rect width="44" height="44" rx="5" fill="#eedcc5"/><g fill="#b48a68"><rect x="11" width="11" height="11"/><rect x="33" width="11" height="11"/><rect y="11" width="11" height="11"/><rect x="22" y="11" width="11" height="11"/><rect x="11" y="22" width="11" height="11"/><rect x="33" y="22" width="11" height="11"/><rect y="33" width="11" height="11"/><rect x="22" y="33" width="11" height="11"/></g></g><g transform="translate(48 2) scale(.46)"><path d="M30 84c0-18 6-30 16-38 2-6 0-10-2-14l-8 10c-6 2-10-2-8-8 2-4 8-10 14-14 2-6 6-8 10-8l2 6c16 4 26 18 28 42l-2 24z" fill="#fdf6ec" stroke="#2d2033" stroke-width="4" stroke-linejoin="round"/><rect x="22" y="84" width="56" height="8" rx="3" fill="#fdf6ec" stroke="#2d2033" stroke-width="4"/><circle cx="46" cy="30" r="3" fill="#2d2033"/></g><use href="#qmSpark" x="4" y="40" width="8" height="8" fill="#f2c35b"/></svg></span>
+      <span class="qmtx"><b>Satranç</b><small id="satrancSub">İkimizin satrancı, sırayla hamle.</small></span>
+      <i class="qmnew" id="satrancBadge"></i>
+      <svg class="qmchev" aria-hidden="true"><use href="#qmChev"/></svg>
+    </a>
+    <a class="qmc qmt qm-amiral" href="amiral.html" data-g="amiral" id="toAmiral">
+      <span class="qmart"><svg viewBox="0 0 92 56" aria-hidden="true"><g transform="translate(10 6)"><rect width="44" height="44" rx="5" fill="#1c3b63"/><g fill="none" stroke="rgba(255,255,255,.18)"><path d="M11 0v44M22 0v44M33 0v44M0 11h44M0 22h44M0 33h44"/></g><rect x="1" y="12" width="31" height="9" rx="3" fill="#8da0b8"/><rect x="23" y="23" width="9" height="20" rx="3" fill="#8da0b8"/><circle cx="16.5" cy="16.5" r="3.5" fill="#ff6b7a"/><circle cx="5.5" cy="38.5" r="2.2" fill="#fff" opacity=".8"/><circle cx="38.5" cy="5.5" r="2.2" fill="#fff" opacity=".8"/></g><g transform="translate(60 10)" fill="none" stroke="#ff6b7a" stroke-width="3" stroke-linecap="round"><circle cx="12" cy="14" r="9"/><path d="M12 0v8M12 20v8M-2 14h8M16 14h8"/></g></svg></span>
+      <span class="qmtx"><b>Amiral Battı</b><small id="amiralSub">Filonu diz, önce batıran kazanır.</small></span>
+      <i class="qmnew" id="amiralBadge"></i>
+      <svg class="qmchev" aria-hidden="true"><use href="#qmChev"/></svg>
+    </a>
+    <a class="qmc qmt qm-asmaca" href="asmaca.html" data-g="asmaca" id="toAsmaca">
+      <span class="qmart"><svg viewBox="0 0 92 56" aria-hidden="true"><rect x="2" y="2" width="56" height="52" rx="7" fill="#24332f" stroke="#5a3f2a" stroke-width="3"/><g fill="none" stroke="#f3efe6" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M10 48h26M17 48V9h22v6"/><path d="M17 17l8-8" opacity=".7"/></g><circle cx="39" cy="20" r="5" fill="none" stroke="#f3efe6" stroke-width="2.4"/><path d="M39 25v11M39 29l-5 5M39 29l5 5M39 36l-4 7M39 36l4 7" fill="none" stroke="#f3efe6" stroke-width="2.2" stroke-linecap="round"/><g font-family="Caveat,cursive" font-weight="700" font-size="15" fill="#ffe6a6" text-anchor="middle"><text x="69" y="24">A</text><text x="81" y="24">_</text><text x="69" y="44">_</text><text x="81" y="44">K</text></g><path d="M86 6s-5-3-5-6.2a2.7 2.7 0 0 1 5-1.6 2.7 2.7 0 0 1 5 1.6C91 3 86 6 86 6z" transform="translate(-4 8)" fill="#f3a3c0"/></svg></span>
+      <span class="qmtx"><b>Adam Asmaca</b><small id="asmacaSub">Aynı 5 kelime, aynı anda; çok puanı olan kazanır.</small></span>
+      <i class="qmnew" id="asmacaBadge"></i>
+      <svg class="qmchev" aria-hidden="true"><use href="#qmChev"/></svg>
+    </a>
+    <a class="qmc qmt qm-tepe" href="tepe.html" data-g="tepe" id="toTepe">
+      <span class="qmart"><svg viewBox="0 0 92 56" aria-hidden="true"><path d="M0 56V40c10-6 18-14 30-14s16 10 26 10 16-12 36-14v34z" fill="#5f9e3a"/><path d="M0 44c10-6 18-14 30-14s16 10 26 10 16-12 36-14" fill="none" stroke="#8fd16a" stroke-width="2.5"/><circle cx="54" cy="44" r="7" fill="#7cc4ef" opacity=".0"/><path d="M50 36a7 7 0 0 0 4 12" fill="#3d2a1a" opacity=".0"/><circle cx="20" cy="27" r="5.5" fill="#ff7aa8"/><circle cx="72" cy="18" r="5.5" fill="#6f8cff"/><path d="M26 22q18-24 38-8" fill="none" stroke="#fff" stroke-width="2" stroke-dasharray="3 3"/><circle cx="64" cy="14" r="3" fill="#ffd15c"/><g fill="#ffb347"><circle cx="70" cy="11" r="2"/><circle cx="74" cy="14" r="1.6"/></g></svg></span>
+      <span class="qmtx"><b>Tepe Savaşı</b><small id="tepeSub">Takımını diz, açını ayarla; bazuka, bomba, dinamit…</small></span>
+      <i class="qmnew" id="tepeBadge"></i>
+      <svg class="qmchev" aria-hidden="true"><use href="#qmChev"/></svg>
+    </a>
+    <a class="qmc qmt qm-yasak" href="yasak.html" data-g="yasak" id="toYasak">
+      <span class="qmart"><svg viewBox="0 0 92 56" aria-hidden="true"><g transform="rotate(-8 24 30)"><rect x="8" y="4" width="34" height="48" rx="6" fill="#fff7f2"/><rect x="8" y="4" width="34" height="14" rx="6" fill="#e2455f"/><rect x="8" y="12" width="34" height="6" fill="#e2455f"/><path d="M14 26h22M14 33h22M14 40h16" stroke="#e2455f" stroke-width="2.6" stroke-linecap="round"/></g><g transform="rotate(8 64 30)"><rect x="48" y="6" width="34" height="46" rx="6" fill="#ff6b86"/><rect x="48" y="6" width="34" height="46" rx="6" fill="none" stroke="#fff" stroke-opacity=".35" stroke-width="3"/><text x="65" y="34" font-family="Nunito,Arial,sans-serif" font-weight="900" font-size="11" fill="#fff" text-anchor="middle">TABU</text></g><circle cx="84" cy="8" r="6" fill="#f2c35b"/><path d="M84 5v3.4l2 1.4" stroke="#3b2a08" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg></span>
+      <span class="qmtx"><b>Yasak Kelime</b><small id="yasakSub">Yan yanayken tek telefonla, sesli oynanır.</small></span>
+      <i class="qmnew" id="yasakBadge">yüz yüze</i>
+      <svg class="qmchev" aria-hidden="true"><use href="#qmChev"/></svg>
+    </a>
+  </div>
+
+  <div class="qmsec qmsec-tek"><span>Tek başına</span><small>rekorunu geç, tabloda yarış</small></div>
+  <div class="qmgrid" id="qmTek">
+    <a class="qmc qmt qm-gunun" href="gunun.html" data-g="gunun" id="toGunun">
+      <span class="qmart"><svg viewBox="0 0 92 56" aria-hidden="true"><g font-family="Nunito,sans-serif" font-weight="800" font-size="13" text-anchor="middle"><rect x="2" y="16" width="16" height="18" rx="4" fill="#3fb86a"/><text x="10" y="30" fill="#fff">K</text><rect x="20" y="16" width="16" height="18" rx="4" fill="#f2c35b"/><text x="28" y="30" fill="#5a3a06">A</text><rect x="38" y="16" width="16" height="18" rx="4" fill="rgba(255,255,255,.28)"/><text x="46" y="30" fill="#fff">L</text><rect x="56" y="16" width="16" height="18" rx="4" fill="#3fb86a"/><text x="64" y="30" fill="#fff">E</text><rect x="74" y="16" width="16" height="18" rx="4" fill="rgba(255,255,255,.28)"/><text x="82" y="30" fill="#fff">M</text></g><g fill="rgba(255,255,255,.22)"><rect x="2" y="38" width="16" height="6" rx="2"/><rect x="20" y="38" width="16" height="6" rx="2"/><rect x="38" y="38" width="16" height="6" rx="2"/><rect x="56" y="38" width="16" height="6" rx="2"/><rect x="74" y="38" width="16" height="6" rx="2"/></g></svg></span>
+      <span class="qmtx"><b>Günün Kelimesi</b><small>Her gün tek kelime, 5 tahmin hakkı.</small></span>
+      <svg class="qmchev" aria-hidden="true"><use href="#qmChev"/></svg>
+    </a>
+    <a class="qmc qmt qm-stilobat" href="stilobat.html" data-g="stilobat" id="toStilobat">
+      <span class="qmart"><svg viewBox="0 0 92 56" aria-hidden="true"><g transform="translate(46 8)"><path d="M0 6l16 8-16 8-16-8z" fill="#fff4f8"/><path d="M-16 14l16 8v8l-16-8z" fill="#f2a9c9"/><path d="M16 14L0 22v8l16-8z" fill="#d97fae"/><path d="M-14 24l14 7v8l-14-7z" fill="#e894bb"/><path d="M14 24L0 31v8l14-7z" fill="#c76d9f"/><path d="M-14 32l14 7v8l-14-7z" fill="#dd88b0"/><path d="M14 32L0 39v8l14-7z" fill="#b86590"/></g><path d="M14 50h64M20 46h52" stroke="#f2c35b" stroke-width="2" stroke-linecap="round" opacity=".9"/><path d="M72 12v34M69 18h6M69 30h6M69 42h6" stroke="#f3dff5" stroke-width="1.4" stroke-linecap="round" opacity=".8"/><use href="#qmSpark" x="78" y="6" width="10" height="10" fill="#f2c35b"/></svg></span>
+      <span class="qmtx"><b>Stilobat</b><small id="stilobatSub">Kat kat yüksel, tam oturt, rekoru geç.</small></span>
+      <i class="qmnew" id="stilobatBadge"></i>
+      <svg class="qmchev" aria-hidden="true"><use href="#qmChev"/></svg>
+    </a>
+    <a class="qmc qmt qm-yikim" href="yikim.html" data-g="yikim" id="toYikim">
+      <span class="qmart"><svg viewBox="0 0 92 56" aria-hidden="true"><rect x="40" y="0" width="12" height="56" rx="3" fill="#f7f1ea"/><g transform="translate(46 0)"><path d="M-30 30h60l-4 6h-52z" fill="#ff8fb3"/><path d="M-30 30h60v4h-60z" fill="#e8517f"/><path d="M-30 40h60l-4 6h-52z" fill="#b79cf2"/><path d="M-30 40h60v4h-60z" fill="#7d5bd6"/><path d="M-8 40h16v4h-16z" fill="#25202d"/><path d="M-30 50h60v6h-60z" fill="#ffd15c"/></g><circle cx="46" cy="21" r="6" fill="#3d63ff"/><circle cx="44" cy="19" r="1.8" fill="#fff" opacity=".8"/><g fill="#ff8fb3"><path d="M10 20l9-4 3 7-10 2z"/><path d="M72 14l9 2-2 8-9-3z"/></g><g fill="#b79cf2"><path d="M4 34l7-2 2 5-7 2z"/><path d="M80 30l7 3-3 5-6-3z"/></g></svg></span>
+      <span class="qmtx"><b>Yıkım</b><small id="yikimSub">3D kuleyi kat kat kır, siyaha dikkat.</small></span>
+      <i class="qmnew" id="yikimBadge">3D</i>
+      <svg class="qmchev" aria-hidden="true"><use href="#qmChev"/></svg>
+    </a>
+    <a class="qmc qmt qm-kelime" href="kelime.html" data-g="kelime" id="toKelime">
+      <span class="qmart"><svg viewBox="0 0 92 56" aria-hidden="true"><g transform="translate(26 28)"><g fill="#ffd3e2" stroke="#f3a3c0" stroke-width="1.2"><ellipse cx="0" cy="-13" rx="9" ry="12"/><ellipse cx="0" cy="-13" rx="9" ry="12" transform="rotate(72)"/><ellipse cx="0" cy="-13" rx="9" ry="12" transform="rotate(144)"/><ellipse cx="0" cy="-13" rx="9" ry="12" transform="rotate(216)"/><ellipse cx="0" cy="-13" rx="9" ry="12" transform="rotate(288)"/></g><circle r="5.5" fill="#f6c64a"/><circle r="2.4" fill="#e89a1c"/></g><path d="M44 40c6-10 14-14 24-12M52 33c-4-6-2-11 4-13 2 6-1 10-4 13zM62 30c4-6 10-6 14-3-4 5-9 5-14 3z" fill="#7cc48f" stroke="#5aa66f" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><g transform="translate(76 14)" fill="#a8e6b4"><use href="#qmSpark" x="-6" y="-6" width="12" height="12"/></g><g transform="translate(70 42)" fill="#a8e6b4"><use href="#qmSpark" x="-4" y="-4" width="8" height="8"/></g></svg></span>
+      <span class="qmtx"><b>Kelime Bahçesi</b><small>Kelimelerle dolu bir bahçede kaybol.</small></span>
+      <svg class="qmwm" viewBox="0 0 40 40" aria-hidden="true"><path d="M8 34C14 18 24 10 36 6M18 25c-6-1-10-6-9-12 6 1 9 6 9 12zM26 16c-1-6 2-10 7-11 1 5-2 9-7 11z" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <svg class="qmchev" aria-hidden="true"><use href="#qmChev"/></svg>
+    </a>
+    <a class="qmc qmt qm-ok" href="ok.html" data-g="ok" id="toOk">
+      <span class="qmart"><svg viewBox="0 0 92 56" aria-hidden="true"><path d="M14 6c20 6 30 22 26 46" fill="none" stroke="#e7a43a" stroke-width="5" stroke-linecap="round"/><path d="M14 6c20 6 30 22 26 46" fill="none" stroke="#ffd27a" stroke-width="2" stroke-linecap="round"/><path d="M14 6L40 52" stroke="#f3e6c8" stroke-width="1.6"/><path d="M8 47L60 16" stroke="#f5d17f" stroke-width="3.2" stroke-linecap="round"/><g class="qmwink" transform="translate(70 13)"><path d="M0 13S-11 6.4-11-1.6a6 6 0 0 1 11-3.6 6 6 0 0 1 11 3.6C11 6.4 0 13 0 13z" fill="#ff8597" stroke="#ffd0d8" stroke-width="1.2" stroke-linejoin="round"/><circle cx="-4" cy="0" r="1.6" fill="#5a1d2e"/><circle class="qmeye" cx="4" cy="0" r="1.6" fill="#5a1d2e"/><path class="qmeyewink" d="M2 0.2q2-1.8 4 0" fill="none" stroke="#5a1d2e" stroke-width="1.3" stroke-linecap="round"/><path d="M-2.6 4q2.6 2.4 5.2 0" fill="none" stroke="#5a1d2e" stroke-width="1.2" stroke-linecap="round"/><ellipse cx="-7" cy="3.4" rx="1.8" ry="1.1" fill="#ff5c7c" opacity=".55"/><ellipse cx="7" cy="3.4" rx="1.8" ry="1.1" fill="#ff5c7c" opacity=".55"/></g><path d="M8 47l-2 8 6-5zM8 47l-8 1 6 4z" fill="#ffb3c0"/></svg></span>
+      <span class="qmtx"><b>Eros'un Oku</b><small>Okları sırayla çıkar. Kolay değil ;)</small></span>
+      <svg class="qmwm" viewBox="0 0 40 40" aria-hidden="true"><path d="M6 34L32 8M32 8h-9M32 8v9M14 34l-6-6M20 28l-6-6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <svg class="qmchev" aria-hidden="true"><use href="#qmChev"/></svg>
+    </a>
+    <a class="qmc qmt qm-kase" href="kase.html" data-g="kase" id="toKase">
+      <span class="qmart"><svg viewBox="0 0 92 56" aria-hidden="true"><path d="M6 14h56a28 28 0 0 1-56 0z" fill="#2f8a4a"/><path d="M11 14h46a23 23 0 0 1-46 0z" fill="#e8f3c9"/><path d="M14 14h40a20 20 0 0 1-40 0z" fill="#ef4f5f"/><path d="M14 14h40" stroke="#ff8d97" stroke-width="2"/><g fill="#3a1d1d"><ellipse cx="24" cy="21" rx="1.6" ry="2.6" transform="rotate(-20 24 21)"/><ellipse cx="34" cy="27" rx="1.6" ry="2.6"/><ellipse cx="44" cy="21" rx="1.6" ry="2.6" transform="rotate(20 44 21)"/><ellipse cx="29" cy="17" rx="1.4" ry="2.2"/><ellipse cx="39" cy="17" rx="1.4" ry="2.2"/></g><path d="M16 10c2-5 6-7 10-6" stroke="#4f9a5c" stroke-width="2.4" fill="none" stroke-linecap="round"/></svg></span>
+      <span class="qmtx"><b>Meyve Kasesi</b><small>Meyveleri birleştir, karpuzdan sonrası sürpriz.</small></span>
+      <svg class="qmwm" viewBox="0 0 40 40" aria-hidden="true"><use href="#qmSpark" x="22" y="4" width="12" height="12" fill="currentColor"/><path d="M8 34l14-18M22 16l-6 2M22 16l-1 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <svg class="qmchev" aria-hidden="true"><use href="#qmChev"/></svg>
+    </a>
+    <a class="qmc qmt qm-oda" href="oda.html" data-g="oda" id="toOda">
+      <span class="qmart"><svg viewBox="0 0 92 56" aria-hidden="true"><path d="M14 30c-7 0-11-5-10-11 1-6 7-9 12-7 1-6 7-10 13-9 5 1 8 4 9 8 5-3 12-1 14 5 2 7-3 13-10 14z" fill="#fff" stroke="#e6dcf7" stroke-width="1.4"/><path d="M15 30h27v14c0 2-2 4-4 4H19c-2 0-4-2-4-4z" fill="#fff" stroke="#e6dcf7" stroke-width="1.4"/><path d="M15 36h27" stroke="#d9cdf2" stroke-width="1.6"/></svg></span>
+      <span class="qmtx"><b>Oda Döşe</b><small>Odayı döşe, mimar onaylasın.</small></span>
+      <svg class="qmwm" viewBox="0 0 40 40" aria-hidden="true"><path d="M10 34l12-12M24 20c-3-3-3-9 1-13s10-4 13-1-1 10-5 13-6 4-9 1z" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M26 10l6 6M29 8l4 4" stroke="currentColor" stroke-width="1.6"/></svg>
+      <svg class="qmchev" aria-hidden="true"><use href="#qmChev"/></svg>
+    </a>
+    <a class="qmc qmt qm-plan" href="oyun.html" data-g="plan" id="toGame">
+      <span class="qmart"><svg viewBox="0 0 92 56" aria-hidden="true"><path d="M6 8l30-4 6 44-30 4z" fill="#fff7e2" stroke="#e8dcb8" stroke-width="1.4" stroke-linejoin="round"/><g stroke="#7ab88b" stroke-width="2.2" stroke-linecap="round" fill="none"><path d="M12 16l2 2 4-4M13 27l2 2 4-4M14 38l2 2 4-4"/></g><g stroke="#c9bb93" stroke-width="2" stroke-linecap="round"><path d="M22 15l11-1.5M23 26l11-1.5M24 37l11-1.5"/></g><path d="M38 44L58 10l6 4-20 34-7 3z" fill="#4c8de8" stroke="#3567b5" stroke-width="1.2" stroke-linejoin="round"/><path d="M58 10l2-3c1-2 4-2 5 0l1 1c1 2 0 3-1 4l-1 2z" fill="#ff8fa3"/><path d="M37 51l1-5 4 3z" fill="#3a2a1a"/></svg></span>
+      <span class="qmtx"><b>Bahçe Planı</b><small>Bahçeni planla, sarmaşıklar sarsın.</small></span>
+      <svg class="qmwm" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 36V18M20 24c-8 0-12-6-11-14 8 0 12 6 11 14zM20 20c0-7 4-12 11-12 1 7-4 12-11 12z" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <svg class="qmchev" aria-hidden="true"><use href="#qmChev"/></svg>
+    </a>
+  </div>
+
+  <a class="qmc qmsoon qmtablo" href="tablo.html" id="toTablo">
+    <span class="qmplus" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 19V9M12 19V5M19 19v-7"/></svg></span>
+    <span class="qmtx"><b>Skor Tablosu</b><small>Kim kaç taç aldı, son hareketler.</small></span>
+    <svg class="qmchev" aria-hidden="true"><use href="#qmChev"/></svg>
+  </a>
+
+  <p class="qmimza">YEC Games · Nunu &amp; Büş yapımı · <a href="gizlilik.html">Gizlilik</a></p>
+</main>
+
+<script src="app.js?v=yec1"></script>
+<script src="yapilandirma.js?v=yec1"></script>
+<script src="deneme.js?v=yec1"></script>
+<script src="hesap.js?v=yec1"></script>
+<script>
+/* oda çubuğu: iki koltuk, adlar, durum */
+(function () {
+  var avaA = document.getElementById("odaAvaA"), avaB = document.getElementById("odaAvaB"), adlar = document.getElementById("odaAdlar"), sub = document.getElementById("odaSub"), btn = document.getElementById("odaBtn"), kart = document.getElementById("qmOda");
+  if (!window.Hesap) return;
+  function ciz() {
+    var k = Hesap.kim(), o = Hesap.oda();
+    if (!k) { adlar.textContent = "Oda yok"; sub.textContent = "Oda aç ya da arkadaşının odasına katıl."; btn.textContent = "Başla"; kart.href = "baslat.html"; return; }
+    var a = Hesap.gorunenAd("a"), b = Hesap.gorunenAd("b"), dolu = !!(o && o.dolu);
+    avaA.textContent = (a || "?").charAt(0).toUpperCase(); avaB.textContent = dolu ? (b || "?").charAt(0).toUpperCase() : "+";
+    avaB.classList.toggle("bos", !dolu);
+    adlar.textContent = dolu ? a + " & " + b : a;
+    sub.textContent = dolu ? "İkiniz aynı odadasınız; sıra sende olan oyunlar yeşil." : (o && o.kod ? "Arkadaşın henüz katılmadı · kod: " + o.kod.slice(0, 4) + "-" + o.kod.slice(4) : "Arkadaşın henüz katılmadı; kodu Oda Ayarları'nda bul.");
+    btn.textContent = dolu ? "Oda ayarları" : "Kodu paylaş"; kart.href = "ayar.html";
+    try { var c = (o && o.ayar && o.ayar.cumle) || ""; if (c) localStorage.setItem("yg_cumle", c); else localStorage.removeItem("yg_cumle"); } catch (e) {}
+  }
+  Hesap.izle(ciz); Hesap.odaIzle(ciz);
+  /* Sayı Düellosu ve Amiral Battı: kartta durum */
+  var duBakti = false;
+  Hesap.izle(function (k) {
+    if (!k || !k.kesin || duBakti) return; duBakti = true;
+    Hesap.db().then(function (db) {
+      [["sayi", "sayiBadge", "sayiSub", "tahmin"], ["amiral", "amiralBadge", "amiralSub", "atis"], ["kelimeavi", "kelimeaviBadge", "kelimeaviSub", "tur"], ["xox", "xoxBadge", "xoxSub", "hamle"], ["tepe", "tepeBadge", "tepeSub", "hamle"], ["zincir", "zincirBadge", "zincirSub", "hamle"], ["sonkart", "sonkartBadge", "sonkartSub", "hamle"], ["dort", "dortBadge", "dortSub", "hamle"], ["ciz", "cizBadge", "cizSub", "hamle"]].filter(function (x) { return !(window.geliyorMu && geliyorMu(x[0])); }).forEach(function (x) {
+        db.collection(x[0]).doc("mac").get().then(function (snap) {
+          var d = snap.exists ? snap.data() : null, badge = document.getElementById(x[1]), sub = document.getElementById(x[2]); if (!d) return;
+          if (d.bitti) { badge.textContent = "yeni oyun"; sub.textContent = d.kazanan ? (d.kazanan === k.uid ? "Son oyunu sen kazandın." : "Son oyunu kaybettin.") + " Yeni oyunu ikiniz de kurabilirsiniz." : "Son oyun berabere bitti."; return; }
+          if (x[0] === "zincir" && d.mod === "yaz" && (!d.hazir || !d.hazir[k.uid])) { badge.textContent = "sıra sende"; badge.className = "qmnew qmturn"; sub.textContent = "Zincirini yaz, o çözecek."; return; }
+          if (x[0] === "zincir" && d.mod === "yaz" && !d.hazir[d.a === k.uid ? d.b : d.a]) { badge.textContent = "o yazıyor"; sub.textContent = "Senin zincirin hazır, onunkini bekliyorsun."; return; }
+          if (x[0] === "ciz") { var cb = d.cizen === k.uid; if (cb && !d.hazir) { badge.textContent = "sıra sende"; badge.className = "qmnew qmturn"; sub.textContent = "Sıra sende · kelime seç, çiz."; } else if (cb) { badge.textContent = "çiziyorsun"; sub.textContent = "Çizimini bitir; o tahmin ediyor."; } else if (d.hazir) { badge.textContent = "sıra sende"; badge.className = "qmnew qmturn"; sub.textContent = "Sıra sende · çizime bak, tahmin et."; } else { badge.textContent = "o çiziyor"; sub.textContent = "Kelimesini seçince çizimi görürsün."; } return; }
+          if (x[0] === "kelimeavi") { var oy = d.oy || {}, bo = oy[k.uid], oo = oy[d.a === k.uid ? d.b : d.a]; if (!bo || !bo.bitti) { badge.textContent = "sıra sende"; badge.className = "qmnew qmturn"; sub.textContent = oo && oo.bitti ? "O oynadı: " + (oo.k || []).length + " kelime. 90 saniyen hazır." : "Tablo seni bekliyor · 90 saniye."; } else { badge.textContent = "onu bekle"; sub.textContent = "Sen oynadın; o da oynayınca sonuç açılır."; } return; }
+          if (x[0] === "sonkart" && d.sira === "bot") { badge.textContent = "bot oynuyor"; sub.textContent = "Girince botun hamlesi oynanır."; return; }
+          if (x[3] === "hamle") { if (d.sira === k.uid) { badge.textContent = "sıra sende"; badge.className = "qmnew qmturn"; sub.textContent = x[0] === "tepe" ? "Sıra sende · nişan al, ateşle." : x[0] === "zincir" ? "Sıra sende · sıradaki kelimeyi bil." : x[0] === "sonkart" ? "Sıra sende · kartını at." : x[0] === "dort" ? "Sıra sende · taşını at." : "Sıra sende · hamleni yap."; } else { badge.textContent = "sırası onda"; sub.textContent = "Hamlesini yapınca sıra sana geçer."; } return; }
+          if (!d.hazir || !d.hazir[k.uid]) { badge.textContent = "sıra sende"; badge.className = "qmnew qmturn"; sub.textContent = x[0] === "sayi" ? "Gizli sayını belirle, oyun başlasın." : "Filonu yerleştir, oyun başlasın."; return; }
+          if (!d.hazir[d.a === k.uid ? d.b : d.a]) { badge.textContent = "o hazırlanıyor"; sub.textContent = "Senin tarafın hazır, onu bekliyorsun."; return; }
+          if (d.sira === k.uid) { badge.textContent = "sıra sende"; badge.className = "qmnew qmturn"; sub.textContent = x[0] === "sayi" ? "Sıra sende · " + (((d.tahmin || {})[k.uid] || []).length + 1) + ". tahmin." : "Sıra sende · ateş serbest."; }
+          else { badge.textContent = "sırası onda"; sub.textContent = "Hamlesini yapınca sıra sana geçer."; }
+        }).catch(function () {});
+      });
+    }).catch(function () {});
+  });
+  /* Adam Asmaca: kartta durum */
+  var amBakti = false;
+  Hesap.izle(function (k) {
+    if (!k || !k.kesin || amBakti) return; amBakti = true;
+    Hesap.db().then(function (db) { return db.collection("asmaca").doc("mac").get(); }).then(function (snap) {
+      var d = snap.exists ? snap.data() : null, badge = document.getElementById("asmacaBadge"), sub = document.getElementById("asmacaSub"); if (!d) return;
+      var o = d.a === k.uid ? d.b : d.a, il = d.ilerleme || {}, bi = il[k.uid] && il[k.uid].s ? il[k.uid].s.length : 0, oi = il[o] && il[o].s ? il[o].s.length : 0;
+      if (d.bitti) { badge.textContent = "yeni oyun"; sub.textContent = d.kazanan ? (d.kazanan === k.uid ? "Son oyunu sen kazandın." : "Son oyunu kaybettin.") + " Yeni kelimeler bekliyor." : "Son oyun berabere bitti."; return; }
+      if (!d.ilerleme) { badge.textContent = "yeni"; sub.textContent = "Artık ikimize aynı kelimeler geliyor; beklemek yok."; return; }
+      var ad = d.adet || 5;
+      if (d.mod === "yaz" && !(d.hazir && d.hazir[k.uid])) { badge.textContent = "kelimeleri yaz"; badge.className = "qmnew qmturn"; sub.textContent = d.hazir && d.hazir[o] ? "O kelimelerini yazdı; sıra sende, ona 3 kelime yaz." : "Ona 3 kelime yaz, oyun başlasın."; return; }
+      if (d.mod === "yaz" && !d.hazir[o]) { badge.textContent = "o yazıyor"; sub.textContent = "Kelimelerin gitti, onunkileri bekliyorsun."; return; }
+      if (bi < ad) { badge.textContent = bi ? "devam et" : "oyna"; badge.className = "qmnew qmturn"; sub.textContent = "Sen " + (bi + 1) + ". kelimedesin · o " + (oi >= ad ? "bitirdi." : (oi + 1) + ". kelimede."); return; }
+      badge.textContent = "o çözüyor"; sub.textContent = "Sen bitirdin; o da bitirince puanlar karşılaştırılacak.";
+    }).catch(function () {});
+  });
+  /* Satranç: sıra bendeyse kartta "sıra sende" */
+  var stBakti = false;
+  Hesap.izle(function (k) {
+    if (!k || !k.kesin || stBakti) return; stBakti = true;
+    Hesap.db().then(function (db) { return db.collection("satranc").doc("mac").get(); }).then(function (snap) {
+      var d = snap.exists ? snap.data() : null, badge = document.getElementById("satrancBadge"), sub = document.getElementById("satrancSub");
+      if (!d) return;
+      if (d.bitti) { badge.textContent = "yeni oyun"; sub.textContent = d.kazanan ? (d.kazanan === k.uid ? "Son oyunu sen kazandın." : "Son oyunu kaybettin.") + " Yeni oyunda " + (d.siyah === k.uid ? "sen beyazsın." : "o beyaz.") : "Son oyun berabere bitti."; return; }
+      var n = Math.ceil((d.hamleler || []).length / 2);
+      if (d.sira === k.uid) { badge.textContent = "sıra sende"; badge.className = "qmnew qmturn"; sub.textContent = "Sıra sende" + (n ? " · " + n + ". hamle" : " · ilk hamle senin") + "."; }
+      else { badge.textContent = "sırası onda"; sub.textContent = "Hamlesini yapınca sıra sana geçer" + (n ? " · " + n + ". hamle." : "."); }
+    }).catch(function () {});
+  });
+  /* Hafıza Düellosu: sıra bendeyse kartta "sıra sende" */
+  var hsBakti = false;
+  Hesap.izle(function (k) {
+    if (!k || !k.kesin || hsBakti) return; hsBakti = true;
+    Hesap.db().then(function (db) { return db.collection("hafiza").doc("mac").get(); }).then(function (snap) {
+      var d = snap.exists ? snap.data() : null, badge = document.getElementById("hafizaBadge"), sub = document.getElementById("hafizaSub");
+      if (!d || d.bitti) { if (d && d.bitti) { badge.textContent = "yeni oyun"; sub.textContent = d.kazanan === k.uid ? "Son oyunu sen kazandın. Yeni oyunda ilk hamle onun." : "Son oyunu kaybettin. Yeni oyunda ilk hamle senin."; } return; }
+      if (d.sira === k.uid) { badge.textContent = "sıra sende"; badge.className = "qmnew qmturn"; sub.textContent = "Sıra sende, hamleni bekliyor."; }
+      else { badge.textContent = "sırası onda"; sub.textContent = "Hamlesini yapınca sıra sana geçer."; }
+    }).catch(function () {});
+  });
+})();
+/* Tam ekran: iPhone'da tarayıcı oyunu tam ekran yapamıyor; tek yol siteyi ana ekrana eklemek (uygulama gibi açılır, adres çubuğu olmaz).
+   Android'de "Yükle" penceresi açılır. Zaten ana ekrandan açıldıysa kart görünmez. */
+(function () {
+  var kart = document.getElementById("qmTam"); if (!kart) return;
+  var ua = navigator.userAgent, ios = /iPhone|iPad|iPod/.test(ua) || (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1), ig = /Instagram|FBAN|FBAV/.test(ua);
+  var android = /Android/.test(ua), tel = ios || android || matchMedia("(pointer:coarse)").matches;
+  var uygulama = navigator.standalone === true || matchMedia("(display-mode: standalone)").matches || matchMedia("(display-mode: fullscreen)").matches;
+  var gizli = false; try { gizli = localStorage.getItem("qg_tam_gizle") === "1"; } catch (e) {}
+  if (uygulama || !tel || gizli) return;
+  var istem = null;
+  addEventListener("beforeinstallprompt", function (e) { e.preventDefault(); istem = e; });
+  kart.hidden = false;
+  document.getElementById("qmTamX").addEventListener("click", function (e) { e.stopPropagation(); kart.hidden = true; try { localStorage.setItem("qg_tam_gizle", "1"); } catch (er) {} });
+  function sheet(html) {
+    var s = document.createElement("div"); s.className = "qmsheet"; s.innerHTML = '<div class="qmsheetcard" role="dialog" aria-modal="true"><span class="qmsoonpill big">tam ekran</span><h2>Uygulama gibi aç</h2><div class="qmsheettext qmtamadim">' + html + '</div><button type="button" class="qmsheetbtn">Tamam</button></div>';
+    document.body.appendChild(s);
+    function kapat() { if (s.parentNode) s.parentNode.removeChild(s); }
+    s.querySelector(".qmsheetbtn").onclick = kapat; s.addEventListener("click", function (e) { if (e.target === s) kapat(); });
+  }
+  var paylas = '<svg class="qmpay" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15V3M8 7l4-4 4 4M6 11H5v10h14V11h-1"/></svg>';
+  kart.addEventListener("click", function () {
+    if (istem) { istem.prompt(); istem.userChoice.then(function () { istem = null; }); return; }
+    if (ig) sheet('<ol><li>Sağ üstteki <b>⋯</b> menüsüne dokun, <b>Tarayıcıda aç</b>' + (ios ? " (Safari)" : "") + ' de.</li><li>' + (ios ? 'Safari\'de alttaki ' + paylas + ' <b>Paylaş</b> düğmesine, sonra <b>Ana Ekrana Ekle</b>\'ye dokun.' : 'Chrome menüsünden <b>Ana ekrana ekle</b> / <b>Uygulamayı yükle</b>\'yi seç.') + '</li><li>Ana ekrandaki <b>YEC Games</b> simgesinden açınca adres çubuğu olmadan, tam ekran açılır.</li></ol><p class="qmsoonnote">İlk açılışta bir kez giriş yapman yeter; ilerlemen hesabından gelir.</p>');
+    else if (ios) sheet('<ol><li>Alttaki ' + paylas + ' <b>Paylaş</b> düğmesine dokun.</li><li>Aşağı kaydırıp <b>Ana Ekrana Ekle</b>\'yi seç, <b>Ekle</b> de.</li><li>Ana ekrandaki <b>YEC Games</b> simgesinden açınca adres çubuğu olmadan, tam ekran açılır.</li></ol><p class="qmsoonnote">İlk açılışta bir kez giriş yapman yeter; ilerlemen hesabından gelir.</p>');
+    else sheet('<ol><li>Tarayıcı menüsünden (<b>⋮</b>) <b>Ana ekrana ekle</b> ya da <b>Uygulamayı yükle</b>\'yi seç.</li><li>Ana ekrandaki <b>YEC Games</b> simgesinden açınca tam ekran açılır.</li></ol><p class="qmsoonnote">İlk açılışta bir kez giriş yapman yeter; ilerlemen hesabından gelir.</p>');
+  });
+})();
+/* Özel ikonlar: elle çizilmiş SVG'ler ikon/oyun-<ad>.svg olarak eklenince adını bu listeye yaz (ör. "kelime"). Kartın resim alanına (92×56 oranında) oturur. */
+(function () {
+  var OZEL = [];
+  OZEL.forEach(function (g) { var k = document.querySelector('.qmt[data-g="' + g + '"] .qmart'); if (!k) return; var im = new Image(); im.alt = ""; im.decoding = "async"; im.onload = function () { k.innerHTML = ""; k.appendChild(im); k.classList.add("ozel"); }; im.src = "ikon/oyun-" + g + ".svg?v=1"; });
+})();
+/* Yıkım kartı: ulaşılan seviye */
+(function () { var l = 0, b = 0; try { l = +localStorage.getItem("yk_seviye") || 0; b = +localStorage.getItem("yk_best") || 0; } catch (e) {} if (l > 1) document.getElementById("yikimSub").textContent = l + ". seviyedesin · rekor " + b; })();
+/* Stilobat kartı: rekor varsa rozet "rekor N" */
+(function () { var b = 0; try { b = +localStorage.getItem("stb_best") || 0; } catch (e) {} if (b > 0) document.getElementById("stilobatBadge").textContent = "rekor " + b; })();
+
+/* son oynanan oyun: menüye ait küçük kayıt (qg_last) */
+(function () {
+  [].forEach.call(document.querySelectorAll(".qmt[data-g]"), function (a) { a.addEventListener("click", function () { try { localStorage.setItem("qg_last", a.getAttribute("data-g")); } catch (e) {} }); });
+})();
+</script>
+<script>
+/* açılış: yaklaşık 1,2 sn (oturum başına bir kez), sonra kaybolur */
+(function () {
+  var a = document.getElementById("qmAcilis"); if (!a || / yok/.test(a.className)) { if (a) a.parentNode.removeChild(a); return; }
+  /* kısa açılış sesi (Web Audio); tarayıcı izin vermezse ilk dokunuşta çalar */
+  var ctx = null, caldi = false, AC = window.AudioContext || window.webkitAudioContext, sesKapali = false;
+  try { sesKapali = localStorage.getItem("qg_acilis_ses") === "0"; } catch (e) {}
+  function cal() {
+    if (caldi || !AC || sesKapali) return; 
+    try {
+      ctx = ctx || new AC();
+      if (ctx.state !== "running") { var r = ctx.resume(); if (r && r.then) r.then(function () { if (!bitti) cal(); }, function () {}); return; }
+      caldi = true;
+      /* kısa, yumuşak "tıng": üç hızlı çan notası, yankısız */
+      var t0 = ctx.currentTime + 0.03, ana = ctx.createGain(); ana.gain.value = 0.09; ana.connect(ctx.destination);
+      [[1318.5, 0], [1567.98, 0.07], [2093, 0.14]].forEach(function (n, i) {
+        var o = ctx.createOscillator(), g = ctx.createGain(), t = t0 + n[1], sure = i === 2 ? 0.7 : 0.35;
+        o.type = "sine"; o.frequency.value = n[0];
+        g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(i === 2 ? 0.8 : 0.5, t + 0.008); g.gain.exponentialRampToValueAtTime(0.0001, t + sure);
+        o.connect(g); g.connect(ana); o.start(t); o.stop(t + sure + 0.05);
+      });
+    } catch (e) {}
+  }
+  var bitti = false;
+  cal();
+  function kapat() { if (bitti) return; bitti = true; a.classList.add("bitti"); setTimeout(function () { if (a.parentNode) a.parentNode.removeChild(a); }, 520); }
+  setTimeout(kapat, 1950);
+  var buDokunus = false;
+  a.addEventListener("pointerdown", function () { buDokunus = false; if (!caldi) { cal(); buDokunus = true; } }, { passive: true });
+  a.addEventListener("click", function () { if (buDokunus) { buDokunus = false; return; } kapat(); });
+})();
+</script>
+</body>
+</html>
