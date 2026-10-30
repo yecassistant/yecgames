@@ -2870,3 +2870,68 @@ body[data-tema="bordo"] .qmacilis{background:radial-gradient(90% 70% at 50% 40%,
 .qmskor.geride{background:rgba(255,140,160,.28)}
 .qmnokta{display:inline-block;width:7px;height:7px;margin-right:6px;border-radius:50%;background:rgba(255,255,255,.35);vertical-align:1px}
 .qmnokta.on{background:#5be08a;box-shadow:0 0 0 3px rgba(91,224,138,.22)}
+/* ---------- Buluşma Takvimi: gece mavisi + altın ---------- */
+body[data-page="takvim"]{--t-bg:#16213a;--t-sf:#22304f;--t-line:#3a4b70;--t-ink:#f4f1ff;--t-mute:#b8c0dc;--t-acc:#f2c35b;--t-me:#ff8fb0;--t-o:#9d8cff;
+  background:radial-gradient(110% 55% at 50% -8%,#2a3b66 0%,var(--t-bg) 62%);background-color:var(--t-bg);color:var(--t-ink);font-family:"Nunito",system-ui,-apple-system,sans-serif;
+  padding:max(10px,env(safe-area-inset-top)) 12px max(16px,env(safe-area-inset-bottom));min-height:100vh;min-height:100dvh}
+body[data-page="takvim"] .garden,body[data-page="takvim"] #petals{display:none}
+body[data-page="takvim"] .gkbtn{background:var(--t-sf);box-shadow:inset 0 0 0 1px var(--t-line);color:var(--t-ink)}
+body[data-page="takvim"] .gkbtn:disabled{opacity:.35}
+body[data-page="takvim"] .gkover{background:rgba(10,16,32,.86)}
+body[data-page="takvim"] .gkcard{background:var(--t-sf);box-shadow:inset 0 0 0 1px var(--t-line),0 30px 60px -24px rgba(0,0,0,.7);color:var(--t-ink)}
+body[data-page="takvim"] .gkprimary{background:var(--t-acc);color:#3b2a08;box-shadow:0 4px 0 #b88a2a}
+body[data-page="takvim"] .gkcard p.gksmall{color:var(--t-mute)}
+body[data-page="takvim"] .hdtitle span{color:var(--t-acc)}
+.tk{position:relative;z-index:1;width:100%;max-width:460px;margin:0 auto;display:flex;flex-direction:column;gap:12px;-webkit-user-select:none;user-select:none}
+.tkhero{display:flex;align-items:center;gap:12px;padding:14px 16px;border-radius:20px;background:rgba(255,255,255,.06);box-shadow:inset 0 0 0 1px rgba(255,255,255,.1);min-height:74px}
+.tkhero.var{background:linear-gradient(135deg,rgba(242,195,91,.24),rgba(242,195,91,.08));box-shadow:inset 0 0 0 1px rgba(242,195,91,.55)}
+.tkheart{width:34px;height:34px;flex:none;fill:rgba(255,255,255,.18)}
+.tkhero.var .tkheart{fill:var(--t-acc);-webkit-animation:tkbeat 1.6s ease-in-out infinite;animation:tkbeat 1.6s ease-in-out infinite}
+@-webkit-keyframes tkbeat{0%,100%{-webkit-transform:scale(1)}30%{-webkit-transform:scale(1.12)}}
+@keyframes tkbeat{0%,100%{transform:scale(1)}30%{transform:scale(1.12)}}
+.tkherotx{min-width:0;display:flex;flex-direction:column;gap:2px}
+.tkherotx small{font-size:.7rem;font-weight:800;letter-spacing:.03em;color:var(--t-mute)}
+.tkhero.var .tkherotx small{color:var(--t-acc)}
+.tkherotx b{font-family:"Fraunces",Georgia,serif;font-style:italic;font-weight:600;font-size:1.22rem;line-height:1.15}
+.tkherotx span{font-size:.8rem;color:var(--t-mute)}
+.tkmonth{display:grid;grid-template-columns:44px 1fr 44px;align-items:center;gap:6px}
+.tkmonth b{text-align:center;font-size:1.05rem;font-weight:900}
+.tkdow{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;text-align:center;font-size:.68rem;font-weight:800;letter-spacing:.03em;color:var(--t-mute)}
+.tkdow .hs{color:var(--t-acc);opacity:.85}
+.tkgrid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
+.tkd{position:relative;aspect-ratio:1/1;min-height:40px;border:0;border-radius:14px;background:rgba(255,255,255,.06);box-shadow:inset 0 0 0 1px rgba(255,255,255,.08);color:var(--t-ink);font:inherit;font-weight:800;font-size:.98rem;cursor:pointer;-webkit-tap-highlight-color:transparent;touch-action:manipulation;padding:0;display:flex;align-items:center;justify-content:center;transition:transform .15s,background .2s,box-shadow .2s}
+.tkd.bos{background:transparent;box-shadow:none;pointer-events:none}
+.tkd.gecmis{opacity:.28;cursor:default}
+.tkd.hs:not(.gecmis){color:#ffe6a6}
+.tkd.bugun{box-shadow:inset 0 0 0 2px rgba(255,255,255,.6)}
+.tkd.ben{background:rgba(255,143,176,.22);box-shadow:inset 0 0 0 2px var(--t-me)}
+.tkd.o{background:rgba(157,140,255,.2);box-shadow:inset 0 0 0 2px var(--t-o)}
+.tkd.ikisi{background:linear-gradient(145deg,#f7d27a,#e9ad2c);color:#3b2a08;box-shadow:0 3px 0 #a9771a}
+.tkd i{font-style:normal;position:relative;z-index:1}
+.tkd svg{position:absolute;right:4px;top:4px;width:11px;height:11px;fill:#c6392f}
+.tkd:not(:disabled):active{-webkit-transform:scale(.92);transform:scale(.92)}
+.tkd.pat{-webkit-animation:tkpat .7s ease-out;animation:tkpat .7s ease-out}
+@-webkit-keyframes tkpat{0%{-webkit-transform:scale(1)}35%{-webkit-transform:scale(1.18)}70%{-webkit-transform:scale(.96)}100%{-webkit-transform:scale(1)}}
+@keyframes tkpat{0%{transform:scale(1)}35%{transform:scale(1.18)}70%{transform:scale(.96)}100%{transform:scale(1)}}
+.tklegend{display:flex;justify-content:center;gap:16px;font-size:.78rem;font-weight:700;color:var(--t-mute)}
+.tklegend span{display:inline-flex;align-items:center;gap:6px}
+.tklegend span::before{content:"";width:12px;height:12px;border-radius:4px;box-shadow:inset 0 0 0 2px var(--t-me);background:rgba(255,143,176,.22)}
+.tklegend .o::before{box-shadow:inset 0 0 0 2px var(--t-o);background:rgba(157,140,255,.2)}
+.tklegend .ikisi::before{box-shadow:none;background:linear-gradient(145deg,#f7d27a,#e9ad2c)}
+.tksayac{margin:-6px 0 0;display:flex;justify-content:center;gap:12px;font-size:.76rem;color:var(--t-mute);flex-wrap:wrap}
+.tksayac .ikisi{color:var(--t-acc);font-weight:800}
+.tklist{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+.tklist li{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;border-radius:14px;background:rgba(242,195,91,.1);box-shadow:inset 0 0 0 1px rgba(242,195,91,.35);font-size:.9rem}
+.tklist li b{font-weight:800}
+.tklist li span{font-size:.78rem;color:var(--t-mute)}
+.tklist[hidden]{display:none}
+.tkmsg{min-height:1.3em;color:var(--t-acc)}
+@media (max-width:350px){.tkgrid,.tkdow{gap:4px}.tkd{border-radius:11px;font-size:.9rem}.tklegend{gap:10px}}
+
+.qm-takvim{background:linear-gradient(150deg,#2f4a86 0%,#1a2a52 100%)}
+.qmico-takvim{background:linear-gradient(160deg,#3d5db0,#22386e);box-shadow:inset 0 1px 0 rgba(255,255,255,.3),0 6px 14px -8px rgba(0,0,0,.5)}
+.qmico-takvim svg{width:58px;height:36px;display:block;filter:drop-shadow(0 3px 5px rgba(0,0,0,.25))}
+
+/* ===== YEC: menünün üstü — takvim + skor tablosu ===== */
+.qmust{display:flex;flex-direction:column;gap:12px;margin:4px 0 18px}
+.qmust .qmtablo{min-height:72px}

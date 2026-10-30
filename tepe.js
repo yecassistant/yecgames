@@ -396,7 +396,7 @@
     S.izler.forEach(function (z) { z.o -= dt * (z.tip === "flas" ? 6 : z.tip === "halka" ? 3 : 2.2); });
     S.izler = S.izler.filter(function (z) { return z.o > 0; });
     S.yazi.forEach(function (y) { y.o -= dt * 0.8; y.y -= 24 * dt; }); S.yazi = S.yazi.filter(function (y) { return y.o > 0; });
-    kamera.salla *= Math.pow(0.02, dt);
+    kamera.salla *= Math.pow(0.02, dt); if (kamera.salla < 0.05) kamera.salla = 0;
   }
 
   /* ---------- tur ---------- */
@@ -627,7 +627,7 @@
 
   /* ---------- çizim ---------- */
   var cv = $("cv"), ctx = cv.getContext("2d"), CW = 1, CH = 1, DPR = 1;
-  function boyut() { DPR = Math.min(window.devicePixelRatio || 1, 2); CW = innerWidth; CH = innerHeight; cv.width = Math.round(CW * DPR); cv.height = Math.round(CH * DPR); cv.style.width = CW + "px"; cv.style.height = CH + "px"; zSinir(); }
+  function boyut() { DPR = Math.min(window.devicePixelRatio || 1, 1.5);   /* tam ekran tuval: 2x yerine 1.5x — görüntü aynı netlikte, telefonun yükü ~%45 az */ CW = innerWidth; CH = innerHeight; cv.width = Math.round(CW * DPR); cv.height = Math.round(CH * DPR); cv.style.width = CW + "px"; cv.style.height = CH + "px"; zSinir(); }
   function zMin() { var a = CW / (W + 200), b = CH / (H + 120); return CH > CW ? Math.max(a, b * 0.55) : Math.max(a, b); }
   function zSinir() { kamera.hz = Math.max(zMin(), Math.min(2.4, kamera.hz)); }
   addEventListener("resize", boyut); boyut(); kamera.z = kamera.hz = zMin();
@@ -791,7 +791,7 @@
   }
 
   /* ---------- döngü ---------- */
-  var yuruYon = 0, adimT = 0;
+  var yuruYon = 0, adimT = 0, atla = false;
   function dongu(ts) {
     requestAnimationFrame(dongu);
     var dt = sonT ? Math.min(0.05, (ts - sonT) / 1000) : 0.016; sonT = ts; saat += dt;
@@ -811,7 +811,11 @@
     efektAdim(dt);
     bulutlar.forEach(function (b) { b.x += (8 + S.ruzgar * 40) * b.s * dt; if (b.x > W + 200) b.x = -200; if (b.x < -220) b.x = W + 180; });
     kameraAdim(dt);
-    ciz();
+    /* sahnede bir şey olmuyorsa (mermi, parça, efekt, yürüme, nişan, kamera kayması yok) saniyede 30 kare yeter */
+    var sakin = !S.mermi.length && !S.parca.length && !S.izler.length && !S.alev.length && !S.yazi.length && !yuruYon && !kamera.salla && !(nisan && nisan.var) && !jest &&
+      Math.abs(kamera.hx - kamera.x) < 0.5 && Math.abs(kamera.hy - kamera.y) < 0.5 && Math.abs(kamera.hz - kamera.z) < 0.002 && (mod === "yok" || mod === "hareket");
+    atla = sakin ? !atla : false;
+    if (!atla) ciz();
     if (Math.floor(saat * 4) !== Math.floor((saat - dt) * 4)) arayuzCan();
   }
   function yuruAdim(dt) {

@@ -21,7 +21,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="YEC Games">
 <link rel="apple-touch-icon" href="ikon/app-180.png">
-<link rel="stylesheet" href="style.css?v=yec4">
+<link rel="stylesheet" href="style.css?v=yec5">
 <script>try { if (!localStorage.getItem("yg_oda") && location.search.indexOf("deneme") < 0) location.replace("baslat.html"); } catch (e) {}</script>
 </head>
 <body data-page="oyunlar">
@@ -63,6 +63,20 @@
     <span class="qmtamtx"><b>Tam ekran oyna</b><small id="qmTamSub">Adres çubuğu gitsin, ekranın hepsi oyunun olsun.</small></span>
     <span class="qmtamx" id="qmTamX" role="button" aria-label="Gizle">×</span>
   </button>
+
+  <div class="qmust">
+  <a class="qmc qmwide qm-takvim" href="takvim.html" id="toTakvim">
+    <span class="qmico qmico-takvim"><svg viewBox="0 0 92 56" aria-hidden="true"><rect x="18" y="8" width="56" height="44" rx="8" fill="#fbf7fd"/><rect x="18" y="8" width="56" height="13" rx="7" fill="#f2c35b"/><rect x="18" y="15" width="56" height="6" fill="#f2c35b"/><rect x="28" y="3" width="5" height="11" rx="2.5" fill="#3b2a08"/><rect x="59" y="3" width="5" height="11" rx="2.5" fill="#3b2a08"/><g fill="#d9d1e3"><rect x="24" y="26" width="8" height="6" rx="2"/><rect x="36" y="26" width="8" height="6" rx="2"/><rect x="48" y="26" width="8" height="6" rx="2"/><rect x="60" y="26" width="8" height="6" rx="2"/><rect x="24" y="36" width="8" height="6" rx="2"/><rect x="36" y="36" width="8" height="6" rx="2"/><rect x="60" y="36" width="8" height="6" rx="2"/></g><path d="M52 45s-6-3.8-6-7.4a3.1 3.1 0 0 1 6-1.2 3.1 3.1 0 0 1 6 1.2c0 3.6-6 7.4-6 7.4z" fill="#ec4b5f"/><use href="#qmSpark" x="78" y="6" width="10" height="10" fill="#ffe08a"/><use href="#qmSpark" x="4" y="38" width="8" height="8" fill="#ffe08a"/></svg></span>
+    <span class="qmtx"><b>Ortak Takvim</b><small id="takvimSub">Müsait olduğun günleri işaretle; ikinizin de boş olduğu ilk gün öne çıksın.</small></span>
+    <i class="qmnew qmturn" id="takvimBadge">işaretle</i>
+    <svg class="qmchev" aria-hidden="true"><use href="#qmChev"/></svg>
+  </a>
+  <a class="qmc qmsoon qmtablo" href="tablo.html" id="toTablo">
+    <span class="qmplus" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 19V9M12 19V5M19 19v-7"/></svg></span>
+    <span class="qmtx"><b>Skor Tablosu</b><small>Kim kaç taç aldı, son hareketler.</small></span>
+    <svg class="qmchev" aria-hidden="true"><use href="#qmChev"/></svg>
+  </a>
+  </div>
 
   <div class="qmsec qmsec-iki"><span>Birlikte</span><small>2 kişilik · uzaktan da olur</small></div>
   <div class="qmgrid" id="qmBirlikte">
@@ -197,19 +211,14 @@
     </a>
   </div>
 
-  <a class="qmc qmsoon qmtablo" href="tablo.html" id="toTablo">
-    <span class="qmplus" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 19V9M12 19V5M19 19v-7"/></svg></span>
-    <span class="qmtx"><b>Skor Tablosu</b><small>Kim kaç taç aldı, son hareketler.</small></span>
-    <svg class="qmchev" aria-hidden="true"><use href="#qmChev"/></svg>
-  </a>
 
   <p class="qmimza">YEC Games · Nunu &amp; Büş yapımı · <a href="gizlilik.html">Gizlilik</a></p>
 </main>
 
-<script src="app.js?v=yec4"></script>
-<script src="yapilandirma.js?v=yec4"></script>
-<script src="deneme.js?v=yec4"></script>
-<script src="hesap.js?v=yec4"></script>
+<script src="app.js?v=yec5"></script>
+<script src="yapilandirma.js?v=yec5"></script>
+<script src="deneme.js?v=yec5"></script>
+<script src="hesap.js?v=yec5"></script>
 <script>
 /* oda çubuğu: iki koltuk, adlar, durum */
 (function () {
@@ -331,7 +340,7 @@
 /* iki kişilik kartlarda seri skoru (sen – o) ve oda çubuğunda arkadaşın nerede olduğu */
 (function () {
   if (!window.Hesap) return;
-  var AD = { oyunlar: "menüde", tablo: "Skor Tablosu'nda", ayar: "Oda Ayarları'nda", baslat: "girişte", kelimeavi: "Kelime Avı'nda", zincir: "Kelime Zinciri'nde", sonkart: "Son Kart'ta", dort: "Dört Taş'ta", ciz: "Çiz Bil'de", xox: "XOX'ta", hafiza: "Hafıza Düellosu'nda", sayi: "Sayı Düellosu'nda", satranc: "Satranç'ta", amiral: "Amiral Battı'da", asmaca: "Adam Asmaca'da", tepe: "Tepe Savaşı'nda", yasak: "Yasak Kelime'de", gunun: "Günün Kelimesi'nde", stilobat: "Stilobat'ta", yikim: "Yıkım'da", kelime: "Kelime Bahçesi'nde", ok: "Eros'un Oku'nda", kase: "Meyve Kasesi'nde", oda: "Oda Döşe'de", oyun: "Bahçe Planı'nda", gizlilik: "gizlilik sayfasında" };
+  var AD = { oyunlar: "menüde", takvim: "Ortak Takvim'de", tablo: "Skor Tablosu'nda", ayar: "Oda Ayarları'nda", baslat: "girişte", kelimeavi: "Kelime Avı'nda", zincir: "Kelime Zinciri'nde", sonkart: "Son Kart'ta", dort: "Dört Taş'ta", ciz: "Çiz Bil'de", xox: "XOX'ta", hafiza: "Hafıza Düellosu'nda", sayi: "Sayı Düellosu'nda", satranc: "Satranç'ta", amiral: "Amiral Battı'da", asmaca: "Adam Asmaca'da", tepe: "Tepe Savaşı'nda", yasak: "Yasak Kelime'de", gunun: "Günün Kelimesi'nde", stilobat: "Stilobat'ta", yikim: "Yıkım'da", kelime: "Kelime Bahçesi'nde", ok: "Eros'un Oku'nda", kase: "Meyve Kasesi'nde", oda: "Oda Döşe'de", oyun: "Bahçe Planı'nda", gizlilik: "gizlilik sayfasında" };
   function saat(t) {
     var d = new Date(t), simdi = new Date(), dk = Math.round((simdi - d) / 60000), hh = ("0" + d.getHours()).slice(-2) + ":" + ("0" + d.getMinutes()).slice(-2);
     if (dk < 60) return dk <= 1 ? "az önce" : dk + " dk önce";
@@ -363,6 +372,31 @@
         e.className = "qmskor" + (ben > o2 ? " onde" : ben < o2 ? " geride" : ""); e.textContent = ben + " – " + o2; e.title = "Seri: sen " + ben + ", o " + o2 + (v.b ? ", " + v.b + " berabere" : "");
       }).catch(function () {});
     });
+  });
+})();
+/* Ortak Takvim: ikisinin de boş olduğu en yakın gün */
+(function () {
+  if (!window.Hesap) return; var bakti = false;
+  Hesap.izle(function (k) {
+    if (!k || !k.kesin || bakti || !Hesap.oda()) return; bakti = true;
+    Hesap.db().then(function (db) { return db.collection("takvim").get(); }).then(function (snap) {
+      var benim = {}, onun = {}; snap.forEach(function (doc) { var g = doc.data().g || {}; if (doc.id === k.uid) benim = g; else onun = g; });
+      var bugun = new Date(); bugun.setHours(0, 0, 0, 0); var ort = [], tb = document.getElementById("takvimBadge"), ts = document.getElementById("takvimSub");
+      var bugunK = bugun.getFullYear() + "-" + ("0" + (bugun.getMonth() + 1)).slice(-2) + "-" + ("0" + bugun.getDate()).slice(-2), bensay = 0, onsay = 0, d;
+      for (d in benim) if (benim[d] && d >= bugunK) { bensay++; if (onun[d]) ort.push(d); }
+      for (d in onun) if (onun[d] && d >= bugunK) onsay++;
+      var oAd = Hesap.gorunenAd(k.uid === "a" ? "b" : "a") || "Arkadaşın";
+      if (!ort.length) {
+        if (!bensay) { tb.textContent = "işaretle"; ts.textContent = onsay ? oAd + " " + onsay + " gün işaretledi; sen de boş günlerini seç." : "Henüz gün işaretlemedin; boş olduğun günleri seç, ortak günü bulun."; }
+        else { tb.textContent = onsay ? "ortak yok" : "onu bekle"; tb.className = "qmnew"; ts.textContent = onsay ? "İşaretlediğiniz günler çakışmıyor; birkaç gün daha ekle." : bensay + " gün işaretledin; " + oAd + " işaretleyince ortak gün çıkar."; }
+        return;
+      }
+      ort.sort();
+      var p2 = ort[0].split("-"), dt = new Date(+p2[0], +p2[1] - 1, +p2[2]), G7 = ["Pazar", "Pazartesi", "Salı", "Çarşamba", "Perşembe", "Cuma", "Cumartesi"], AY = ["Ocak", "Şubat", "Mart", "Nisan", "Mayıs", "Haziran", "Temmuz", "Ağustos", "Eylül", "Ekim", "Kasım", "Aralık"];
+      var n = Math.round((dt - bugun) / 86400000), ne = n === 0 ? "bugün" : n === 1 ? "yarın" : n + " gün sonra";
+      tb.textContent = ort.length === 1 ? "ortak gün" : ort.length + " ortak gün"; tb.className = "qmnew qmturn";
+      ts.textContent = G7[dt.getDay()] + " " + dt.getDate() + " " + AY[dt.getMonth()] + " — ikiniz de boşsunuz (" + ne + ")";
+    }).catch(function () {});
   });
 })();
 /* son oynanan oyun: menüye ait küçük kayıt (qg_last) */

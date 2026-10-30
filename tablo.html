@@ -19,7 +19,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="YEC Games">
 <link rel="apple-touch-icon" href="ikon/app-180.png">
-<link rel="stylesheet" href="style.css?v=yec4">
+<link rel="stylesheet" href="style.css?v=yec5">
 <style>
 .tbmin{gap:12px}
 .tbmin .tbvitrin{padding:16px 12px 12px;background:rgba(255,255,255,.06);box-shadow:inset 0 0 0 1px rgba(255,255,255,.12)}
@@ -55,10 +55,10 @@
   </section>
 </main>
 
-<script src="app.js?v=yec4"></script>
-<script src="yapilandirma.js?v=yec4"></script>
-<script src="deneme.js?v=yec4"></script>
-<script src="hesap.js?v=yec4"></script>
+<script src="app.js?v=yec5"></script>
+<script src="yapilandirma.js?v=yec5"></script>
+<script src="deneme.js?v=yec5"></script>
+<script src="hesap.js?v=yec5"></script>
 <script>
 (function () {
   var $ = function (id) { return document.getElementById(id); };
@@ -74,7 +74,7 @@
     if (d < 60000) return "az önce"; if (d < 3600000) return Math.round(d / 60000) + " dk önce"; if (d < 86400000) return Math.round(d / 3600000) + " sa önce";
     var t = new Date(ms); return t.getDate() + " " + AYLAR[t.getMonth()] + " " + pad(t.getHours()) + ":" + pad(t.getMinutes());
   }
-  var OYUN = { kelime: "Kelime Bahçesi", ok: "Eros'un Oku", kase: "Meyve Kasesi", gunun: "Günün Kelimesi", plan: "Bahçe Planı", oda: "Oda Döşe", hafiza: "Hafıza Düellosu", satranc: "Satranç", kelimeavi: "Kelime Avı", sayi: "Sayı Düellosu", amiral: "Amiral Battı", asmaca: "Adam Asmaca", yasak: "Tabu", xox: "XOX", tepe: "Tepe Savaşı", zincir: "Kelime Zinciri", sonkart: "UNO", dort: "Dört Taş", ciz: "Çiz Bil", yikim: "Yıkım", stilobat: "Stilobat", takvim: "takvimde", oyunlar: "menüde", tablo: "skor tablosunda", giris: "girişte", index: "ana sayfada" };
+  var OYUN = { takvim: "Ortak Takvim", kelime: "Kelime Bahçesi", ok: "Eros'un Oku", kase: "Meyve Kasesi", gunun: "Günün Kelimesi", plan: "Bahçe Planı", oda: "Oda Döşe", hafiza: "Hafıza Düellosu", satranc: "Satranç", kelimeavi: "Kelime Avı", sayi: "Sayı Düellosu", amiral: "Amiral Battı", asmaca: "Adam Asmaca", yasak: "Tabu", xox: "XOX", tepe: "Tepe Savaşı", zincir: "Kelime Zinciri", sonkart: "UNO", dort: "Dört Taş", ciz: "Çiz Bil", yikim: "Yıkım", stilobat: "Stilobat", takvim: "takvimde", oyunlar: "menüde", tablo: "skor tablosunda", giris: "girişte", index: "ana sayfada" };
   function yildiz(n) { var s = ""; for (var i = 0; i < 3; i++) s += i < n ? "★" : "☆"; return s; }
 
   /* ---- bir oyuncunun özeti ---- */
@@ -105,6 +105,7 @@
     if (o === "ok" && k === "bolum") { var L = Math.floor(v / 10), y = v % 10; return ad + " Eros'un Oku'nda " + L + ". bölümü " + (y >= 3 ? "kusursuz geçti " : "geçti ") + yildiz(y); }
     if (o === "kelime" && k === "bolum") return ad + " Kelime Bahçesi'nde " + v + ". bölümü bitirdi.";
     if (o === "kelime" && k === "rozet") return ad + " Kelime Bahçesi'nde " + (v === 3 ? "altın" : v === 2 ? "gümüş" : "bronz") + " rozeti kazandı 🏅";
+    if (o === "takvim") { var AY = ["Ocak", "Şubat", "Mart", "Nisan", "Mayıs", "Haziran", "Temmuz", "Ağustos", "Eylül", "Ekim", "Kasım", "Aralık"], gun = v % 100, ay = Math.floor(v / 100) % 100; return ad + " takvimde " + gun + " " + (AY[ay - 1] || "") + (k === "ortak" ? " gününü işaretledi — ortak gün 💛" : " gününü müsait işaretledi."); }
     if (o === "kase" && k === "rekor") return ad + " Meyve Kasesi'nde yeni rekor kırdı: " + v + " puan.";
     if (o === "kase" && k === "sufle") return ad + " Meyve Kasesi'nde büyük boy sufle kazandı 🍫" + (v > 1 ? " (" + v + ". sufle)" : "");
     if (o === "kase" && k === "pm_muffin2") return ad + " Meyve Kasesi'nde sürpriz muffini açtı 🧁";
@@ -133,8 +134,8 @@
   var oyuncular = {}, ben = null, akis = [], seri = null, mac = null, stSeri = null, stMac = null;
   var DUEL = ["hafiza", "sayi", "kelimeavi", "zincir", "sonkart", "dort", "ciz", "xox", "tepe", "satranc", "amiral", "asmaca"];
   var duSeri = {}, duMac = {}; DUEL.forEach(function (k) { duSeri[k] = null; duMac[k] = null; });
-  var IK = { hafiza: "🃏", sayi: "🔢", kelimeavi: "🔡", xox: "❌", tepe: "💥", zincir: "⛓️", sonkart: "🎴", dort: "🔵", ciz: "🎨", satranc: "♟️", amiral: "⚓", asmaca: "🔤", gunun: "🟩", kelime: "🌸", ok: "🏹", kase: "🍫", oda: "🛋️", plan: "🌿", tur: "🏰", fark: "🔍", yikim: "🔨", stilobat: "🏛️", takvim: "📅", hesap: "🔑", yasak: "🃏" };
-  var LINK = { hafiza: "hafiza.html", sayi: "sayi.html", kelimeavi: "kelimeavi.html", xox: "xox.html", tepe: "tepe.html", zincir: "zincir.html", sonkart: "sonkart.html", dort: "dort.html", ciz: "ciz.html", satranc: "satranc.html", amiral: "amiral.html", asmaca: "asmaca.html" };
+  var IK = { takvim: "📅", hafiza: "🃏", sayi: "🔢", kelimeavi: "🔡", xox: "❌", tepe: "💥", zincir: "⛓️", sonkart: "🎴", dort: "🔵", ciz: "🎨", satranc: "♟️", amiral: "⚓", asmaca: "🔤", gunun: "🟩", kelime: "🌸", ok: "🏹", kase: "🍫", oda: "🛋️", plan: "🌿", tur: "🏰", fark: "🔍", yikim: "🔨", stilobat: "🏛️", takvim: "📅", hesap: "🔑", yasak: "🃏" };
+  var LINK = { takvim: "takvim.html", hafiza: "hafiza.html", sayi: "sayi.html", kelimeavi: "kelimeavi.html", xox: "xox.html", tepe: "tepe.html", zincir: "zincir.html", sonkart: "sonkart.html", dort: "dort.html", ciz: "ciz.html", satranc: "satranc.html", amiral: "amiral.html", asmaca: "asmaca.html" };
   var filtreO = ""; try { filtreO = sessionStorage.getItem("tb_filtre") || ""; } catch (e) {}
   function ekDe(ad) { var m = String(ad).toLowerCase().match(/[aeıioöuü](?![\s\S]*[aeıioöuü])/), v = m ? m[0] : "a"; return ad + "'" + (/[fstkçşhp]$/i.test(ad) ? "t" : "d") + (/[aıou]/.test(v) ? "a" : "e"); }
   function liste() { var L = [], u; for (u in oyuncular) L.push(oyuncular[u]); L.sort(function (a, b) { return (a.uid === ben ? 1 : 0) - (b.uid === ben ? 1 : 0) || (a.ad > b.ad ? 1 : -1); }); return L; }

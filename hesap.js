@@ -256,7 +256,7 @@
   function odayiSil() {
     if (!oda) return Promise.reject(new Error("oda"));
     return baglan().then(function () {
-      var r = odaRef(), kols = ["oyuncular", "akis", "sohbet", "hafiza", "sayi", "xox", "tepe", "satranc", "amiral", "asmaca", "zincir", "sonkart", "dort", "ciz", "kelimeavi"];
+      var r = odaRef(), kols = ["oyuncular", "akis", "sohbet", "hafiza", "sayi", "xox", "tepe", "satranc", "amiral", "asmaca", "zincir", "sonkart", "dort", "ciz", "kelimeavi", "takvim"];
       return Promise.all(kols.map(function (k) { return r.collection(k).get().then(function (s) { var b = db.batch(); s.forEach(function (d) { b.delete(d.ref); }); return b.commit(); }).catch(function () {}); }))
         .then(function () { return r.get(); }).then(function (o) { var v = o.exists ? o.data() : null, b = db.batch(); if (v && v.kod) b.delete(db.collection("kodlar").doc(v.kod)); b.delete(r); b.delete(db.collection("kisiler").doc(user.uid)); return b.commit(); })
         .then(function () { ayril(); temizle(); });

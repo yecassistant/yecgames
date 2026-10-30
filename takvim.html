@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<title>Ortak Takvim</title>
+<meta name="description" content="Müsait olduğun günleri işaretle; ikinizin de boş olduğu günler öne çıksın.">
+<meta property="og:title" content="Ortak Takvim">
+<meta property="og:description" content="Müsait olduğun günleri işaretle; ikinizin de boş olduğu günler öne çıksın.">
+<meta name="color-scheme" content="dark">
+<meta property="og:type" content="website">
+<meta property="og:image" content="onizleme.jpg">
+<meta name="theme-color" content="#16213a">
+<link rel="icon" href="ikon/simge.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@1,9..144,600&family=Nunito:wght@600;700;800;900&display=swap">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="YEC Games">
+<link rel="apple-touch-icon" href="ikon/app-180.png">
+<link rel="stylesheet" href="style.css?v=yec5">
+</head>
+<body data-page="takvim">
+
+<main class="tk" id="stage">
+  <header class="hdbar">
+    <a class="gkbtn" href="oyunlar.html" aria-label="Geri"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 5.5L8 12l6.5 6.5"/></svg></a>
+    <div class="hdtitle"><b>Ortak Takvim</b><span id="tkSub">Bağlanıyor…</span></div>
+    <button type="button" class="gkbtn" id="bHelp" aria-label="Nasıl çalışır"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M9.6 9.4a2.5 2.5 0 0 1 4.8.9c0 1.8-2.4 2.1-2.4 3.7"/><path d="M12 16.9v.2"/></svg></button>
+  </header>
+
+  <section class="tkhero" id="hero" aria-live="polite">
+    <svg class="tkheart" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7.5-5.2-9.5-10A5.3 5.3 0 0 1 12 6a5.3 5.3 0 0 1 9.5 5c-2 4.8-9.5 10-9.5 10z"/></svg>
+    <div class="tkherotx"><small id="heroKick">Yaklaşan</small><b id="heroT">Yükleniyor…</b><span id="heroS"></span></div>
+  </section>
+
+  <div class="tkmonth">
+    <button type="button" class="gkbtn" id="geri" aria-label="Önceki ay"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 5.5L8 12l6.5 6.5"/></svg></button>
+    <b id="ay">—</b>
+    <button type="button" class="gkbtn" id="ileri" aria-label="Sonraki ay"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.5 5.5L16 12l-6.5 6.5"/></svg></button>
+  </div>
+  <div class="tkdow" aria-hidden="true"><span>Pzt</span><span>Sal</span><span>Çar</span><span>Per</span><span>Cum</span><span class="hs">Cmt</span><span class="hs">Paz</span></div>
+  <div class="tkgrid" id="grid" aria-label="Takvim"></div>
+
+  <div class="tklegend"><span class="ben">sen</span><span class="o" id="legO">o</span><span class="ikisi">ikiniz</span></div>
+  <p class="tksayac" id="sayac"></p>
+  <ol class="tklist" id="list" hidden></ol>
+  <p class="hdmsg tkmsg" id="msg" role="status" aria-live="polite"></p>
+</main>
+
+<div class="gkover" id="gate" hidden>
+  <div class="gkcard hdcard">
+    <h2>Ortak Takvim</h2>
+    <p>Takvimi kullanmak için bir odada olman lazım.</p>
+    <a class="hsbtn" href="baslat.html?d=takvim.html">Oda aç / odaya katıl</a>
+  </div>
+</div>
+
+<div class="gkover" id="help" hidden>
+  <div class="gkcard hdcard">
+    <h2>Ortak Takvim</h2>
+    <p>Müsait olduğun günlere dokun; arkadaşın da kendi günlerini işaretlesin. İkinizin de boş olduğu günler altın olur, en yakını en üstte görünür.</p>
+    <p>Bir daha dokununca işaret kalkar; her şey anında ikinizde de görünür.</p>
+    <p class="gksmall">Takvimi odanızdaki iki kişiden başkası göremez.</p>
+    <button type="button" class="gkprimary" id="helpGo">Tamam</button>
+  </div>
+</div>
+
+<script src="app.js?v=yec5"></script>
+<script src="yapilandirma.js?v=yec5"></script>
+<script src="deneme.js?v=yec5"></script>
+<script src="hesap.js?v=yec5"></script>
+<script src="takvim.js?v=yec5"></script>
+<script src="takvim-ses.js?v=yec5"></script>
+</body>
+</html>
