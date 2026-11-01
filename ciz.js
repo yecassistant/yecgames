@@ -19,7 +19,11 @@
     startText: "Sırayla çiziyoruz: çizen üç kelimeden birini seçip çizer, öbürü bakarak tahmin eder. 6 tur; puanı çok olan kazanır.",
     yeniDoc: function (d, ME, OTHER) {
       var baslayan = d && d.baslayan ? (d.baslayan === ME ? OTHER : ME) : ME, puan = {}; puan[ME] = 0; puan[OTHER] = 0;
-      return { a: ME, b: OTHER, baslayan: baslayan, top: TOP, tur: 1, cizen: baslayan, hazir: false, kelime: "", uz: [], cizim: [], cizdi: false, ipucu: [], tahminler: [], puan: puan, gecmis: [], sira: baslayan, son: null };
+      /* son oyunlarda çizilen ve seçenek olarak gösterilen kelimeler bir sonraki oyunlara devredilir: yakın zamanda yine gelmesinler */
+      var eski = ((d && d.eski) || []).concat((d && d.gordu) || [], ((d && d.gecmis) || []).map(function (g) { return g.k; })), tek = [];
+      for (var i = eski.length - 1; i >= 0 && tek.length < 180; i--) if (eski[i] && tek.indexOf(eski[i]) < 0) tek.unshift(eski[i]);
+      return { a: ME, b: OTHER, baslayan: baslayan, top: TOP, tur: 1, cizen: baslayan, hazir: false, kelime: "", uz: [], cizim: [], cizdi: false, ipucu: [], tahminler: [], puan: puan, gecmis: [], sira: baslayan, son: null,
+        tohum: Math.floor(Math.random() * 2147483646) + 1, degis: 0, gordu: [], eski: tek };
     },
     onMac: function (d, ilk) { macGeldi(d, ilk); },
     onYok: function () { G = null; ["score", "sahne", "altBar"].forEach(function (x) { $(x).hidden = true; }); },
@@ -62,7 +66,18 @@
     for (var i = 2; i < n; i += 2) ctx.lineTo(p[i] / OLCEK * BOY, p[i + 1] / OLCEK * YUK);
     ctx.stroke();
   }
-  function hepsiniCiz() { temizle(); var L = (G && G.cizim) || []; for (var i = 0; i < L.length; i++) vuruCiz(L[i]); if (canliVuru) vuruCiz(canliVuru); cizilen = L.length; }
+  function hepsiniCiz() { temizle(); var L = (G && G.cizim) || []; for (var i = 0; i < L.length; i++) vuruCiz(L[i]); if (canliVuru) vuruCiz(canliVuru); cizilen = L.length; akisSifirla(L); }
+  /* bir vurunun yalnızca a..b koordinat aralığını çizer (yuvarlak uçlarla parça parça çizim bütünle aynı görünür) */
+  function parcaCiz(v, a, b) {
+    var p = v.p; b = Math.min(b, p.length); if (b < 2 || b <= a) return;
+    var s = a >= 2 ? a - 2 : 0;
+    ctx.setTransform(DPR, 0, 0, DPR, 0, 0); ctx.lineCap = "round"; ctx.lineJoin = "round";
+    ctx.strokeStyle = v.e ? "#fffdf8" : v.c; ctx.lineWidth = v.w * (BOY / 360);
+    ctx.beginPath(); ctx.moveTo(p[s] / OLCEK * BOY, p[s + 1] / OLCEK * YUK);
+    if (b - s <= 2) ctx.lineTo(p[s] / OLCEK * BOY + 0.01, p[s + 1] / OLCEK * YUK);
+    for (var k = s + 2; k < b; k += 2) ctx.lineTo(p[k] / OLCEK * BOY, p[k + 1] / OLCEK * YUK);
+    ctx.stroke();
+  }
   /* çizen: parmakla çiz */
   var arac = { c: RENKLER[0], w: 5, e: false }, yazT = 0, yazBekle = null;
   function nokta(e) { var r = cv.getBoundingClientRect(); return [Math.round((e.clientX - r.left) / r.width * OLCEK), Math.round((e.clientY - r.top) / r.height * OLCEK)]; }
@@ -73,10 +88,11 @@
   });
   cv.addEventListener("pointermove", function (e) {
     if (!canliVuru || e.pointerId !== canliVuru.pid) return; e.preventDefault();
-    var q = nokta(e), p = canliVuru.p, lx = p[p.length - 2], ly = p[p.length - 1];
-    if (Math.abs(q[0] - lx) + Math.abs(q[1] - ly) < 4) return;
-    p.push(q[0], q[1]); vuruCiz(canliVuru, p.length); vuruCiz(canliVuru);
-    if (Date.now() - yazT > 350) cizimYaz(false);
+    var p = canliVuru.p, once = p.length, olaylar = (e.getCoalescedEvents && e.getCoalescedEvents()) || []; if (!olaylar.length) olaylar = [e];   /* telefonun kareler arasındaki dokunuş noktaları: daha pürüzsüz çizgi */
+    for (var i = 0; i < olaylar.length; i++) { var q = nokta(olaylar[i]), lx = p[p.length - 2], ly = p[p.length - 1]; if (Math.abs(q[0] - lx) + Math.abs(q[1] - ly) >= 3) p.push(q[0], q[1]); }
+    if (p.length === once) return;
+    parcaCiz(canliVuru, once, p.length);                                    /* yalnız yeni eklenen parça: uzun çizgide bile hızlı */
+    if (Date.now() - yazT > 160) cizimYaz(false);
   });
   function vuruBitir(e) {
     if (!canliVuru || (e && e.pointerId !== canliVuru.pid)) return;
@@ -117,14 +133,34 @@
 
   /* izleyen: yeni vuruları ekle; ilk açılışta baştan oynat */
   var oynatim = null;
+  /* izleyen: gelen yeni noktalar bir anda basılmaz; iki güncelleme arasındaki süreye yayılarak akıcı çizilir ("tık tık" yerine çizgi akar) */
+  var akis = { i: 0, j: 0, imza: "", raf: 0, hiz: 0.1, son: 0, gT: 0 };
+  function vImza(v) { return v ? v.c + "|" + v.w + "|" + (v.e ? 1 : 0) + "|" + v.p[0] + "," + v.p[1] : ""; }
+  function akisSifirla(L) { if (akis.raf) { cancelAnimationFrame(akis.raf); akis.raf = 0; } akis.son = 0; akis.i = L.length ? L.length - 1 : 0; akis.j = L.length ? L[L.length - 1].p.length : 0; akis.imza = L.length ? vImza(L[L.length - 1]) : ""; }
+  function akisKalan(L) { var k = 0; for (var x = akis.i; x < L.length; x++) k += L[x].p.length - (x === akis.i ? akis.j : 0); return k; }
+  function akisAdim(t) {
+    akis.raf = 0; var L = (G && G.cizim) || []; if (!L.length || cizenBen()) return;
+    var dt = akis.son ? Math.min(48, t - akis.son) : 16; akis.son = t;
+    var butce = Math.max(2, Math.round(akis.hiz * dt / 2) * 2);
+    while (butce > 0 && akis.i < L.length) {
+      var v = L[akis.i], n = v.p.length;
+      if (akis.j >= n) { if (akis.i < L.length - 1) { akis.i++; akis.j = 0; continue; } break; }
+      var b = Math.min(n, akis.j + butce); parcaCiz(v, akis.j, b); butce -= b - akis.j; akis.j = b;
+    }
+    akis.imza = vImza(L[akis.i]);
+    if (akisKalan(L) > 0) akis.raf = requestAnimationFrame(akisAdim); else akis.son = 0;
+  }
   function izle(d, ilk) {
     var L = d.cizim || [];
     if (oynatim) { if (L.length >= oynatim.hedef) { oynatim.hedef = L.length; return; } clearTimeout(oynatim.t); oynatim = null; }
     if (ilk && L.length) { oynat(L); return; }
-    if (L.length < cizilen) { hepsiniCiz(); return; }
-    for (var i = cizilen; i < L.length; i++) vuruCiz(L[i]); cizilen = L.length;
-    /* devam eden vuru (canlı): son vuru büyüyorsa tamamını yeniden çiz (eksik kısmı tamamlamak için) */
-    if (L.length && cizilen === L.length) vuruCiz(L[L.length - 1]);
+    /* geri alma, temizleme ya da değişen vuru: baştan çiz (silinen çizgi ekranda kalmasın) */
+    if (!L.length) { if (akis.i || akis.j) hepsiniCiz(); return; }
+    if (akis.i >= L.length || L[akis.i].p.length < akis.j || (akis.j > 0 && vImza(L[akis.i]) !== akis.imza)) { hepsiniCiz(); return; }
+    var kalan = akisKalan(L); if (kalan <= 0) return;
+    var simdi = performance.now(), sure = Math.max(110, Math.min(450, simdi - (akis.gT || simdi - 200))); akis.gT = simdi;
+    akis.hiz = Math.max(0.05, kalan / sure);                                  /* bu paketi bir sonraki paket gelene kadar bitir */
+    if (!akis.raf) akis.raf = requestAnimationFrame(akisAdim);
   }
   function oynat(L) {
     temizle(); cizilen = 0; var i = 0, j = 2, toplam = 0; L.forEach(function (v) { toplam += v.p.length; });
@@ -164,7 +200,7 @@
     cv.classList.toggle("cizilir", a === "ciz"); $("kanvasKap").classList.toggle("perde", a === "sec" || a === "bekle"); document.body.classList.toggle("cz-sec", a === "sec");
     $("durumNot").textContent = G.bitti ? "Oyun bitti" : a === "ciz" ? (G.cizdi ? adO + " tahmin ediyor · istersen çizmeye devam et" : "Sen çiziyorsun · bitince Çizdim'e bas") : a === "tahmin" ? (G.cizdi ? adO + " çizdi · tahminini yaz" : adO + " canlı çiziyor · istediğin an tahmin et") : a === "sec" ? "Bu tur sen çiziyorsun" : "";
     /* tahminler */
-    var T = (G.tahminler || []).slice(-3), th = T.map(function (x) { return '<span class="cztah' + (x.ok ? " ok" : "") + '"><i>' + (x.ok ? "✓" : "✗") + "</i>" + D.esc(x.t) + "</span>"; }).join("");
+    var T = (G.tahminler || []).slice(-3), th = T.map(function (x) { return '<span class="cztah' + (x.ok ? " ok" : x.yakin ? " yakin" : "") + '"><i>' + (x.ok ? "✓" : x.yakin ? "≈" : "✗") + "</i>" + D.esc(x.t) + (x.yakin ? "<small>çok yakın</small>" : "") + "</span>"; }).join("");
     if ($("tahminler").getAttribute("data-h") !== th) { $("tahminler").innerHTML = th; $("tahminler").setAttribute("data-h", th); }
     if (a === "tahmin") { var yanlis = (G.tahminler || []).filter(function (x) { return !x.ok; }).length, ip = (G.ipucu || []).length, toplamH = (G.uz || []).reduce(function (s, n) { return s + n; }, 0); $("puanOlasi").textContent = "+" + Math.max(2, taban(G) - yanlis - 2 * ip); $("bIpucu").disabled = ip >= Math.max(0, toplamH - 2); }
     aracCiz();
@@ -172,25 +208,42 @@
     if (ilkAcilis || sonAsama !== a) { sonAsama = a; boyut(); }
   }
   function secenekler() {
-    var r = rng(((G.n || 1) * 7919 + (G.tur || 1) * 104729) >>> 0), kullanilan = (G.gecmis || []).map(function (g) { return g.k; }), L = [];
-    var havuz = K.filter(function (k) { return kullanilan.indexOf(k[0]) < 0; });
+    var r = rng(((G.tohum || 0) ^ ((G.n || 1) * 7919 + (G.tur || 1) * 104729 + (G.degis || 0) * 15485863)) >>> 0), kullanilan = (G.gecmis || []).map(function (g) { return g.k; }), L = [];
+    var gorulen = kullanilan.concat(G.gordu || [], G.eski || []);
+    var havuz = K.filter(function (k) { return gorulen.indexOf(k[0]) < 0; });
+    if (havuz.length < 30) havuz = K.filter(function (k) { return kullanilan.indexOf(k[0]) < 0 && (G.gordu || []).indexOf(k[0]) < 0; });   /* havuz tükenirse yalnız bu oyundakiler hariç */
     var var_ = function (k) { return L.some(function (x) { return x.k === k; }); };
     /* odaya özel kelimeler (Oda Ayarları): üçte bir ihtimalle seçeneklerden biri bizim kelimemiz olur */
     var ozel = []; try { var o = window.Hesap && Hesap.oda(); ozel = (o && o.ayar && o.ayar.kelimeler && o.ayar.kelimeler.ciz) || []; } catch (e) {}
-    ozel = ozel.map(function (w) { return String(w).toLocaleUpperCase("tr-TR"); }).filter(function (w) { return w && kullanilan.indexOf(w) < 0; });
+    ozel = ozel.map(function (w) { return String(w).toLocaleUpperCase("tr-TR"); }).filter(function (w) { return w && kullanilan.indexOf(w) < 0 && (G.gordu || []).indexOf(w) < 0; });
     if (ozel.length && r() < 0.34) L.push({ k: ozel[Math.floor(r() * ozel.length)], z: 2, ozel: true });
     [1, 2, 3].forEach(function (z) { if (L.length >= 3) return; var Z = havuz.filter(function (k) { return k[1] === z && !var_(k[0]); }); if (Z.length) { var sec = Z[Math.floor(r() * Z.length)]; L.push({ k: sec[0], z: z }); } });
     while (L.length < 3 && havuz.length) { var x = havuz[Math.floor(r() * havuz.length)]; if (!var_(x[0])) L.push({ k: x[0], z: x[1] }); }
     return L;
   }
+  /* seçim ekranında o an gösterilen kelimeler "görüldü" listesine eklenir (bu oyunun sonraki turlarında ve sonraki oyunlarda tekrar gelmez) */
+  function gorulduyeEkle() { var L = secenekler().map(function (o) { return o.k; }), g = (G.gordu || []).slice(); L.forEach(function (k) { if (g.indexOf(k) < 0) g.push(k); }); return g.slice(-60); }
+  /* tek harf eklenmiş/eksik/değişmiş tahmin (uzun kelimede iki harf) "çok yakın" sayılır */
+  function yakinMi(a, b) {
+    if (!a || !b || b.length < 4) return false; var lim = b.length >= 8 ? 2 : 1; if (Math.abs(a.length - b.length) > lim) return false;
+    var A = harfler(a), B = harfler(b), onc = []; for (var j = 0; j <= B.length; j++) onc.push(j);
+    for (var i = 1; i <= A.length; i++) { var cur = [i]; for (j = 1; j <= B.length; j++) cur.push(Math.min(onc[j] + 1, cur[j - 1] + 1, onc[j - 1] + (A[i - 1] === B[j - 1] ? 0 : 1))); onc = cur; }
+    return onc[B.length] <= lim;
+  }
+  $("secimDegis").onclick = function () {
+    if (asama() !== "sec" || gonderiyor || (G.degis || 0) >= 1) return; gonderiyor = true;
+    D.ref.set({ degis: (G.degis || 0) + 1, gordu: gorulduyeEkle(), t: firebase.firestore.FieldValue.serverTimestamp() }, { merge: true })
+      .then(function () { gonderiyor = false; snd("key"); }).catch(function () { gonderiyor = false; D.msg("Olmadı, tekrar dene."); });
+  };
   function secimCiz() {
+    $("secimDegis").hidden = (G.degis || 0) >= 1;
     var L = secenekler(), Z = { 1: "kolay", 2: "orta", 3: "zor" };
     $("secimListe").innerHTML = L.map(function (o) { return '<button type="button" class="czsk z' + o.z + '" data-k="' + D.esc(o.k) + '" data-z="' + o.z + '"><small>' + (o.ozel ? "bizim kelimemiz ★" : Z[o.z]) + "</small><b>" + D.esc(o.k) + '</b><em>' + TABAN[o.z] + " puan</em></button>"; }).join("");
   }
   $("secimListe").addEventListener("click", function (e) {
     var b = e.target.closest ? e.target.closest("button[data-k]") : null; if (!b || asama() !== "sec" || gonderiyor) return;
     var k = b.getAttribute("data-k"), uz = k.split(" ").map(function (p) { return harfler(p).length; }), z = +b.getAttribute("data-z") || 2; gonderiyor = true;
-    D.ref.set({ hazir: true, kelime: D.gizle(k, "ciz" + G.n + "-" + G.tur), uz: uz, zor: z, cizim: [], cizdi: false, ipucu: [], tahminler: [], sira: D.other, son: { u: D.me, t: "secti" }, t: firebase.firestore.FieldValue.serverTimestamp() }, { merge: true })
+    D.ref.set({ hazir: true, kelime: D.gizle(k, "ciz" + G.n + "-" + G.tur), uz: uz, zor: z, cizim: [], cizdi: false, ipucu: [], tahminler: [], sira: D.other, son: { u: D.me, t: "secti" }, gordu: gorulduyeEkle(), t: firebase.firestore.FieldValue.serverTimestamp() }, { merge: true })
       .then(function () { gonderiyor = false; snd("lock"); }).catch(function () { gonderiyor = false; D.msg("Kaydedilemedi, tekrar dene."); });
   });
   /* tahmin */
@@ -201,20 +254,20 @@
     var gecmis = (d.gecmis || []).concat([{ tur: d.tur, cizen: d.cizen, k: k, ok: ok, p: pB, z: d.zor || 2 }]), tur = d.tur + 1, bitti = tur > d.top;
     var upd = { tahminler: (d.tahminler || []).concat(tahmin ? [{ u: ME, t: tahmin, ok: ok }] : []), puan: puan, gecmis: gecmis, son: { u: ME, t: ok ? "bildi" : "pas", k: k, p: pB, tur: d.tur }, v: d.v + 1, t: firebase.firestore.FieldValue.serverTimestamp() };
     if (bitti) { upd.bitti = true; upd.sonuc = "bitti"; upd.sira = ""; upd.kazanan = puan[ME] > puan[OTHER] ? ME : puan[OTHER] > puan[ME] ? OTHER : null; }
-    else { upd.tur = tur; upd.cizen = ME; upd.hazir = false; upd.kelime = ""; upd.uz = []; upd.cizim = []; upd.cizdi = false; upd.ipucu = []; upd.tahminler = []; upd.sira = ME; }   /* roller değişir: bilen çizer */
+    else { upd.tur = tur; upd.cizen = ME; upd.hazir = false; upd.kelime = ""; upd.uz = []; upd.cizim = []; upd.cizdi = false; upd.ipucu = []; upd.tahminler = []; upd.sira = ME; upd.degis = 0; }   /* roller değişir: bilen çizer */
     return upd;
   }
   function tahminGonder() {
     var t = buyuk($("tahminIn").value); if (!t || asama() !== "tahmin" || gonderiyor) return;
-    var ME = D.me, once = G, ok = anahtar(t) === anahtar(kelimeOku(G)); gonderiyor = true; $("tahminIn").value = "";
+    var ME = D.me, once = G, ok = anahtar(t) === anahtar(kelimeOku(G)), yakin = !ok && yakinMi(anahtar(t), anahtar(kelimeOku(G))); gonderiyor = true; $("tahminIn").value = "";
     var bitirdi = false;
     D.db.runTransaction(function (tx) {
       return tx.get(D.ref).then(function (snap) {
         var d = snap.data(); if (!d || d.bitti || d.tur !== once.tur || d.cizen === ME || !d.hazir) throw new Error("tur");
-        var upd; if (ok) { upd = turBitir(d, true, t); bitirdi = !!upd.bitti; } else upd = { tahminler: (d.tahminler || []).concat([{ u: ME, t: t, ok: false }]), son: { u: ME, t: "yanlis", k: t, tur: d.tur }, v: d.v + 1, t: firebase.firestore.FieldValue.serverTimestamp() };
+        var upd; if (ok) { upd = turBitir(d, true, t); bitirdi = !!upd.bitti; } else upd = { tahminler: (d.tahminler || []).concat([yakin ? { u: ME, t: t, ok: false, yakin: true } : { u: ME, t: t, ok: false }]), son: { u: ME, t: "yanlis", k: t, tur: d.tur, yakin: yakin }, v: d.v + 1, t: firebase.firestore.FieldValue.serverTimestamp() };
         tx.set(D.ref, upd, { merge: true });
       });
-    }).then(function () { gonderiyor = false; if (bitirdi) D.bitirenBenim = true; snd(ok ? "found" : "key"); if (!ok) { var inp = $("tahminIn"); inp.classList.remove("titre"); void inp.offsetWidth; inp.classList.add("titre"); } })
+    }).then(function () { gonderiyor = false; if (bitirdi) D.bitirenBenim = true; snd(ok ? "found" : "key"); if (!ok) { if (yakin) D.msg("Çok yakın! Bir harf farkı var 🔥"); var inp = $("tahminIn"); inp.classList.remove("titre"); void inp.offsetWidth; inp.classList.add("titre"); } })
       .catch(function () { gonderiyor = false; D.msg("Gönderilemedi, tekrar dene."); });
   }
   $("bTahmin").onclick = tahminGonder;
@@ -239,7 +292,7 @@
     if (s.t === "secti") { if (!ben) { D.msg(kim + " kelimeyi seçti, çiziyor…"); snd("plus"); } }
     else if (s.t === "bildi") { damga((ben ? "Bildin!" : kim + " bildi!") + " +" + s.p, s.k, true); D.msg(G.bitti ? "" : "Şimdi " + (cizenBen() ? "sen çiziyorsun" : "o çiziyor") + "."); if (!ben) snd("found"); }
     else if (s.t === "pas") { damga("Geçildi", s.k, false); D.msg(G.bitti ? "" : "Sıradaki tur: " + (cizenBen() ? "sen çiziyorsun" : "o çiziyor") + "."); }
-    else if (s.t === "yanlis") { if (!ben) D.msg(kim + " dedi: " + s.k + " — değil"); }
+    else if (s.t === "yanlis") { if (!ben) D.msg(kim + " dedi: " + s.k + (s.yakin ? " — çok yaklaştı! 🔥" : " — değil")); }
     else if (s.t === "ipucu") { if (!ben) D.msg(kim + " bir harf açtı."); }
   }
   var damgaT = null;
@@ -252,7 +305,7 @@
     var onceki = G; G = d; var turK = d.n + ":" + d.tur;
     var yeniTur = turK !== sonTur; sonTur = turK;
     if (!yeniTur && onceki && d.cizen === D.me && d.hazir) G.cizim = onceki.cizim;              /* çizen için yerel çizim esastır (ara yazımlar çift vuru üretmesin) */
-    if (yeniTur) { canliVuru = null; cizilen = 0; if (oynatim) { clearTimeout(oynatim.t); oynatim = null; } }
+    if (yeniTur) { canliVuru = null; cizilen = 0; if (oynatim) { clearTimeout(oynatim.t); oynatim = null; } akisSifirla([]); akis.gT = 0; }
     ciz();
     if (cizenBen()) { if (yeniTur || !onceki) hepsiniCiz(); }
     else izle(d, yeniTur || !onceki);

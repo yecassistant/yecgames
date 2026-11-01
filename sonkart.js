@@ -35,7 +35,7 @@
   function motor(d) { var S = {}; MOTOR.forEach(function (k) { S[k] = d[k] === undefined ? null : JSON.parse(JSON.stringify(d[k])); }); S.ceza = S.ceza || 0; S.yok = S.yok || {}; S.cekilen = S.cekilen || ""; return S; }
   function tamDoc(d, upd) {
     var o = {}; for (var k in d) if (k !== "t") o[k] = d[k];
-    o = JSON.parse(JSON.stringify(o)); upd = JSON.parse(JSON.stringify(upd, function (k, v) { return k === "t" ? undefined : v; }));
+    o = JSON.parse(JSON.stringify(o)); upd = JSON.parse(JSON.stringify(upd, function (k, v) { return k === "t" && v && typeof v === "object" ? undefined : v; }));
     for (k in upd) o[k] = upd[k]; o.t = firebase.firestore.FieldValue.serverTimestamp(); return o;
   }
   function ad(id) { return id === "bot" ? "Bot" : id === D.me ? "Sen" : (D.adlar[id] || "Rakip"); }
@@ -171,7 +171,7 @@
     if (h.t === "oyna") { var kb = $("el").querySelector('.ukkb[data-k="' + h.k + '"]'); ucur(h.k, kb ? kb.getBoundingClientRect() : $("el").getBoundingClientRect(), $("atik").getBoundingClientRect()); }
     if (h.t === "cek") ucur("", $("deste").getBoundingClientRect(), $("el").getBoundingClientRect(), true);
     gonderiyor = true; bekleyenKart = null; unoBasili = false;
-    var yeni = JSON.parse(JSON.stringify(once, function (k, v) { return k === "t" ? undefined : v; })); MOTOR.forEach(function (k) { yeni[k] = S2[k]; });
+    var yeni = JSON.parse(JSON.stringify(once, function (k, v) { return k === "t" && v && typeof v === "object" ? undefined : v; })); MOTOR.forEach(function (k) { yeni[k] = S2[k]; });
     if (S2.bitti) { yeni.sonuc = S2.kazanan === "bot" ? "bot" : "bitti"; yeni.kazanan = S2.kazanan === "bot" ? null : S2.kazanan; }
     yeni.v = once.v + 1; G = yeni; ciz(); olayGoster(false);
     var bitirdi = false;

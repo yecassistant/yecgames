@@ -109,7 +109,7 @@
     var hedef = coz(G, OTHER); if (hedef.length !== 4) { gonderiyor = false; cizPad(); D.msg("Rakibin sayısı okunamadı."); return; }
     var pm = puanla(hedef, s), bulundu = pm.p === 4, bitirdi = false, once = G;
     /* anında göster: tahmin listeye girer, sonuç sunucudan onaylanınca kesinleşir */
-    G = JSON.parse(JSON.stringify(G, function (k, v) { return k === "t" ? undefined : v; })); G.tahmin[ME] = (G.tahmin[ME] || []).concat([{ t: s, p: pm.p, m: pm.m }]); if (!(G.baslayan !== ME && bulundu)) G.sira = OTHER; giris = ""; ciz();
+    G = JSON.parse(JSON.stringify(G, function (k, v) { return k === "t" && v && typeof v === "object" ? undefined : v; })); G.tahmin[ME] = (G.tahmin[ME] || []).concat([{ t: s, p: pm.p, m: pm.m }]); if (!(G.baslayan !== ME && bulundu)) G.sira = OTHER; giris = ""; ciz();
     D.db.runTransaction(function (tx) {
       return tx.get(D.ref).then(function (snap) {
         var d = snap.data(); if (!d || d.bitti || d.sira !== ME || d.v !== G.v) throw new Error("sira");

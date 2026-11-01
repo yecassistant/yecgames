@@ -111,7 +111,7 @@
     var t = tahta(G); if (bosSatir(t, c) < 0) return;
     var ME = D.me, OTHER = D.other, bitirdi = false, kazandi = false, once = G;
     gonderiyor = true;
-    G = JSON.parse(JSON.stringify(G, function (k, v) { return k === "t" ? undefined : v; })); G.hamle.push({ u: ME, c: c }); G.sira = OTHER;
+    G = JSON.parse(JSON.stringify(G, function (k, v) { return k === "t" && v && typeof v === "object" ? undefined : v; })); G.hamle.push({ u: ME, c: c }); G.sira = OTHER;
     var tt = tahta(G), kare = bosSatir(t, c) * SUT + c, dz = dizi(tt, kare);
     if (dz) { G.bitti = true; G.kazanan = ME; G.cizgi = dz; G.sira = ""; } else if (G.hamle.length >= SUT * SAT) { G.bitti = true; G.kazanan = null; G.sira = ""; }
     ciz(); snd("lock");
