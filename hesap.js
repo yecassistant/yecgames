@@ -107,8 +107,12 @@
       try { oda.adlar = { a: odaVeri.koltuk.a.ad, b: odaVeri.koltuk.b.ad }; if (odaVeri.koltuk[oda.koltuk]) oda.ad = odaVeri.koltuk[oda.koltuk].ad; ls("yg_oda", JSON.stringify(oda)); } catch (e) {}
       odaCb.forEach(function (f) { try { f(odaVeri); } catch (e) {} }); durum();
     }, function (e) {
-      /* kurallar okumayı reddetti: oda silinmiş ya da bu koltuk başka cihaza taşınmış demektir */
-      if (e && e.code === "permission-denied") { ayril(); location.href = "baslat.html?tasindi=1"; }
+      /* oda okunamadı. Koltuk başka cihaza taşındıysa odadan çıkılır; ama kurallar ya da App Check yüzünden her şey reddediliyorsa
+         (genel kesinti) kimse odadan atılmaz: kendi kişi kaydını da okuyamıyorsak kesinti sayılır, biraz sonra yeniden denenir. */
+      if (!(e && e.code === "permission-denied")) return;
+      odaDinliyor = false;
+      db.collection("kisiler").doc(user.uid).get().then(function () { ayril(); location.href = "baslat.html?tasindi=1"; },
+        function () { setTimeout(function () { if (oda && db && user) odaDinle(); }, 20000); });
     });
   }
 
@@ -259,7 +263,7 @@
   function odayiSil() {
     if (!oda) return Promise.reject(new Error("oda"));
     return baglan().then(function () {
-      var r = odaRef(), kols = ["oyuncular", "akis", "sohbet", "hafiza", "sayi", "xox", "tepe", "satranc", "amiral", "asmaca", "zincir", "sonkart", "dort", "ciz", "kelimeavi", "takvim"];
+      var r = odaRef(), kols = ["oyuncular", "akis", "sohbet", "hafiza", "sayi", "xox", "tepe", "satranc", "amiral", "asmaca", "zincir", "sonkart", "dort", "ciz", "kelimeavi", "takvim", "joled", "notlar"];
       return Promise.all(kols.map(function (k) { return r.collection(k).get().then(function (s) { var b = db.batch(); s.forEach(function (d) { b.delete(d.ref); }); return b.commit(); }).catch(function () {}); }))
         .then(function () { return r.get(); }).then(function (o) { var v = o.exists ? o.data() : null, b = db.batch(); if (v && v.kod) b.delete(db.collection("kodlar").doc(v.kod)); b.delete(r); b.delete(db.collection("kisiler").doc(user.uid)); return b.commit(); })
         .then(function () { ayril(); temizle(); });
