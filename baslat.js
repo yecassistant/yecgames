@@ -18,6 +18,14 @@
   if (window.Hesap && Hesap.kim() && !mod && !/[?&]kal/.test(location.search)) { location.replace(geri); return; }
   if (/[?&]tasindi/.test(location.search)) { hata("secimNot", "Bu cihazın odayla bağı kalmadı: koltuk kurtarma anahtarıyla başka bir cihaza taşınmış ya da oda silinmiş olabilir. Anahtarın varsa odana geri dönebilirsin."); }
   if (/[?&]silindi/.test(location.search)) { hata("secimNot", "Oda silindi; bütün kayıtlar gitti. İstersen yeni bir oda açabilirsin."); }
+  /* odası görünmüyorsa: bu cihaz önceden bir odada oturuyorduysa (kesintide yerel kayıt silindiyse) sessizce geri bağlan */
+  if (window.Hesap && Hesap.kurtar && !Hesap.kim() && !/[?&]silindi/.test(location.search) && yapilandirmaVar()) {
+    Hesap.kurtar().then(function (geldi) {
+      if (!geldi || !Hesap.kim()) return;
+      hata("secimNot", "Odana geri bağlandın ✓ Oyunlara geçiliyor…");
+      setTimeout(function () { location.replace(geri); }, 900);
+    });
+  }
   if (!yapilandirmaVar()) hata("secimNot", "Firebase ayarı yapılmamış: yapilandirma.js dosyasına proje bilgilerini yazmak gerekiyor.");
 
   [].forEach.call(document.querySelectorAll("[data-mod]"), function (b) { b.addEventListener("click", function () { var m = b.getAttribute("data-mod"); goster(m === "ac" ? "fAc" : m === "katil" ? "fKatil" : "fAnahtar"); var i = m === "ac" ? $("acAd") : m === "katil" ? $("kaAd") : $("anKey"); setTimeout(function () { try { i.focus(); } catch (e) {} }, 50); }); });

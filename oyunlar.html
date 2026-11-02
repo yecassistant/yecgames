@@ -21,7 +21,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="YEC Games">
 <link rel="apple-touch-icon" href="ikon/app-180.png">
-<link rel="stylesheet" href="style.css?v=yec13">
+<link rel="stylesheet" href="style.css?v=yec17">
 <script>try { if (!localStorage.getItem("yg_oda") && location.search.indexOf("deneme") < 0) location.replace("baslat.html"); } catch (e) {}</script>
 </head>
 <body data-page="oyunlar">
@@ -73,6 +73,12 @@
     <svg class="qmchev" aria-hidden="true"><use href="#qmChev"/></svg>
   </a>
   </div>
+  <button type="button" class="qmc qmwide qm-notlar" id="toNotlar" hidden>
+    <span class="qmico qmico-notlar"><svg viewBox="0 0 46 36" aria-hidden="true"><rect x="3" y="5" width="40" height="27" rx="5" fill="#fff8fb"/><path d="M4 8l19 13L42 8" fill="none" stroke="#eaa3c2" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round"/><path d="M23 30c-4.6-3-7-5.4-7-7.8a3.5 3.5 0 0 1 7-1.4 3.5 3.5 0 0 1 7 1.4c0 2.4-2.4 4.8-7 7.8z" fill="#e8457f"/></svg></span>
+    <span class="qmtx"><b>Notlar</b><small id="notlarSub">Küçük bir not bırak; menüyü açınca görür.</small></span>
+    <i class="qmnew" id="notlarBadge" hidden>not yolda</i>
+    <svg class="qmchev" aria-hidden="true"><use href="#qmChev"/></svg>
+  </button>
   <a class="qmc qmsoon qmtablo" href="tablo.html" id="toTablo">
     <span class="qmplus" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 19V9M12 19V5M19 19v-7"/></svg></span>
     <span class="qmtx"><b>Skor Tablosu</b><small>Kim kaç taç aldı, son hareketler.</small></span>
@@ -82,6 +88,12 @@
 
   <div class="qmsec qmsec-iki"><span>Birlikte</span><small>2 kişilik · uzaktan da olur</small></div>
   <div class="qmgrid" id="qmBirlikte">
+    <a class="qmc qmt qm-jole" href="jole.html" data-g="jole" id="toJole">
+      <span class="qmart"><svg viewBox="0 0 92 56" aria-hidden="true"><g font-family="Nunito,Arial,sans-serif" font-weight="900" text-anchor="middle" fill="#1c1028"><path d="M10 52c-3-12 3-22 14-23 10-1 17 6 16 15 0 6-3 9-9 9H14c-2 0-3-0-4-1z" fill="#3f8cff"/><text x="25" y="46" font-size="11">16</text><path d="M41 53c-2-15 6-28 21-28 13 0 22 10 20 22-1 4-3 6-8 6z" fill="#35f0ff"/><text x="61" y="44" font-size="11">1024</text><path d="M30 24c-1-7 4-12 10-12s10 5 9 11c0 3-2 5-5 5h-9c-3 0-5-1-5-4z" fill="#ffd84a"/><text x="39.5" y="24" font-size="9">2</text><path d="M58 15c0-6 4-10 9-10s9 4 9 9c0 3-2 5-4 5h-10c-3 0-4-1-4-4z" fill="#ff5468"/><text x="67" y="15.5" font-size="8">1</text></g><g fill="#fff" opacity=".55"><ellipse cx="18" cy="36" rx="4" ry="2" transform="rotate(-30 18 36)"/><ellipse cx="52" cy="32" rx="5" ry="2.2" transform="rotate(-25 52 32)"/></g></svg></span>
+      <span class="qmtx"><b>Jöle</b><small id="joleSub">Jöleleri fırlat, aynılar birleşsin; 4 mod, düello dahil ⚔️</small></span>
+      <i class="qmnew" id="joleBadge">yeni</i>
+      <svg class="qmchev" aria-hidden="true"><use href="#qmChev"/></svg>
+    </a>
     <a class="qmc qmt qm-kelimeavi" href="kelimeavi.html" data-g="kelimeavi" id="toKelimeavi">
       <span class="qmart"><svg viewBox="0 0 92 56" aria-hidden="true"><g font-family="Nunito,Arial,sans-serif" font-weight="900" font-size="12" text-anchor="middle"><rect x="14" y="4" width="20" height="20" rx="5" fill="#ffd166"/><text x="24" y="19" fill="#3a2410">K</text><rect x="37" y="4" width="20" height="20" rx="5" fill="#ffd166"/><text x="47" y="19" fill="#3a2410">A</text><rect x="60" y="4" width="20" height="20" rx="5" fill="#fbf4e6"/><text x="70" y="19" fill="#3a2410">L</text><rect x="14" y="28" width="20" height="20" rx="5" fill="#fbf4e6"/><text x="24" y="43" fill="#3a2410">S</text><rect x="37" y="28" width="20" height="20" rx="5" fill="#ffd166"/><text x="47" y="43" fill="#3a2410">H</text><rect x="60" y="28" width="20" height="20" rx="5" fill="#ffd166"/><text x="70" y="43" fill="#3a2410">V</text></g><path d="M24 14L47 14L47 38L70 38" fill="none" stroke="#f2c35b" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" opacity=".55"/><circle cx="8" cy="46" r="6" fill="#5fe3b8"/><text x="8" y="49" font-family="Nunito,Arial,sans-serif" font-weight="900" font-size="7" fill="#0b2a22" text-anchor="middle">90</text></svg></span>
       <span class="qmtx"><b>Kelime Avı</b><small id="kelimeaviSub">Aynı tablo, 90 saniye; kim daha çok kelime bulur?</small></span>
@@ -217,10 +229,10 @@
   <p class="qmimza">YEC Games · Nunu &amp; Büş yapımı · <a href="gizlilik.html">Gizlilik</a></p>
 </main>
 
-<script src="app.js?v=yec13"></script>
-<script src="yapilandirma.js?v=yec13"></script>
-<script src="deneme.js?v=yec13"></script>
-<script src="hesap.js?v=yec13"></script>
+<script src="app.js?v=yec17"></script>
+<script src="yapilandirma.js?v=yec17"></script>
+<script src="deneme.js?v=yec17"></script>
+<script src="hesap.js?v=yec17"></script>
 <script>
 /* oda çubuğu: iki koltuk, adlar, durum */
 (function () {
@@ -276,6 +288,20 @@
       if (bi < ad) { badge.textContent = bi ? "devam et" : "oyna"; badge.className = "qmnew qmturn"; sub.textContent = "Sen " + (bi + 1) + ". kelimedesin · o " + (oi >= ad ? "bitirdi." : (oi + 1) + ". kelimede."); return; }
       badge.textContent = "o çözüyor"; sub.textContent = "Sen bitirdin; o da bitirince puanlar karşılaştırılacak.";
     }).catch(function () {});
+  });
+  /* Jöle Düellosu: canlı davet varsa kartta "seni çağırıyor" (davet 25 sn tazeyse) */
+  var jdBakti = false;
+  Hesap.izle(function (k) {
+    if (!k || !k.kesin || jdBakti) return; jdBakti = true;
+    var badge = document.getElementById("joleBadge"), sub = document.getElementById("joleSub"); if (!badge || !sub) return;
+    var ilkSub = sub.textContent, son = null;
+    function goster() {
+      var d = son, gelen = d && d.durum === "davet" && d.davet !== k.uid && d.nabiz && Math.abs(Date.now() - d.nabiz) < 25000;
+      if (gelen) { badge.textContent = "davet ⚔️"; badge.className = "qmnew qmturn"; sub.textContent = Hesap.gorunenAd(k.uid === "a" ? "b" : "a") + " seni Jöle düellosuna çağırıyor!"; }
+      else { badge.textContent = "yeni"; badge.className = "qmnew"; sub.textContent = ilkSub; }
+    }
+    Hesap.db().then(function (db) { db.collection("joled").doc("mac").onSnapshot(function (snap) { son = snap.exists ? snap.data() : null; goster(); }, function () {}); }).catch(function () {});
+    setInterval(goster, 5000);
   });
   /* Satranç: sıra bendeyse kartta "sıra sende" */
   var stBakti = false;
@@ -458,5 +484,6 @@
   a.addEventListener("click", function () { if (buDokunus) { buDokunus = false; return; } kapat(); });
 })();
 </script>
+<script src="notlar.js?v=yec17"></script>
 </body>
 </html>
