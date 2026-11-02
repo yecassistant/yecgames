@@ -148,36 +148,6 @@
   function now() { return performance.now(); }
   function randLevel() { var s = 0, i; for (i = 0; i <= DROP_MAX; i++) s += DROP_W[i]; var r = Math.random() * s; for (i = 0; i <= DROP_MAX; i++) { r -= DROP_W[i]; if (r <= 0) return i; } return 0; }
 
-  /* ---------- kalbin gerçek şekli ----------
-     Kalp çizimde iki kıvrımlı; fizikte tek daire olunca üstteki girintide meyveler kalbe değmeden havada duruyordu.
-     Kalbin çizgisi SVG yolundan örneklenir (sprite birimi: merkez (50,52), yarıçap 44 = b.r) ve kalbe değen meyve bu çizgiyle çarpışır. */
-  var KALP_P = (function () {
-    var C = [[50, 93, 30, 78, 8, 63, 8, 40], [8, 40, 8, 26, 18.5, 16, 31, 16], [31, 16, 39.5, 16, 46, 20.5, 50, 28], [50, 28, 54, 20.5, 60.5, 16, 69, 16], [69, 16, 81.5, 16, 92, 26, 92, 40], [92, 40, 92, 63, 70, 78, 50, 93]], P = [];
-    C.forEach(function (c) { for (var i = 0; i < 8; i++) { var t = i / 8, u = 1 - t; P.push([u * u * u * c[0] + 3 * u * u * t * c[2] + 3 * u * t * t * c[4] + t * t * t * c[6] - 50, u * u * u * c[1] + 3 * u * u * t * c[3] + 3 * u * t * t * c[5] + t * t * t * c[7] - 52]); } });
-    return P;
-  })();
-  function kalpTemas(h, c) {                                  /* kalp–daire teması: [nx, ny, batma] (n kalpten daireye) ya da null */
-    var dx = c.x - h.x, dy = c.y - h.y; if (dx * dx + dy * dy >= (h.r + c.r) * (h.r + c.r)) return null;
-    var k = h.r / 44, ca = Math.cos(h.a), sa = Math.sin(h.a), lx = (dx * ca + dy * sa) / k, ly = (-dx * sa + dy * ca) / k, rr = c.r / k;
-    var P = KALP_P, n = P.length, en = 1e9, qx = 0, qy = 0, ic = false, i, j;
-    for (i = 0, j = n - 1; i < n; j = i++) {
-      var a = P[j], b = P[i], ex = b[0] - a[0], ey = b[1] - a[1], L = ex * ex + ey * ey, t = L ? ((lx - a[0]) * ex + (ly - a[1]) * ey) / L : 0; t = t < 0 ? 0 : t > 1 ? 1 : t;
-      var px = a[0] + ex * t, py = a[1] + ey * t, d = (px - lx) * (px - lx) + (py - ly) * (py - ly);
-      if (d < en) { en = d; qx = px; qy = py; }
-      if ((a[1] > ly) !== (b[1] > ly) && lx < (b[0] - a[0]) * (ly - a[1]) / (b[1] - a[1]) + a[0]) ic = !ic;
-    }
-    en = Math.sqrt(en); if (!ic && en >= rr) return null;
-    var nx, ny;
-    if (en < 1e-6) { var l0 = Math.sqrt(lx * lx + ly * ly) || 1; nx = lx / l0; ny = ly / l0; }
-    else if (ic) { nx = (qx - lx) / en; ny = (qy - ly) / en; } else { nx = (lx - qx) / en; ny = (ly - qy) / en; }
-    return [nx * ca - ny * sa, nx * sa + ny * ca, (ic ? rr + en : rr - en) * k];
-  }
-  function kalpUzan(h, ux, uy) {                              /* kalbin (ux,uy) yönündeki en uzak noktası: kase duvarına değme mesafesi */
-    var k = h.r / 44, ca = Math.cos(h.a), sa = Math.sin(h.a), lx = ux * ca + uy * sa, ly = -ux * sa + uy * ca, m = -1e9;
-    for (var i = 0; i < KALP_P.length; i++) { var v = KALP_P[i][0] * lx + KALP_P[i][1] * ly; if (v > m) m = v; }
-    return m * k;
-  }
-
   /* ---------- fizik ---------- */
   /* Uyku yok: her meyve her karede yerçekimi ve temas kuvvetlerine tabi; altta kalan meyve üsttekilerin baskısıyla kayabilir.
      Titreşimi önleyen şeyler: slop'lu yumuşak konum düzeltmesi, düşük hızda sekme yok, çok küçük hızın sıfırlanması (sürünme yok).
@@ -194,16 +164,10 @@
       /* meyve–meyve */
       for (i = 0; i < n; i++) for (j = i + 1; j < n; j++) {
         b = bodies[i]; o = bodies[j];
-        var kb = !!FRUITS[b.L].kalp, ko = !!FRUITS[o.L].kalp, nx, ny, pen;
-        if (kb !== ko) {                                       /* biri kalpse: kalbin gerçek çizgisiyle */
-          var kt = kb ? kalpTemas(b, o) : kalpTemas(o, b); if (!kt) continue;
-          nx = kb ? kt[0] : -kt[0]; ny = kb ? kt[1] : -kt[1]; pen = kt[2];
-        } else {
-          var dx = o.x - b.x, dy = o.y - b.y, d2 = dx * dx + dy * dy, R = b.r + o.r;
-          if (d2 >= R * R) continue;
-          if (d2 < 0.0001) { dx = 0.01; dy = -0.01; d2 = 0.0002; }
-          var d = Math.sqrt(d2); nx = dx / d; ny = dy / d; pen = R - d;
-        }
+        var dx = o.x - b.x, dy = o.y - b.y, d2 = dx * dx + dy * dy, R = b.r + o.r;
+        if (d2 >= R * R) continue;
+        if (d2 < 0.0001) { dx = 0.01; dy = -0.01; d2 = 0.0002; }
+        var d = Math.sqrt(d2), nx = dx / d, ny = dy / d, pen = R - d;
         var mb = b.mass, mo = o.mass, tot = mb + mo;
         var push = Math.max(0, pen - SLOP) * corr;
         var sb = Math.abs(b.vx) + Math.abs(b.vy), so = Math.abs(o.vx) + Math.abs(o.vy);
@@ -241,9 +205,7 @@
           var t = ((b.x - w.x1) * ex + (b.y - w.y1) * ey) / len2; t = Math.max(0, Math.min(1, t));
           var px = w.x1 + ex * t, py = w.y1 + ey * t, ddx = b.x - px, ddy = b.y - py, dd = Math.sqrt(ddx * ddx + ddy * ddy);
           if (dd >= b.r || dd === 0) continue;
-          var wnx = ddx / dd, wny = ddy / dd, wr = FRUITS[b.L].kalp ? kalpUzan(b, -wnx, -wny) : b.r;
-          if (dd >= wr) continue;
-          var wpen = wr - dd;
+          var wnx = ddx / dd, wny = ddy / dd, wpen = b.r - dd;
           b.x += wnx * Math.max(0, wpen - SLOP * 0.5) * 0.85; b.y += wny * Math.max(0, wpen - SLOP * 0.5) * 0.85;
           var vn2 = b.vx * wnx + b.vy * wny;
           if (vn2 < 0) {

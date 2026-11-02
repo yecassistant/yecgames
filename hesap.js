@@ -23,7 +23,6 @@
     kb_max: "max", kb_lvl: "max", kb_bonus: "max", kb_rozet: "max", kb_hint: "max", kb_done: "flag", kb_end: "flag", kb_new31: "flag", kb_wait: "flag", kb_intro: "flag", kb_state: "new",
     ok_max: "max", ok_lvl: "max", ok_hint: "max", ok_intro: "flag", ok_stars: "stars", ok_best: "best", ok_state: "new",
     pm_best: "max", pm_sufle: "max", pm_muffin2: "flag", pm_tost2: "flag", pm_kalp1: "flag", pm_hediye1: "flag",
-    jl_best: "max", jl_max: "max", jl_sbest: "max", jl_zbest: "max",
     sef_best: "max", sef_oda: "new",
     stb_best: "max", stb_oyun: "max", yk_best: "max", yk_seviye: "max",
     gk_start: "min", gk_stat: "new", gk_help: "flag", qg_last: "new"
@@ -107,12 +106,8 @@
       try { oda.adlar = { a: odaVeri.koltuk.a.ad, b: odaVeri.koltuk.b.ad }; if (odaVeri.koltuk[oda.koltuk]) oda.ad = odaVeri.koltuk[oda.koltuk].ad; ls("yg_oda", JSON.stringify(oda)); } catch (e) {}
       odaCb.forEach(function (f) { try { f(odaVeri); } catch (e) {} }); durum();
     }, function (e) {
-      /* oda okunamadı. Koltuk başka cihaza taşındıysa odadan çıkılır; ama kurallar ya da App Check yüzünden her şey reddediliyorsa
-         (genel kesinti) kimse odadan atılmaz: kendi kişi kaydını da okuyamıyorsak kesinti sayılır, biraz sonra yeniden denenir. */
-      if (!(e && e.code === "permission-denied")) return;
-      odaDinliyor = false;
-      db.collection("kisiler").doc(user.uid).get().then(function () { ayril(); location.href = "baslat.html?tasindi=1"; },
-        function () { setTimeout(function () { if (oda && db && user) odaDinle(); }, 20000); });
+      /* kurallar okumayı reddetti: oda silinmiş ya da bu koltuk başka cihaza taşınmış demektir */
+      if (e && e.code === "permission-denied") { ayril(); location.href = "baslat.html?tasindi=1"; }
     });
   }
 
@@ -154,8 +149,6 @@
     if (artti("kb_max")) olay("kelime", "bolum", num(b.kb_max));
     if (artti("kb_rozet")) olay("kelime", "rozet", num(b.kb_rozet));
     if (artti("pm_best")) olay("kase", "rekor", num(b.pm_best));
-    if (artti("jl_best")) olay("jole", "rekor", num(b.jl_best));
-    if (artti("jl_max") && num(b.jl_max) >= 256) olay("jole", "buyuk", num(b.jl_max));
     if (artti("pm_sufle")) olay("kase", "sufle", num(b.pm_sufle));
     ["pm_muffin2", "pm_tost2", "pm_kalp1"].forEach(function (k) { if (b[k] === "1" && a[k] !== "1") olay("kase", k, 1); });
     if (artti("sef_best")) olay("plan", "rekor", num(b.sef_best));
@@ -263,7 +256,7 @@
   function odayiSil() {
     if (!oda) return Promise.reject(new Error("oda"));
     return baglan().then(function () {
-      var r = odaRef(), kols = ["oyuncular", "akis", "sohbet", "hafiza", "sayi", "xox", "tepe", "satranc", "amiral", "asmaca", "zincir", "sonkart", "dort", "ciz", "kelimeavi", "takvim", "joled", "notlar"];
+      var r = odaRef(), kols = ["oyuncular", "akis", "sohbet", "hafiza", "sayi", "xox", "tepe", "satranc", "amiral", "asmaca", "zincir", "sonkart", "dort", "ciz", "kelimeavi", "takvim"];
       return Promise.all(kols.map(function (k) { return r.collection(k).get().then(function (s) { var b = db.batch(); s.forEach(function (d) { b.delete(d.ref); }); return b.commit(); }).catch(function () {}); }))
         .then(function () { return r.get(); }).then(function (o) { var v = o.exists ? o.data() : null, b = db.batch(); if (v && v.kod) b.delete(db.collection("kodlar").doc(v.kod)); b.delete(r); b.delete(db.collection("kisiler").doc(user.uid)); return b.commit(); })
         .then(function () { ayril(); temizle(); });

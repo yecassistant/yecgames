@@ -4,7 +4,7 @@
    - Sürümlü dosyalar (?v=…), resimler, ses, Firebase SDK ve Google yazı tipleri: önce saklanan kopya, yoksa ağ.
    - Firestore / giriş istekleri hiç saklanmaz (canlı veri).
    Yeni sürüm yüklenince SURUM'u değiştirmek yeterli; eski saklananlar silinir. */
-var SURUM = "yec-16";
+var SURUM = "yec-13";
 var ONCE = ["oyunlar.html", "baslat.html", "manifest.webmanifest", "ikon/app-192.png", "ikon/logo-koyu.svg"];
 self.addEventListener("install", function (e) {
   e.waitUntil(caches.open(SURUM).then(function (c) { return c.addAll(ONCE).catch(function () {}); }).then(function () { return self.skipWaiting(); }));
