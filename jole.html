@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<title>Jöle</title>
+<meta name="description" content="Sayılı jöleleri kutuya fırlat; aynılar birleşsin, 2048'e kadar git.">
+<meta property="og:title" content="Jöle 🫧">
+<meta property="og:description" content="Jöleleri fırlat, aynılar birleşsin.">
+<meta name="color-scheme" content="light">
+<meta property="og:type" content="website">
+<meta property="og:image" content="onizleme.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#ec6f9a">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Ctext y=%27.9em%27 font-size=%2790%27%3E%F0%9F%AB%A7%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;1,9..144,600&family=Nunito:wght@600;700;800;900&display=swap">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="YEC Games">
+<link rel="apple-touch-icon" href="ikon/app-180.png">
+<link rel="stylesheet" href="style.css?v=yec15">
+</head>
+<body data-page="jole" data-tone="lav">
+
+<main class="stage jole">
+  <div class="gtop">
+    <a class="gback" href="oyunlar.html">← Geri</a>
+    <div class="gtitle"><b>Jöle</b><small>fırlat, birleştir 🫧</small></div>
+    <div class="gscore"><span>En iyi <b id="best">0</b></span></div>
+  </div>
+
+  <div class="jhead">
+    <div class="jbuyuk"><small>En büyük</small><b id="buyuk">–</b></div>
+    <div class="jpuan"><small>Puan</small><b id="puan">0</b></div>
+    <div class="jdug"><button type="button" id="sesBtn" aria-label="Ses">🔊</button><button type="button" id="yardimBtn" aria-label="Nasıl oynanır">?</button><button type="button" id="modBtn" class="jmodbtn" aria-label="Modlar"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7.5" height="7.5" rx="2.2"/><rect x="13.5" y="3" width="7.5" height="7.5" rx="2.2"/><rect x="3" y="13.5" width="7.5" height="7.5" rx="2.2"/><rect x="13.5" y="13.5" width="7.5" height="7.5" rx="2.2"/></svg></button></div>
+  </div>
+  <div class="jduel" id="jduel" hidden>
+    <div class="jdk"><small>Sen</small><b id="dBenPuan">0</b></div>
+    <div class="jdsure"><b id="dSure">2:30</b><small id="dSureAlt">düello ⚔️</small></div>
+    <div class="jdk o"><small id="dRakipAd">Rakip</small><b id="dRakipPuan">0</b></div>
+  </div>
+
+  <div class="kutuwrap" id="kutuwrap"><div class="kutuyigin" id="kutuYigin"><canvas id="kutuArka" aria-hidden="true"></canvas><canvas id="kutu" aria-label="Jöle kutusu"></canvas><canvas id="kutuOn" aria-hidden="true"></canvas></div></div>
+
+  <p class="jmsg" id="jmsg"></p>
+</main>
+
+<div class="over" id="over" hidden>
+  <div class="overcard">
+    <div class="eyebrow" id="overUst">kutu doldu 🫧</div>
+    <h2>Puan: <em id="overPuan">0</em></h2>
+    <p class="lead" id="overText"></p>
+    <p class="small" id="overBest"></p>
+    <div class="btns"><button type="button" class="btn pink" id="tekrar">Bir daha 🫧</button><button type="button" class="btn ghost" id="overMod">Modlar</button><a class="btn ghost" href="kase.html">Peki Madem (: 🍉</a><a class="btn ghost" href="oyunlar.html">Menü</a></div>
+  </div>
+</div>
+
+<!-- modlar: oyuna girince ilk bu çıkar -->
+<div class="over jmodlar" id="modlar" hidden>
+  <div class="overcard">
+    <div class="eyebrow">jöle 🫧</div>
+    <h2>Nasıl oynayalım?</h2>
+    <div class="jmodliste">
+      <button type="button" class="jmod" data-m="tek"><i class="jmi k">🫧</i><span><b>Klasik</b><small>Kutu dolana kadar; ara ara gri çöp jöle düşer.</small></span><em id="mbtek"></em></button>
+      <button type="button" class="jmod" data-m="sakin"><i class="jmi s">🌙</i><span><b>Sakin</b><small>Çöp yok, acele yok; sadece birleştir.</small></span><em id="mbsakin"></em></button>
+      <button type="button" class="jmod" data-m="zaman"><i class="jmi z">⏱</i><span><b>Zamana karşı</b><small>2 dakika; kombolarla puanı katla.</small></span><em id="mbzaman"></em></button>
+      <div class="jmod jmodduel" id="mDuel">
+        <button type="button" class="jmodbas" id="mDuelBas"><i class="jmi d">⚔️</i><span><b id="mDuelAd">Düello</b><small id="mDuelAlt">Canlı, aynı anda, aynı jöleler.</small></span><em id="mbduel"></em></button>
+        <div class="jmodayar" id="mDuelAyar" hidden>
+          <div class="jsat"><small>Süre</small><div class="jchip" id="mSure"><button type="button" data-s="60">1 dk</button><button type="button" data-s="150" class="on">2,5 dk</button><button type="button" data-s="300">5 dk</button></div></div>
+          <div class="jsat"><small>Çöp jöle</small><div class="jchip" id="mCop"><button type="button" data-c="1" class="on">Açık</button><button type="button" data-c="0">Kapalı</button></div></div>
+          <button type="button" class="btn pink" id="mDavet">Davet et ⚔️</button>
+        </div>
+      </div>
+    </div>
+    <button type="button" class="btn link" id="mDevam" hidden>Oyuna dön</button>
+  </div>
+</div>
+
+<!-- düello -->
+<div class="over" id="dDavet" hidden>
+  <div class="overcard">
+    <div class="eyebrow">jöle düellosu ⚔️</div>
+    <h2 id="dDavetBaslik">Düelloya çağrıldın</h2>
+    <p class="lead" id="dDavetMetin">Aynı jölelerle, aynı anda, 2,5 dakika. Büyük birleşmeler karşı tarafa gri çöp jöle yollar.</p>
+    <div class="btns"><button type="button" class="btn pink" id="dKatil">Katıl ⚔️</button><button type="button" class="btn ghost" id="dReddet">Şimdi değil</button></div>
+  </div>
+</div>
+<div class="over" id="dBekle" hidden>
+  <div class="overcard">
+    <div class="eyebrow">jöle düellosu ⚔️</div>
+    <h2 id="dBekleBaslik">Bekliyorum…</h2>
+    <p class="lead" id="dBekleMetin">Jöle'yi açınca davetini görecek; katılınca 3-2-1 ile birlikte başlarsınız.</p>
+    <div class="jbekle" aria-hidden="true"><i></i><i></i><i></i></div>
+    <div class="btns"><button type="button" class="btn ghost" id="dVazgec">Vazgeç</button></div>
+  </div>
+</div>
+<div class="jgeri" id="dGeri" hidden><b id="dGeriSayi">3</b><small id="dGeriAlt">aynı jöleler, 2,5 dakika</small></div>
+<div class="over" id="dSon" hidden>
+  <div class="overcard">
+    <div class="eyebrow" id="dSonUst">düello bitti ⚔️</div>
+    <h2 id="dSonBaslik">…</h2>
+    <div class="jsonskor"><div><b id="dSonBen">0</b><small>Sen</small></div><div><b id="dSonO">0</b><small id="dSonOAd">Rakip</small></div></div>
+    <p class="small" id="dSonMetin"></p>
+    <div class="btns"><button type="button" class="btn pink" id="dRovans" hidden>Rövanş ⚔️</button><button type="button" class="btn ghost" id="dTek" hidden>Modlara dön</button></div>
+  </div>
+</div>
+
+<div class="over intro" id="intro" hidden>
+  <div class="overcard">
+    <div class="eyebrow">yeni oyun 🫧</div>
+    <h2><em>Jöle</em></h2>
+    <ul class="howto">
+      <li>Üstteki jölelerden birini parmağınla tut, sağa sola gezdir; bırakınca düşer, hızlı bırakırsan fırlar.</li>
+      <li>Rayda iki aynı sayı varsa birini öbürünün üstüne getir, orada birleşirler.</li>
+      <li>Aynı iki sayı değince birleşir: 1+1=2, 2+2=4 … 2048'e kadar.</li>
+      <li>Gri çöp jöleler birleşmez; yanında bir birleşme olursa erir. Ara ara gökten düşerler.</li>
+      <li>Arka arkaya birleştirirsen kombo yaparsın, puan katlanır.</li>
+      <li>Kesikli çizginin üstünde jöle birikirse kutu dolar, oyun biter.</li>
+      <li>4 mod var: Klasik, Sakin (çöp yok), Zamana karşı (2 dakika) ve ⚔️ Düello. Düelloda ikiniz aynı anda aynı jölelerle oynarsınız; süreyi ve çöpü siz seçersiniz.</li>
+    </ul>
+    <div class="btns"><button type="button" class="btn pink" id="introGo">Başla 🫧</button></div>
+  </div>
+</div>
+
+<script src="app.js?v=yec15"></script>
+<script src="yapilandirma.js?v=yec15"></script>
+<script src="deneme.js?v=yec15"></script>
+<script src="hesap.js?v=yec15"></script>
+<script>(window.Hesap ? Hesap.oyun : function (l) { l.forEach(function (x) { document.write('<script src="' + x + '"><\/script>'); }); })(["jole.js?v=yec15"]);</script>
+</body>
+</html>

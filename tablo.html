@@ -19,7 +19,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="YEC Games">
 <link rel="apple-touch-icon" href="ikon/app-180.png">
-<link rel="stylesheet" href="style.css?v=yec13">
+<link rel="stylesheet" href="style.css?v=yec15">
 <style>
 .tbmin{gap:12px}
 .tbmin .tbvitrin{padding:16px 12px 12px;background:rgba(255,255,255,.06);box-shadow:inset 0 0 0 1px rgba(255,255,255,.12)}
@@ -55,10 +55,10 @@
   </section>
 </main>
 
-<script src="app.js?v=yec13"></script>
-<script src="yapilandirma.js?v=yec13"></script>
-<script src="deneme.js?v=yec13"></script>
-<script src="hesap.js?v=yec13"></script>
+<script src="app.js?v=yec15"></script>
+<script src="yapilandirma.js?v=yec15"></script>
+<script src="deneme.js?v=yec15"></script>
+<script src="hesap.js?v=yec15"></script>
 <script>
 (function () {
   var $ = function (id) { return document.getElementById(id); };
@@ -74,7 +74,7 @@
     if (d < 60000) return "az önce"; if (d < 3600000) return Math.round(d / 60000) + " dk önce"; if (d < 86400000) return Math.round(d / 3600000) + " sa önce";
     var t = new Date(ms); return t.getDate() + " " + AYLAR[t.getMonth()] + " " + pad(t.getHours()) + ":" + pad(t.getMinutes());
   }
-  var OYUN = { takvim: "Ortak Takvim", kelime: "Kelime Bahçesi", ok: "Eros'un Oku", kase: "Meyve Kasesi", gunun: "Günün Kelimesi", plan: "Bahçe Planı", oda: "Oda Döşe", hafiza: "Hafıza Düellosu", satranc: "Satranç", kelimeavi: "Kelime Avı", sayi: "Sayı Düellosu", amiral: "Amiral Battı", asmaca: "Adam Asmaca", yasak: "Tabu", xox: "XOX", tepe: "Tepe Savaşı", zincir: "Kelime Zinciri", sonkart: "UNO", dort: "Dört Taş", ciz: "Çiz Bil", yikim: "Yıkım", stilobat: "Stilobat", takvim: "takvimde", oyunlar: "menüde", tablo: "skor tablosunda", giris: "girişte", index: "ana sayfada" };
+  var OYUN = { takvim: "Ortak Takvim", kelime: "Kelime Bahçesi", ok: "Eros'un Oku", kase: "Meyve Kasesi", jole: "Jöle", joled: "Jöle Düellosu", gunun: "Günün Kelimesi", plan: "Bahçe Planı", oda: "Oda Döşe", hafiza: "Hafıza Düellosu", satranc: "Satranç", kelimeavi: "Kelime Avı", sayi: "Sayı Düellosu", amiral: "Amiral Battı", asmaca: "Adam Asmaca", yasak: "Tabu", xox: "XOX", tepe: "Tepe Savaşı", zincir: "Kelime Zinciri", sonkart: "UNO", dort: "Dört Taş", ciz: "Çiz Bil", yikim: "Yıkım", stilobat: "Stilobat", takvim: "takvimde", oyunlar: "menüde", tablo: "skor tablosunda", giris: "girişte", index: "ana sayfada" };
   function yildiz(n) { var s = ""; for (var i = 0; i < 3; i++) s += i < n ? "★" : "☆"; return s; }
 
   /* ---- bir oyuncunun özeti ---- */
@@ -87,6 +87,7 @@
     return [
       { o: "kelime", ad: "Kelime Bahçesi", v: kbDone, t: kbDone ? kbDone + ". bölüm" : "—", alt: roz ? roz + " rozet" + (num(d.kb_bonus) ? " · " + num(d.kb_bonus) + " bonus" : "") : (num(d.kb_bonus) ? num(d.kb_bonus) + " bonus kelime" : "") },
       { o: "ok", ad: "Eros'un Oku", v: num(d.ok_max) * 1000 + okY, t: num(d.ok_max) ? num(d.ok_max) + ". bölüm" : "—", alt: okY ? okY + " yıldız" : "" },
+      { o: "jole", ad: "Jöle", v: num(d.jl_best), t: num(d.jl_best) ? num(d.jl_best) + " puan" : "—", alt: num(d.jl_max) ? "en büyük jöle " + num(d.jl_max) : "" },
       { o: "kase", ad: "Meyve Kasesi", v: num(d.pm_best), t: num(d.pm_best) ? num(d.pm_best) + " puan" : "—", alt: (num(d.pm_sufle) ? num(d.pm_sufle) + " sufle" : "") + (d.pm_kalp1 === "1" ? (num(d.pm_sufle) ? " · " : "") + "kalbe ulaştı" : d.pm_tost2 === "1" ? "atom tosta ulaştı" : d.pm_muffin2 === "1" ? "muffine ulaştı" : "") },
       { o: "gunun", ad: "Günün Kelimesi", v: gkSeri * 1000 + num(gs.w), t: bugun && bugun.s === "w" ? bugun.g.length + " tahminde" : bugun && bugun.s === "l" ? "bulamadı" : bugun && bugun.g && bugun.g.length ? bugun.g.length + " tahmin yaptı" : "—", alt: (bugun && bugun.g && bugun.g.length ? "bugün" : "bugün oynamadı") + (gkSeri ? " · " + gkSeri + " günlük seri" : "") + (num(gs.p) ? " · " + num(gs.w) + "/" + num(gs.p) + " kazanma" : "") },
       { o: "plan", ad: "Bahçe Planı", v: num(d.sef_best), t: num(d.sef_best) ? num(d.sef_best) + " puan" : "—", alt: "" },
@@ -107,6 +108,9 @@
     if (o === "kelime" && k === "rozet") return ad + " Kelime Bahçesi'nde " + (v === 3 ? "altın" : v === 2 ? "gümüş" : "bronz") + " rozeti kazandı 🏅";
     if (o === "takvim") { var AY = ["Ocak", "Şubat", "Mart", "Nisan", "Mayıs", "Haziran", "Temmuz", "Ağustos", "Eylül", "Ekim", "Kasım", "Aralık"], gun = v % 100, ay = Math.floor(v / 100) % 100; return ad + " takvimde " + gun + " " + (AY[ay - 1] || "") + (k === "ortak" ? " gününü işaretledi — ortak gün 💛" : " gününü müsait işaretledi."); }
     if (o === "kase" && k === "rekor") return ad + " Meyve Kasesi'nde yeni rekor kırdı: " + v + " puan.";
+    if (o === "jole" && k === "rekor") return ad + " Jöle'de yeni rekor kırdı: " + v + " puan 🫧";
+    if (o === "jole" && k === "buyuk") return ad + " Jöle'de ilk kez " + v + " jölesini yaptı 🫧";
+    if (o === "joled") return k === "berabere" ? ad + " ve " + rakip(e.uid) + " Jöle Düellosu'nda berabere kaldı (" + v + " puan)." : ad + " Jöle Düellosu'nu " + v + " puanla kazandı ⚔️";
     if (o === "kase" && k === "sufle") return ad + " Meyve Kasesi'nde büyük boy sufle kazandı 🍫" + (v > 1 ? " (" + v + ". sufle)" : "");
     if (o === "kase" && k === "pm_muffin2") return ad + " Meyve Kasesi'nde sürpriz muffini açtı 🧁";
     if (o === "kase" && k === "pm_tost2") return ad + " Meyve Kasesi'nde tosta ulaştı 🍞";
@@ -132,10 +136,10 @@
   }
 
   var oyuncular = {}, ben = null, akis = [], seri = null, mac = null, stSeri = null, stMac = null;
-  var DUEL = ["hafiza", "sayi", "kelimeavi", "zincir", "sonkart", "dort", "ciz", "xox", "tepe", "satranc", "amiral", "asmaca"];
+  var DUEL = ["hafiza", "sayi", "kelimeavi", "zincir", "sonkart", "dort", "ciz", "xox", "tepe", "satranc", "amiral", "asmaca", "joled"];
   var duSeri = {}, duMac = {}; DUEL.forEach(function (k) { duSeri[k] = null; duMac[k] = null; });
-  var IK = { takvim: "📅", hafiza: "🃏", sayi: "🔢", kelimeavi: "🔡", xox: "❌", tepe: "💥", zincir: "⛓️", sonkart: "🎴", dort: "🔵", ciz: "🎨", satranc: "♟️", amiral: "⚓", asmaca: "🔤", gunun: "🟩", kelime: "🌸", ok: "🏹", kase: "🍫", oda: "🛋️", plan: "🌿", tur: "🏰", fark: "🔍", yikim: "🔨", stilobat: "🏛️", takvim: "📅", hesap: "🔑", yasak: "🃏" };
-  var LINK = { takvim: "takvim.html", hafiza: "hafiza.html", sayi: "sayi.html", kelimeavi: "kelimeavi.html", xox: "xox.html", tepe: "tepe.html", zincir: "zincir.html", sonkart: "sonkart.html", dort: "dort.html", ciz: "ciz.html", satranc: "satranc.html", amiral: "amiral.html", asmaca: "asmaca.html" };
+  var IK = { takvim: "📅", hafiza: "🃏", sayi: "🔢", kelimeavi: "🔡", xox: "❌", tepe: "💥", zincir: "⛓️", sonkart: "🎴", dort: "🔵", ciz: "🎨", satranc: "♟️", amiral: "⚓", asmaca: "🔤", gunun: "🟩", kelime: "🌸", ok: "🏹", kase: "🍫", jole: "🫧", joled: "⚔️", oda: "🛋️", plan: "🌿", tur: "🏰", fark: "🔍", yikim: "🔨", stilobat: "🏛️", takvim: "📅", hesap: "🔑", yasak: "🃏" };
+  var LINK = { takvim: "takvim.html", hafiza: "hafiza.html", sayi: "sayi.html", kelimeavi: "kelimeavi.html", xox: "xox.html", tepe: "tepe.html", zincir: "zincir.html", sonkart: "sonkart.html", dort: "dort.html", ciz: "ciz.html", satranc: "satranc.html", amiral: "amiral.html", asmaca: "asmaca.html", jole: "jole.html", joled: "jole.html" };
   var filtreO = ""; try { filtreO = sessionStorage.getItem("tb_filtre") || ""; } catch (e) {}
   function ekDe(ad) { var m = String(ad).toLowerCase().match(/[aeıioöuü](?![\s\S]*[aeıioöuü])/), v = m ? m[0] : "a"; return ad + "'" + (/[fstkçşhp]$/i.test(ad) ? "t" : "d") + (/[aıou]/.test(v) ? "a" : "e"); }
   function liste() { var L = [], u; for (u in oyuncular) L.push(oyuncular[u]); L.sort(function (a, b) { return (a.uid === ben ? 1 : 0) - (b.uid === ben ? 1 : 0) || (a.ad > b.ad ? 1 : -1); }); return L; }
@@ -151,6 +155,7 @@
   }
   function durumOf(k) {                                                  /* bu oyunda bende hamle var mı */
     var mc = macOf(k); if (!mc || mc.bitti) return null; var oth = mc.a === ben ? mc.b : mc.a;
+    if (k === "joled") return mc.durum === "davet" && mc.davet !== ben && mc.nabiz && Math.abs(Date.now() - mc.nabiz) < 25000 ? { ben: true, t: "seni çağırıyor" } : null;
     if (k === "asmaca") { if (!mc.ilerleme) return null; var ad5 = mc.adet || 5, il = mc.ilerleme || {}, bi = il[ben] && il[ben].s ? il[ben].s.length : 0;
       if (mc.mod === "yaz" && !(mc.hazir && mc.hazir[ben])) return { ben: true, t: "kelimeleri yaz" };
       return bi < ad5 ? { ben: true, t: (bi + 1) + ". kelimede" } : { ben: false, t: "o çözüyor" }; }
@@ -217,7 +222,7 @@
       db.collection("hafiza").doc("mac").onSnapshot(function (snap) { mac = snap.exists ? snap.data() : null; ciz(); }, function () {});
       db.collection("satranc").doc("seri").onSnapshot(function (snap) { stSeri = snap.exists ? snap.data() : null; ciz(); }, function () {});
       db.collection("satranc").doc("mac").onSnapshot(function (snap) { stMac = snap.exists ? snap.data() : null; ciz(); }, function () {});
-      ["sayi", "amiral", "asmaca", "xox", "tepe", "zincir", "sonkart", "dort", "ciz", "kelimeavi"].forEach(function (kol) {
+      ["sayi", "amiral", "asmaca", "xox", "tepe", "zincir", "sonkart", "dort", "ciz", "kelimeavi", "joled"].forEach(function (kol) {
         db.collection(kol).doc("seri").onSnapshot(function (snap) { duSeri[kol] = snap.exists ? snap.data() : null; ciz(); }, function () {});
         db.collection(kol).doc("mac").onSnapshot(function (snap) { duMac[kol] = snap.exists ? snap.data() : null; ciz(); }, function () {});
       });

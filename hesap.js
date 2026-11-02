@@ -23,6 +23,7 @@
     kb_max: "max", kb_lvl: "max", kb_bonus: "max", kb_rozet: "max", kb_hint: "max", kb_done: "flag", kb_end: "flag", kb_new31: "flag", kb_wait: "flag", kb_intro: "flag", kb_state: "new",
     ok_max: "max", ok_lvl: "max", ok_hint: "max", ok_intro: "flag", ok_stars: "stars", ok_best: "best", ok_state: "new",
     pm_best: "max", pm_sufle: "max", pm_muffin2: "flag", pm_tost2: "flag", pm_kalp1: "flag", pm_hediye1: "flag",
+    jl_best: "max", jl_max: "max", jl_sbest: "max", jl_zbest: "max",
     sef_best: "max", sef_oda: "new",
     stb_best: "max", stb_oyun: "max", yk_best: "max", yk_seviye: "max",
     gk_start: "min", gk_stat: "new", gk_help: "flag", qg_last: "new"
@@ -149,6 +150,8 @@
     if (artti("kb_max")) olay("kelime", "bolum", num(b.kb_max));
     if (artti("kb_rozet")) olay("kelime", "rozet", num(b.kb_rozet));
     if (artti("pm_best")) olay("kase", "rekor", num(b.pm_best));
+    if (artti("jl_best")) olay("jole", "rekor", num(b.jl_best));
+    if (artti("jl_max") && num(b.jl_max) >= 256) olay("jole", "buyuk", num(b.jl_max));
     if (artti("pm_sufle")) olay("kase", "sufle", num(b.pm_sufle));
     ["pm_muffin2", "pm_tost2", "pm_kalp1"].forEach(function (k) { if (b[k] === "1" && a[k] !== "1") olay("kase", k, 1); });
     if (artti("sef_best")) olay("plan", "rekor", num(b.sef_best));
